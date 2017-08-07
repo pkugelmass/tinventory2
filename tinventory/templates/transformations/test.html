@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block header %}Transformations{% endblock %}
+
+{% block content %}
+
+     <div class="row form-group">
+          
+          <form action="" method="GET">
+               {% for field in t_filter_form %}
+                    <div class="col-md-2">
+                         <h5>{{ field.label }}</h5>
+                         {{ field|add_class:"form-control"}} 
+                    </div>
+               {% endfor %}
+               
+               <div class="col-md-4 align-bottom btn-group block" style="height:100%">
+                    
+                    <h5 class="invisible">Buttons</h5> <!-- pushes the buttons down for appearances -->
+                    <button class="btn btn-default" type="submit" ><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                    </form> <!-- end the first form here -->
+                    
+                    <form action="" method="GET"> <!-- second form to indicate the form should be cleared -->
+                         <button class="btn btn-basic" value="Clear" type="submit">
+                         <span class="glyphicon glyphicon-sunglasses"></span> Clear</button>
+                    </form>
+                    
+               </div>
+          
+     </div>
+     
+     <div class="table-responsive">
+          <table class="table table-striped table-hover align-middle">
+               <tbody>
+               <tr>
+                    <th>Ministry</th>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+               </tr>
+               {% for transformation in transformation_list %}
+               <tr>
+                    <td>{{ transformation.ministry.all|join:", " }}</td>
+                    <td>{{ transformation.title }}</td>
+                    <td>{{ transformation.get_category_display }}</td>
+                    <td>{{ transformation.get_status_display }}</td>
+                    <td>
+                         <a href="{% url 'transformation-detail' transformation.pk %}" class="">View</a> | 
+                         <a href="{% url 'transformation-edit' transformation.pk %}" class="">Edit</a></td>
+                    <!--<td>-
+                         <div class="btn-group btn-group-sm">
+                              <a href="{% url 'transformation-detail' transformation.pk %}" class="btn btn-link">View</a>
+                              <a href="#" class="btn btn-link">Edit</a>
+                         </div>
+                    </td>-->
+               </tr>
+               {% endfor %}
+               </tbody>
+          </table>
+     </div>
+     
+     <div class="row">
+          <div class="panel panel-success">
+               <div class="panel-heading">
+                    Test Data
+               </div>
+               <div class="panel-body">
+                    <p>{{ request.GET }}</p>
+                    <p>{{ message }}</p>
+                    <p>{{ possible_set }}</p>
+               </div>
+          </div>
+     </div>
+
+{% endblock %}

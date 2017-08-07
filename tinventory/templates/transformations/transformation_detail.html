@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block title %} 
+     {{ transformation.ministry.all|join:", " }} - {{transformation.title}}
+{% endblock %}
+
+{% block header %}
+     {{transformation.title}}<small> ({{ transformation.ministry.all|join:", " }})</small>
+     
+     <div class="pull-right">
+          <a class="btn btn-default" href="{% url 'transformation-delete' transformation.pk %}" data-toggle="tooltip" title="Delete Transformation">
+               <span class="glyphicon glyphicon-trash"></span>
+          </a>
+     </div>
+{% endblock %}
+
+{% block content %}
+
+     <div class="row">
+          <div class="col-md-8">
+               <h3>Details:
+               
+                    <div class="pull-right">
+                         <a class="btn btn-default" href="{% url 'transformation-edit' transformation.pk %}" data-toggle="tooltip" title="Edit Details">
+                              <span class="glyphicon glyphicon-pencil"></span>
+                         </a>
+                    </div>
+                    
+               </h3>
+               
+               <table class="table table-striped align-middle">
+                    <tr>
+                         <th class="col-md-2">Transformation Title</th>
+                         <td class="col-md-10">{{transformation.title}}</td>
+                    </tr>
+                    <tr>
+                         <th class="col-md-2">Ministry</th>
+                         <td class="col-md-10">{{transformation.ministries_list}}</td>
+                    </tr>
+                    <tr>
+                         <th class="col-md-2">Specific Areas & Other Orgs</th>
+                         <td class="col-md-10">{{transformation.specific_orgs}}</td>
+                    </tr>
+                    <tr>
+                         <th class="col-md-2">High-Level Description</th>
+                         <td class="col-md-10">{{transformation.description}}</td>
+                    </tr>                    
+                    <tr>
+                         <th class="col-md-2">Problem</th>
+                         <td class="col-md-10">{{transformation.problem}}</td>
+                    </tr>
+                    <tr>
+                         <th class="col-md-2">Category</th>
+                         <td class="col-md-10">{{transformation.get_category_display}}</td>
+                    </tr>
+                    <tr>
+                         <th class="col-md-2">Status</th>
+                         <td class="col-md-10">{{transformation.get_status_display}}</td>
+                    </tr>
+                    <tr>
+                         <th class="col-md-2">Primary Contact</th>
+                         <td class="col-md-10">{{transformation.primary_contact}}</td>
+                    </tr>
+                    <tr>
+                         <th class="col-md-2">Tags</th>
+                         <td class="col-md-10">{{transformation.tags.all|join:', '}}</td>
+                    </tr>
+
+               </table>
+               
+          </div>
+          
+          <div class="col-md-4">
+               <h3>Files and Links:
+               
+                    <div class="pull-right">
+                         <a class="btn btn-default" href="{% url 'add-link' transformation.pk %}" data-toggle="tooltip" title="Add Link">
+                              <span class="glyphicon glyphicon-link"></span>
+                         </a>
+                         <a class="btn btn-default" href="{% url 'add-file' transformation.pk %}" data-toggle="tooltip" title="Add Attachment">
+                              <span class="glyphicon glyphicon-file"></span>
+                         </a>
+                    </div>
+
+               </h3>
+               
+               {% if transformation.resources %}
+               
+               <table class="table table-striped align-middle table-hover">
+                    {% for resource in transformation.resources %}
+                    <tr>
+                         <td class="col=md-1">
+                              {% if resource.type == 'Link' %}
+                                   <span class="glyphicon glyphicon-link large"></span>
+                                   </td>
+                                   <td>
+                                   <a href="{% url 'view-link' resource.pk %}">
+                                        <span class="strong">{{resource.title}}</span>
+                                   </a>
+                              {% endif %}
+                              {% if resource.type == 'File' %}
+                                   <span class="glyphicon glyphicon-file"></span>
+                                   </td>
+                                   <td>
+                                   <a href="{% url 'view-file' resource.pk %}">
+                                        <span class="strong">{{resource.title}}</span>
+                                   </a>
+                              {% endif %}
+                              <br/>
+                              <span class="small">{{resource.description}}</span>
+                         </td>
+                    </tr>
+                    {% endfor %}
+               </table>
+               {% else %}
+               <br/>
+               <p class="well">There are no resources attached to this transformation yet. Add some above.</p>
+               {% endif %}
+               
+          </div>
+     </div>
+
+{% endblock %}

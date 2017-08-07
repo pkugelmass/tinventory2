@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %} 
+     {{object.type}} - {{object.title}}
+{% endblock %}
+
+{% block header %}
+     {{object.title}}<small> ({{ object.type }})</small>
+     
+     <div class="pull-right"> <!-- Edit & delete buttons -->
+          
+          <a class="btn btn-default" href=
+               "{% if object.type == 'Link' %}{% url 'edit-link' object.pk %}{% endif %}
+               {% if object.type == 'File' %}{% url 'edit-file' object.pk %}{% endif %}"
+               data-toggle="tooltip" title="Edit">
+               
+               <span class="glyphicon glyphicon-pencil"></span>
+          </a>
+          
+          <a class="btn btn-default" href=
+               "{% if object.type == 'Link' %}{% url 'delete-link' object.pk %}{% endif %}
+               {% if object.type == 'File' %}{% url 'delete-file' object.pk %}{% endif %}"
+               data-toggle="tooltip" title="Delete">
+               
+               <span class="glyphicon glyphicon-trash"></span>
+          </a>
+
+     </div>
+     
+     
+
+{% endblock %}
+
+{% block content %}
+
+     <h3>Details:</h3>
+     <div class="row">
+          <div class="col-md-12">
+               <table class="table table-striped align-middle">
+                    <tr>
+                         <th class="col-md-2">{{object.type}}</th>
+                         <td class="col-md-10">
+                              {%if object.type == 'Link' %}
+                                   <a href="{{object.resource}}">{{object.resource}}</a>
+                              {% endif %}
+                              {%if object.type == 'File' %}
+                                   <a href="/media/{{ object.resource }}">{{object.filename}}</a>
+                              {% endif %}
+                         </td>
+                    </tr>
+                    <tr>
+                         <th class="col-md-2">Title</th>
+                         <td class="col-md-10 strong">{{object.title}}</td>
+                    </tr>
+                    <tr>
+                         <th class="col-md-2">Description</th>
+                         <td class="col-md-10">{{object.description}}</td>
+                    </tr>
+                    <tr>
+                         <th class="col-md-2">Transformation</th>
+                         <td class="col-md-10">
+                              <a href="{% url 'transformation-detail' object.transformation.pk %}">
+                                   {{object.transformation}}
+                              </a>
+                         </td>
+                    </tr>                    
+                    <tr>
+                         <th class="col-md-2">Tags</th>
+                         <td class="col-md-10">{{object.tags.all|join:', '}}</td>
+                    </tr>
+                    <tr>
+                         <th class="col-md-2">Date</th>
+                         <td class="col-md-10">{{object.date_modified}}</td>
+                    </tr>
+
+               </table>
+               
+          </div>
+     </div>
+
+{% endblock %}

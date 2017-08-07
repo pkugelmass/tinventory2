@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Confirm Delete{% endblock %}
+{% block header %}Confirm Delete{% endblock %}
+
+{% block content %}
+<div class="panel panel-danger">
+    <div class="panel-heading">Are you sure you want to delete <strong>"{{ object }}"</strong>?</div>
+    <div class="panel-body">
+        <form action="" method="post">
+            {% csrf_token %}
+            <button class="btn btn-large btn-danger" type="submit" value="Delete" />Delete</button>
+            <a class="btn btn-large btn-default" href="{% url 'transformation-detail' object.pk %}">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+body {
+  padding-top: 70px;
+  font-family: 'Libre Franklin', sans-serif;
+}
+
+.navbar-inverse {
+  background-color: #006E81;
+}
+
+.navbar-inverse .navbar-brand {
+    color: lightgray;
+    font-size: 18pt;
+    font-weight:800;
+}
+
+.navbar-inverse .navbar-brand a:hover {
+    color: white;
+    font-size: 18pt;
+}
+
+.fit-please {
+  padding: 0 15px 0 0;
+  display:inline-block;
+}
+
+/* Adjust Menu colors - Normal */
+.navbar .nav > li > a, .navbar .nav > li > a:first-letter {
+color:          lightgray;
+text-shadow:    none;
+}
+/* Adjust Menu colors - Hover */
+.navbar .nav > li > a:hover, .navbar .nav > li > a:hover:first-letter { 
+color:          white;                      
+text-shadow:    none;
+
+.container .page-header {
+  margin-top:0px;
+}
