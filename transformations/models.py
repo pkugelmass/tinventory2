@@ -1,8 +1,30 @@
 from django.db import models
-#from taggit.managers import TaggableManager
 from django.core.urlresolvers import reverse
 from autoslug import AutoSlugField
+from .managers import ChoicesManager
 import os
+
+# TAG MODELS
+
+class Tag(models.Model):
+     name = models.CharField(max_length=20)
+     
+     class Meta:
+          abstract = True
+          ordering = ['name']
+          
+     def __str__(self):
+          return self.name
+          
+     objects = ChoicesManager()
+          
+class Transformation_Tag(Tag):
+     pass
+
+class Resource_Tag(Tag):
+     pass
+
+# TRANSFORMATION MODELS
 
 class Transformation(models.Model):
      title = models.CharField("Transformation Title", max_length=100)
@@ -30,8 +52,7 @@ class Transformation(models.Model):
      
      category = models.CharField(max_length=20, choices=CATEGORIES, blank=True)
      status = models.CharField(max_length=20, choices=STATUSES, blank=True)
-     #tags = TaggableManager(blank=True)
-     #tags = models.CharField(max_length=20, blank=True)
+     tags = models.ManyToManyField('Transformation_Tag', blank=True)
      archived = models.BooleanField(default=False)
      slug = AutoSlugField(populate_from='title')
      
@@ -43,10 +64,12 @@ class Transformation(models.Model):
           
      def ministries_list(self):
           return ', '.join(map(str, self.ministry.all()))
+          
+     def resources(self):
+          related_resources = list(self.attachment_set.all()) + list(self.link_set.all())
+          return sorted(related_resources, key=lambda r: r.date_modified, reverse=True)
 
-class MinistryManager(models.Manager):
-     def choices_list(self):
-          return ( ( m , m.long() ) for m in self.get_queryset() )
+
 
 class Ministry(models.Model):
      abbrev = models.CharField(max_length=6)
@@ -61,7 +84,7 @@ class Ministry(models.Model):
      def long(self):
           return self.abbrev + ' - ' + self.name
           
-     objects = MinistryManager()
+     objects = ChoicesManager()
      
 # RESOURCE/FILE MODELS
           
@@ -70,8 +93,7 @@ class Resource(models.Model):
      transformation = models.ForeignKey('transformation')
      title = models.CharField('Title', max_length=50, help_text="Give this resource a descriptive name.")
      description = models.TextField()
-     #tags = TaggableManager(blank=True)
-     tags = models.CharField(max_length=20, blank=True)
+     tags = models.ManyToManyField('Resource_Tag', blank=True)
      date_modified = models.DateTimeField(auto_now=True)
      
      class Meta:
