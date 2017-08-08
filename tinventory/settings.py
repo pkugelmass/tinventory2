@@ -16,7 +16,6 @@ import os
 # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
@@ -26,8 +25,7 @@ SECRET_KEY = '#^!2+ccl$a!oxs98gdp5%_2o97z&-*2@2mv+z7=5%24d&v+ev6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['tinventory4-pkugelmass.c9users.io',]
-
+ALLOWED_HOSTS = ['pktcsb.pythonanywhere.com']
 
 # Application definition
 
@@ -39,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'transformations',
-    #'taggit',
     'widget_tweaks',
     'autoslug'
 ]
@@ -81,11 +78,10 @@ WSGI_APPLICATION = 'tinventory.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'c9',
-        'USER': 'pkugelmass',
-        'PASSWORD': '',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
+        'NAME': 'pktcsb$tcsb',
+        'USER': 'pktcsb',
+        'PASSWORD': 'what3v3r',
+        'HOST': 'pktcsb.mysql.pythonanywhere-services.com',
     },
 }
 
@@ -133,3 +129,10 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Import Local Settings, if they exist:
+
+try:
+    from .local_settings import * 
+except ImportError as e:
+    pass
