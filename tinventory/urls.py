@@ -26,7 +26,7 @@ urlpatterns = [
     
     url(r'^admin/', admin.site.urls),
     
-    url(r'^$', lambda r: HttpResponseRedirect('transformations/')),
+    url(r'^$', auth_views.login, name='login'),
     
     url(r'^transformations/', include('transformations.urls')),
     
