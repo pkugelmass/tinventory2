@@ -20,6 +20,7 @@ from django.http import HttpResponseRedirect
 from . import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
+from tinventory.core import views as core_views
 
 urlpatterns = [
     
@@ -32,6 +33,7 @@ urlpatterns = [
     url(r'^login/$', auth_views.login, name='login'),
     
     url(r'^logout/$', auth_views.logout, name='logout'),
-    #url(r'^logout/$', lambda r: HttpResponseRedirect('transformations/')),
+    
+    url(r'^signup/$', core_views.signup, name='signup'),
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
