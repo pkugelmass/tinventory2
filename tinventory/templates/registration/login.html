@@ -1,7 +1,13 @@
 {% extends 'base.html' %}
 
 {% block title %}Login{% endblock %}
-{% block header %}Login{% endblock %}
+{% block header %}Login
+
+     <div class="pull-right">
+          <a class="btn btn-success" href="{% url 'transformation-add' %}" data-toggle="tooltip" title="Register New User">
+               <span class="glyphicon glyphicon-plus-sign"></span>  Sign Up
+          </a>
+     </div>{% endblock %}
 
 {% block content %}
 {% include 'transformations/form_table_layout.html' %}
