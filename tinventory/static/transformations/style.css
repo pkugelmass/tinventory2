@@ -13,6 +13,10 @@ body {
     font-weight:800;
 }
 
+.navbar-inverse .container {
+  
+}
+
 .navbar-inverse .navbar-brand a:hover {
     color: white;
     font-size: 18pt;
@@ -32,7 +36,8 @@ text-shadow:    none;
 .navbar .nav > li > a:hover, .navbar .nav > li > a:hover:first-letter { 
 color:          white;                      
 text-shadow:    none;
+}
 
-.container .page-header {
-  margin-top:0px;
+.page-header {
+  margin:0px; 
 }

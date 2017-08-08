@@ -69,8 +69,6 @@ class Transformation(models.Model):
           related_resources = list(self.attachment_set.all()) + list(self.link_set.all())
           return sorted(related_resources, key=lambda r: r.date_modified, reverse=True)
 
-
-
 class Ministry(models.Model):
      abbrev = models.CharField(max_length=6)
      name = models.CharField(max_length=100)
@@ -101,7 +99,6 @@ class Resource(models.Model):
      
      def __str__(self):
           return self.title
-        
           
 class Attachment(Resource):
 
