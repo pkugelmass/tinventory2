@@ -2,6 +2,7 @@ from django.db import models
 from django.core.urlresolvers import reverse
 from autoslug import AutoSlugField
 from .managers import ChoicesManager
+from polymorphic.models import PolymorphicModel
 import os
 
 # TAG MODELS
@@ -86,7 +87,7 @@ class Ministry(models.Model):
      
 # RESOURCE/FILE MODELS
           
-class Resource(models.Model):
+class Resource(PolymorphicModel):
 
      transformation = models.ForeignKey('transformation')
      title = models.CharField('Title', max_length=50, help_text="Give this resource a descriptive name.")

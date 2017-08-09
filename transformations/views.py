@@ -72,9 +72,9 @@ class DeleteTransformation(MyDeleteMixin, generic.edit.DeleteView):
      
 # FILE MGMT VIEWS AND FORMS
 
-
-          
-
+# def ResourceList(request):
+     
+#      query_set = list(Attachment.objects.all())+
 
 class ResourceFormMixin:
      template_name='transformations/resource_form.html'
