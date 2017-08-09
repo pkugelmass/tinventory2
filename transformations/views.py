@@ -8,6 +8,16 @@ from django.core.urlresolvers import reverse_lazy, reverse
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 
+# GENERAL MIXINS
+
+class MyDeleteMixin:
+     success_message = "Delete successful."
+     
+     def delete(self, request, *args, **kwargs):
+          messages.success(self.request, self.success_message)
+          return super(generic.edit.DeleteView, self).delete(request, *args, **kwargs)
+     
+
 # LIST/HOME VIEW
 
 def IndexView(request):
@@ -43,8 +53,8 @@ class TransformationFormMixin:
 class TransformationDetail(generic.DetailView):
      model = Transformation
 
-class AddTransformation(TransformationFormMixin, generic.edit.CreateView):
-     pass
+class AddTransformation(SuccessMessageMixin, TransformationFormMixin, generic.edit.CreateView):
+     success_message = "Transformation created."
      
 class EditTransformation(SuccessMessageMixin, generic.edit.UpdateView):
      model = Transformation
@@ -56,18 +66,13 @@ class EditTransformation(SuccessMessageMixin, generic.edit.UpdateView):
      #      return super(EditTransformation,self).form_valid(form)
      
      
-class DeleteTransformation(generic.edit.DeleteView):
+class DeleteTransformation(MyDeleteMixin, generic.edit.DeleteView):
      model = Transformation
      success_url = reverse_lazy('index')
      
 # FILE MGMT VIEWS AND FORMS
 
-class MyDeleteMixin:
-     success_message = "Delete successful."
-     
-     def delete(self, request, *args, **kwargs):
-          messages.success(self.request, self.success_message)
-          return super(generic.edit.DeleteView, self).delete(request, *args, **kwargs)
+
           
 
 
