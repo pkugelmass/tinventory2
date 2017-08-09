@@ -50,7 +50,7 @@
                     </tr>
                     {% for transformation in transformation_list %}
                     <tr>
-                         <td>{{ transformation.ministry.all|join:", " }}</td>
+                         <td>{{ transformation.ministries_list}}</td>
                          <td>{{ transformation.title }}</td>
                          <td>{{ transformation.get_category_display }}</td>
                          <td>{{ transformation.get_status_display }}</td>

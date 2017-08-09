@@ -21,7 +21,7 @@ def IndexView(request):
           criteria = { a.lower():request.GET[a] for a in request.GET if request.GET[a] != ''}
           
           # Filter the query based on those arguments (if any).
-          query_set = query_set.filter(**criteria)
+          query_set = query_set.filter(**criteria).prefetch_related('ministry')
           
           # Set the forms to show the criteria used when they are reloaded.
           for fieldname in criteria:
