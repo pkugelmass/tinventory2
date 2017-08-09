@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
 {% block title %} 
-     {{ transformation.ministry.all|join:", " }} - {{transformation.title}}
+     Transformation Inventory - {{transformation.title}}
 {% endblock %}
 
 {% block header %}
-     {{transformation.title}}<small> ({{ transformation.ministry.all|join:", " }})</small>
+     {{transformation.title}}<small> ({{ transformation.ministries_list }})</small>
      
      <div class="pull-right">
           <a class="btn btn-default" href="{% url 'transformation-delete' transformation.pk %}" data-toggle="tooltip" title="Delete Transformation">
