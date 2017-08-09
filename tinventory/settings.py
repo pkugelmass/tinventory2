@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'autoslug',
     'debug_toolbar',
+    'stronghold',
 ]
 
 MIDDLEWARE = [
@@ -51,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'stronghold.middleware.LoginRequiredMiddleware',
 ]
 
 ROOT_URLCONF = 'tinventory.urls'
