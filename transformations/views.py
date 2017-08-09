@@ -5,6 +5,8 @@ from .forms import TransformationFilterForm, TransformationForm, LinkForm, Attac
 from django.views import generic
 from django import forms
 from django.core.urlresolvers import reverse_lazy, reverse
+from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
 
 # LIST/HOME VIEW
 
@@ -44,8 +46,15 @@ class TransformationDetail(generic.DetailView):
 class AddTransformation(TransformationFormMixin, generic.edit.CreateView):
      pass
      
-class EditTransformation(TransformationFormMixin, generic.edit.UpdateView):
-     pass
+class EditTransformation(SuccessMessageMixin, generic.edit.UpdateView):
+     model = Transformation
+     form_class = TransformationForm
+     success_message = "Transformation updated successfully!"
+     
+     # def form_valid(self,form):
+     #      messages.success(self.request,'Transformation updated.')
+     #      return super(EditTransformation,self).form_valid(form)
+     
      
 class DeleteTransformation(generic.edit.DeleteView):
      model = Transformation

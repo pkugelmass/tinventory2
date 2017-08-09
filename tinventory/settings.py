@@ -71,6 +71,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'tinventory.wsgi.application'
 
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
