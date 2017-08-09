@@ -62,6 +62,15 @@ class DeleteTransformation(generic.edit.DeleteView):
      
 # FILE MGMT VIEWS AND FORMS
 
+class MyDeleteMixin:
+     success_message = "Delete successful."
+     
+     def delete(self, request, *args, **kwargs):
+          messages.success(self.request, self.success_message)
+          return super(generic.edit.DeleteView, self).delete(request, *args, **kwargs)
+          
+
+
 class ResourceFormMixin:
      template_name='transformations/resource_form.html'
      
@@ -73,23 +82,27 @@ class ResourceFormMixin:
                pass
           return initial
           
-class AddLink(ResourceFormMixin, generic.edit.CreateView):
+class AddLink(SuccessMessageMixin, ResourceFormMixin, generic.edit.CreateView):
      model = Link
      form_class = LinkForm
+     success_message = 'New link added.'
      
-class AddFile(ResourceFormMixin, generic.edit.CreateView):
+class AddFile(SuccessMessageMixin, ResourceFormMixin, generic.edit.CreateView):
      model = Attachment
      form_class = AttachmentForm
+     success_message = 'New file added.'
      
-class EditLink(generic.edit.UpdateView):
+class EditLink(SuccessMessageMixin,generic.edit.UpdateView):
      model = Link
      form_class = LinkForm
      template_name='transformations/resource_form.html'
+     success_message = 'Link updated.'
      
-class EditFile(generic.edit.UpdateView):
+class EditFile(SuccessMessageMixin,generic.edit.UpdateView):
      model = Attachment
      form_class = AttachmentForm
      template_name='transformations/resource_form.html'
+     success_message = 'File updated.'
      
 class ViewLink(generic.DetailView):
      model = Link
@@ -99,7 +112,7 @@ class ViewFile(generic.DetailView):
      model = Attachment
      template_name = 'transformations/resource_detail.html'
 
-class DeleteLink(generic.edit.DeleteView):
+class DeleteLink(MyDeleteMixin, generic.edit.DeleteView):
 
      def get_success_url(self):
           # Assuming there is a ForeignKey from Comment to Post in your model
@@ -110,9 +123,8 @@ class DeleteLink(generic.edit.DeleteView):
      success_url = reverse_lazy('index')
      template_name = 'transformations/transformation_confirm_delete.html'
      
-
      
-class DeleteFile(generic.edit.DeleteView):
+class DeleteFile(MyDeleteMixin, generic.edit.DeleteView):
      
      def get_success_url(self):
           # Assuming there is a ForeignKey from Comment to Post in your model
