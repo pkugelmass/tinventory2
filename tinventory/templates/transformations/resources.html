@@ -22,7 +22,6 @@
                          <th>Resource</th>
                          <th>Transformation</th>
                          <th>Tags</th>
-                         <th>Actions</th>
                     </tr>
                     {% for resource in resources %}
                     <tr>
@@ -37,10 +36,11 @@
                                    <a href="{% url 'view-file' resource.pk %}">
                               {% endif %}
                               <span class="strong">{{resource.title}}</span></a>
+                              <br>
+                              {{resource.description}}
                          </td>
-                         <td>{{ resource.transformation }}</td>
+                         <td><a href="{% url 'transformation-detail' resource.transformation.pk %}">{{ resource.transformation }}</td></a>
                          <td>{{ resource.tag_list }}</td>
-                         <td>some action</td>
                     </tr>
                     {% endfor %}
                     </tbody>
