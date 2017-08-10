@@ -47,6 +47,10 @@ class Transformation(models.Model):
      tags = models.ManyToManyField('Transformation_Tag', blank=True)
      archived = models.BooleanField(default=False)
      slug = AutoSlugField(populate_from='title')
+     date_modified = models.DateTimeField(auto_now=True)
+     
+     class Meta:
+          ordering = ['-date_modified']
      
      def get_absolute_url(self):
           return reverse('transformation-detail', kwargs={'pk':self.pk})
