@@ -1,9 +1,9 @@
-{% extends "base.html" %}
+{% extends "core/base.html" %}
 {% load widget_tweaks %}
 
 {% block title %}Add {{form.resource.label}}{% endblock %}
 {% block header %}Add {{form.resource.label}}{% endblock %}
 
 {% block content %}
-{% include 'transformations/form_table_layout.html' %}
+{% include 'core/form_table_layout.html' %}
 {% endblock %}

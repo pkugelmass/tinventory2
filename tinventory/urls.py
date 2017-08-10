@@ -14,6 +14,8 @@ urlpatterns = [
     
     url(r'^transformations/', include('transformations.urls')),
     
+    url(r'^resources/', include('resources.urls')),
+    
     url(r'^login/$', auth_views.login, name='login'),
     
     url(r'^logout/$', auth_views.logout, name='logout'),

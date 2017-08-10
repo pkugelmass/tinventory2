@@ -1,5 +1,5 @@
 from django import forms
-from .models import Ministry, Transformation, Attachment, Link, Transformation_Tag
+from .models import Ministry, Transformation, Transformation_Tag
 
 # FORM HELPER STUFF ---------
 
@@ -34,17 +34,4 @@ class TransformationForm(forms.ModelForm):
                'ministry':'Crtl-click to select all that apply.',
                'tags':'Ctrl-click to select all that apply.'
                }
-               
-# RESOURCES FORMS ---------------
 
-class AttachmentForm(forms.ModelForm):
-     class Meta:
-          model = Attachment
-          fields = ['resource','title','description','transformation', 'tags']
-          widgets = {'description':forms.Textarea(attrs={'rows':3,'cols':40}),}
-          
-class LinkForm(forms.ModelForm):
-     class Meta:
-          model = Link
-          fields = ['resource','title','description','transformation', 'tags'] 
-          widgets = {'description':forms.Textarea(attrs={'rows':3,'cols':40}),}
