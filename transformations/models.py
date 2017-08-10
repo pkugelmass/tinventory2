@@ -87,7 +87,7 @@ class Ministry(models.Model):
      
 # RESOURCE/FILE MODELS
           
-class Resource(PolymorphicModel):
+class Resource(models.Model):
 
      transformation = models.ForeignKey('transformation')
      title = models.CharField('Title', max_length=50, help_text="Give this resource a descriptive name.")
@@ -96,10 +96,13 @@ class Resource(PolymorphicModel):
      date_modified = models.DateTimeField(auto_now=True)
      
      class Meta:
-          abstract = True
+           abstract = True
      
      def __str__(self):
           return self.title
+          
+     def tag_list(self):
+          return ', '.join(map(str, self.tags.all()))
           
 class Attachment(Resource):
 

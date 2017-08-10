@@ -34,7 +34,7 @@ urlpatterns = [
      
      url(r'deletefile/(?P<pk>\d+)$', views.DeleteFile.as_view(), name='delete-file'),
      
-     #url(r'resources/$', views.ResourceList.as_view(), name='resources'),
+     url(r'resources/$', views.ResourceList, name='resources'),
      
      ]
      

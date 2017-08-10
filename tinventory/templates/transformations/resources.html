@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block header %}Resources
+
+     <!--<div class="pull-right">-->
+     <!--     <a class="btn btn-success" href="{% url 'transformation-add' %}" data-toggle="tooltip" title="New Transformation">-->
+     <!--          <span class="glyphicon glyphicon-plus-sign"></span>  Add New Transformation-->
+     <!--     </a>-->
+     <!--</div>-->
+
+{% endblock %}
+
+{% block content %}
+     
+     <div class="row">
+          <div class="col-md-12">
+               <table class="table table-striped table-hover table-responsive align-middle col-md-12">
+                    <tbody>
+                    <tr>
+                         <th>Type</th>
+                         <th>Resource</th>
+                         <th>Transformation</th>
+                         <th>Tags</th>
+                         <th>Actions</th>
+                    </tr>
+                    {% for resource in resources %}
+                    <tr>
+                         <td>
+                              {% if resource.type == 'Link' %}<span class="glyphicon glyphicon-link large"></span>
+                              {% elif resource.type == 'File' %}<span class="glyphicon glyphicon-file large"></span>{% endif %}
+                         </td>
+                         <td>
+                              {% if resource.type == 'Link' %}
+                                   <a href="{% url 'view-link' resource.pk %}">
+                              {% elif resource.type == 'File' %}
+                                   <a href="{% url 'view-file' resource.pk %}">
+                              {% endif %}
+                              <span class="strong">{{resource.title}}</span></a>
+                         </td>
+                         <td>{{ resource.transformation }}</td>
+                         <td>{{ resource.tag_list }}</td>
+                         <td>some action</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+               </table>
+          </div>
+     </div>
+
+{% endblock %}

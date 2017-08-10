@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'autoslug',
     'debug_toolbar',
     'stronghold',
+    #'polymorphic',
 ]
 
 MIDDLEWARE = [
