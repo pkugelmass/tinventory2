@@ -147,3 +147,11 @@ try:
     from .local_settings import * 
 except ImportError as e:
     pass
+
+# For sending email
+
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = "tinventory900@gmail.com"
+EMAIL_HOST_PASSWORD = 'what3v3r'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
