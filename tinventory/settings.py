@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'stronghold',
     #'polymorphic',
+    'mptt',
+    'django_mptt_admin',
+    'topics',
 ]
 
 MIDDLEWARE = [
