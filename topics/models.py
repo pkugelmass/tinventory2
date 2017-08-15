@@ -7,4 +7,7 @@ class Topic(MPTTModel):
     description = models.TextField
     
     class MPTTMeta:
-        order_insertion_by = ['name']
+        order_insertion_by = ['title']
+        
+    def __str__(self):
+        return self.title

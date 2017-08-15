@@ -1,3 +1,7 @@
 from django.shortcuts import render
+from .models import Topic
+from django.views import generic
 
-# Create your views here.
+class TopicsList(generic.ListView):
+    model = Topic
+    template_name = 'topics/topics_list.html'

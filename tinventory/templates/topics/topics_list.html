@@ -1,0 +1,32 @@
+{% extends "core/base.html" %}
+{% load widget_tweaks %}
+{% load mptt_tags %}
+
+{% block title %}Topics {% endblock %}
+
+{% block header %}Topics
+
+     <!--<div class="pull-right">-->
+     <!--     <a class="btn btn-success" href="{% url 'transformation-add' %}" data-toggle="tooltip" title="New Transformation">-->
+     <!--          <span class="glyphicon glyphicon-plus-sign"></span>  Add New Transformation-->
+     <!--     </a>-->
+     <!--</div>-->
+
+{% endblock %}
+
+{% block content %}
+     
+    <ul>
+ {% recursetree topic_list %}
+        <li>
+            {{ node.title }}
+            {% if not node.is_leaf_node %}
+                <ul class="children">
+                    {{ children }}
+                </ul>
+            {% endif %}
+        </li>
+    {% endrecursetree %}
+    </ul>
+
+{% endblock %}
