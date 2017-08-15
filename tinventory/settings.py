@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'stronghold',
     #'polymorphic',
+    'mptt',
+    'topics',
 ]
 
 MIDDLEWARE = [
