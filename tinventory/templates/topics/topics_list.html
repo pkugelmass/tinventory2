@@ -19,7 +19,7 @@
     <ul>
  {% recursetree topic_list %}
         <li>
-            {{ node.title }}
+            <a href="{% url 'topic-detail' slug=node.slug %}">{{ node.title }}</a>
             {% if not node.is_leaf_node %}
                 <ul class="children">
                     {{ children }}
@@ -27,6 +27,5 @@
             {% endif %}
         </li>
     {% endrecursetree %}
-    </ul>
-
+    
 {% endblock %}
