@@ -1,0 +1,21 @@
+{% extends "core/base.html" %}
+{% load widget_tweaks %}
+{% load mptt_tags %}
+
+{% block title %}Topics {% endblock %}
+
+{% block header %} {{ object.title }} <small> ({{object.parent}})</small>
+
+     <!--<div class="pull-right">-->
+     <!--     <a class="btn btn-success" href="{% url 'transformation-add' %}" data-toggle="tooltip" title="New Transformation">-->
+     <!--          <span class="glyphicon glyphicon-plus-sign"></span>  Add New Transformation-->
+     <!--     </a>-->
+     <!--</div>-->
+
+{% endblock %}
+
+{% block content %}
+     
+Wow!
+    
+{% endblock %}
