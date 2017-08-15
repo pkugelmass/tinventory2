@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'stronghold',
     #'polymorphic',
     'mptt',
+    'django_mptt_admin',
     'topics',
 ]
 

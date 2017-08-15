@@ -1,7 +1,10 @@
 from django.contrib import admin
 from .models import Topic
+from django_mptt_admin.admin import DjangoMpttAdmin
 
-admin.site.register(Topic)
 
-class TopicsAdmin(admin.ModelAdmin):
-    topics = ('title','parent','description')
+
+class TopicAdmin(DjangoMpttAdmin):
+    pass
+    
+admin.site.register(Topic, TopicAdmin)
