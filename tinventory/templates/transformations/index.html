@@ -51,13 +51,12 @@
                     {% for transformation in transformation_list %}
                     <tr>
                          <td>{{ transformation.ministries_list}}</td>
-                         <td>{{ transformation.title }}</td>
+                         <td><a href="{% url 'transformation-detail' transformation.pk %}" class="">{{ transformation.title }}</a></td>
                          <td>{{ transformation.get_category_display }}</td>
                          <td>{{ transformation.get_status_display }}</td>
                          <td>
                               <a href="{% url 'transformation-detail' transformation.pk %}" class="">View</a> | 
                               <a href="{% url 'transformation-edit' transformation.pk %}" class="">Edit</a></td>
-     
                     </tr>
                     {% endfor %}
                     </tbody>
