@@ -5,7 +5,7 @@ from autoslug import AutoSlugField
 class Topic(MPTTModel):
     title = models.CharField(max_length=50)
     parent = TreeForeignKey('self', null=True, blank=True, related_name='subtopics', db_index=True)
-    description = models.TextField
+    description = models.TextField(blank=True)
     slug = AutoSlugField(populate_from='title')
     
     class MPTTMeta:

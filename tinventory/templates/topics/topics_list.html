@@ -16,16 +16,34 @@
 
 {% block content %}
      
-    <ul>
- {% recursetree topic_list %}
-        <li>
-            <a href="{% url 'topic-detail' slug=node.slug %}">{{ node.title }}</a>
-            {% if not node.is_leaf_node %}
-                <ul class="children">
-                    {{ children }}
-                </ul>
+    
+        {% recursetree topic_list %}
+        
+            {% if node.is_root_node %}
+            
+                <div class="list-group">
+                <h4>{{node.title}}</h4>
+                
+                {% else %}
+                
+                    <a href="{% url 'topic-detail' slug=node.slug %}" class="list-group-item"><strong>{{ node.title }}</strong>
+                    
+                    {% if node.description %}
+                        <br/>
+                        {{node.description }}
+                    {% endif %}
+                    
+                    </a>
+                
             {% endif %}
-        </li>
-    {% endrecursetree %}
+            
+            {% if not node.is_leaf_node %}
+            
+                {{ children }}
+                </div>
+                
+            {% endif %}
+            
+        {% endrecursetree %}
     
 {% endblock %}
