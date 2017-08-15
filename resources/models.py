@@ -20,7 +20,7 @@ class Resource(models.Model):
      transformation = models.ForeignKey('transformations.Transformation')
      title = models.CharField('Title', max_length=50, help_text="Give this resource a descriptive name.")
      description = models.TextField()
-     topics = TreeManyToManyField('Topic', blank=True)
+     topics = TreeManyToManyField('topics.Topic', blank=True)
      tags = models.ManyToManyField('Resource_Tag', blank=True)
      date_modified = models.DateTimeField(auto_now=True)
      
