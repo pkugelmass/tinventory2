@@ -18,5 +18,6 @@ class Topic(MPTTModel):
     def resources(self):
           related_resources = list(self.attachment_set.all()) + list(self.link_set.all())
           return sorted(related_resources, key=lambda r: r.date_modified, reverse=True)
-          
+        
+        
     

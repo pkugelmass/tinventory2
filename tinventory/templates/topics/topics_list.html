@@ -15,25 +15,23 @@
 {% endblock %}
 
 {% block content %}
-
     
     {% for n in topic_list %}
     
         {% if n.is_root_node %}
         
-            {% cycle '<div class="row"><div class="list-group col-md-6">' '<div class="list-group col-md-6">' %}
+            {% cycle '<div class="row"><div class="list-group list-group-root col-md-6">' '<div class="list-group list-group-root col-md-6">' %}
         
             <h3>{{n.title}}</h3>
             
             {% recursetree n.get_descendants %}
         
-                <a href="{% url 'topic-detail' slug=node.slug %}" class="list-group-item justify-content-between">
                 
+                <a href="{% url 'topic-detail' slug=node.slug %}" class="list-group-item list-lvl-{{node.level}} justify-content-between">
                 <strong>{{ node.title }}</strong>
                 
                 {% if node.description %}
-                    <br/>
-                    {{node.description }}
+                    <br/><span class="small">{{node.description }}</span>
                 {% endif %}
                 
                 <span class="badge badge-default badge-pill">
