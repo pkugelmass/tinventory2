@@ -21,7 +21,7 @@
                          <th>Type</th>
                          <th>Resource</th>
                          <th>Transformation</th>
-                         <th>Tags</th>
+                         <th>Topics</th>
                     </tr>
                     {% for resource in resources %}
                     <tr>
@@ -40,7 +40,7 @@
                               {{resource.description}}
                          </td>
                          <td><a href="{% url 'transformation-detail' resource.transformation.pk %}">{{ resource.transformation }}</td></a>
-                         <td>{{ resource.tag_list }}</td>
+                         <td>{{ resource.topics.all|join:' ,' }}</td>
                     </tr>
                     {% endfor %}
                     </tbody>

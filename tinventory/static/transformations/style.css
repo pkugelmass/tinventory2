@@ -42,3 +42,29 @@ text-shadow:    none;
   margin:0px 0px 20px 0px; 
   padding-bottom:5px;
 }
+
+/* Collapsing list experiment */
+
+.list-group.list-group-root {
+  padding-left:15px;
+}
+
+.list-group.list-group-root .list-lvl-1 {
+  padding-left:10px;
+}
+
+.list-group.list-group-root .list-lvl-2 {
+  padding-left:40px;
+}
+
+.list-group.list-group-root .list-lvl-3 {
+  padding-left:70px;
+}
+
+.list-group.list-group-root .list-lvl-4 {
+  padding-left:100px;
+}
+
+.list-group-item .glyphicon {
+  margin-right: 5px;
+}
