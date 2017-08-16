@@ -33,8 +33,8 @@
                     {% endif %}
                     {% if topic.get_descendants %}
                          <tr>
-                              <th>Subtopics:</th>
-                              <td>{% autoescape off %}{{topic.get_descendants|hyperlink_list:"slug"}} {% endautoescape %}</td>
+                              <th class="col-md-1">Subtopics:</th>
+                              <td>{% autoescape off %}{{topic.get_descendants|hyperlink_list:"slug"}}{% endautoescape %}</td>
                          </tr>
                     {% endif %}
                </table>
