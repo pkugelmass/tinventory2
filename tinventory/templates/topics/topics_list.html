@@ -38,7 +38,9 @@
                         {{node.description }}
                     {% endif %}
                     
-                    <span class="badge badge-default badge-pill">0</span>
+                    <span class="badge badge-default badge-pill">
+                    {{ node.resources|length }}    
+                    </span>
                     
                     </a>
                 
