@@ -4,7 +4,12 @@
 
 {% block title %}Topics {% endblock %}
 
-{% block header %} {{ object.title }} <small> ({{object.parent}})</small>
+{% block header %} 
+     {{ topic.title }} 
+     
+     {% if topic.parent %} 
+          <small> (<a href="{% url 'topic-detail' slug=topic.parent.slug %}">{{topic.parent}}</a>)</small>
+     {% endif %}
 
      <!--<div class="pull-right">-->
      <!--     <a class="btn btn-success" href="{% url 'transformation-add' %}" data-toggle="tooltip" title="New Transformation">-->
@@ -15,7 +20,22 @@
 {% endblock %}
 
 {% block content %}
-     
-Wow!
+
+<div class="row">
+     <div class="col-md-12">
+          <table class="table table-striped">
+               <tr>
+                    <th class="col-md-1">Description:</th>
+                    <td>{{topic.description}}</td>
+               </tr>
+               {% if topic.get_descendants %}
+                    <tr>
+                         <th>Subtopics:</th>
+                         <td>{{topic.get_descendants|join:" | "}}</td>
+                    </tr>
+               {% endif %}
+          
+     </div>
+</div>
     
 {% endblock %}
