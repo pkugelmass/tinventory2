@@ -16,12 +16,18 @@ class Resource_Tag(models.Model):
           return self.name
 
 class Resource(models.Model):
+     
+     CATEGORIES = (
+          ('example', 'Templates, Tools and Exampples'),
+          ('reading', 'Guides, Articles, Books and other Reference'),
+          ('lessons', 'Lessons Learned / Your Perspective'),
+     )
 
      transformation = models.ForeignKey('transformations.Transformation')
      title = models.CharField('Title', max_length=50, help_text="Give this resource a descriptive name.")
      description = models.TextField()
-     topics = TreeManyToManyField('topics.Topic', blank=True)
-     tags = models.ManyToManyField('Resource_Tag', blank=True)
+     topics = TreeManyToManyField('topics.Topic', blank=True, help_text="Ctrl-click to choose all that apply.")
+     category = models.CharField('Primary Category',max_length=10,choices=CATEGORIES)
      date_modified = models.DateTimeField(auto_now=True)
      
      class Meta:
