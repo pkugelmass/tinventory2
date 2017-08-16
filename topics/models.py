@@ -1,6 +1,7 @@
 from django.db import models
 from mptt.models import TreeForeignKey, MPTTModel
 from autoslug import AutoSlugField
+from django.urls import reverse 
 
 
 class Topic(MPTTModel):
@@ -19,5 +20,7 @@ class Topic(MPTTModel):
           related_resources = list(self.attachment_set.all()) + list(self.link_set.all())
           return sorted(related_resources, key=lambda r: r.date_modified, reverse=True)
         
+    def get_absolute_url(self):
+        return reverse('topic-detail', args=[str(self.slug)])
         
     

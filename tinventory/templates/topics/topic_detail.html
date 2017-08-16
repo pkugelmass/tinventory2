@@ -1,6 +1,7 @@
 {% extends "core/base.html" %}
 {% load widget_tweaks %}
 {% load mptt_tags %}
+{% load hyperlink_list %}
 
 {% block title %}Topics {% endblock %}
 
@@ -31,7 +32,7 @@
                {% if topic.get_descendants %}
                     <tr>
                          <th>Subtopics:</th>
-                         <td>{{topic.get_descendants|join:" | "}}</td>
+                         <td>{% autoescape off %}{{topic.get_descendants|hyperlink_list:"slug"}} {% endautoescape %}</td>
                     </tr>
                {% endif %}
           
