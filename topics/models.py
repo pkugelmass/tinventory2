@@ -19,7 +19,4 @@ class Topic(MPTTModel):
           related_resources = list(self.attachment_set.all()) + list(self.link_set.all())
           return sorted(related_resources, key=lambda r: r.date_modified, reverse=True)
           
-    def headings(self):
-        return [ node for node in self.objects.all() if node.is_root_node() ]
-          
     

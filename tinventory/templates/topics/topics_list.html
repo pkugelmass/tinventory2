@@ -25,7 +25,7 @@
         
             <h3>{{n.title}}</h3>
             
-            {% recursetree n.get_children %}
+            {% recursetree n.get_descendants %}
         
                 <a href="{% url 'topic-detail' slug=node.slug %}" class="list-group-item justify-content-between">
                 
@@ -41,6 +41,8 @@
                 </span>
                 
                 </a>
+                
+                {{children}}
             
             {% endrecursetree %}
             
