@@ -5,11 +5,14 @@ from transformations.models import Transformation
 class AttachmentForm(forms.ModelForm):
      class Meta:
           model = Attachment
-          fields = ['resource','title','description','transformation', 'topics']
+          fields = ['resource','title','description', 'category', 'transformation', 'topics']
           widgets = {'description':forms.Textarea(attrs={'rows':3,'cols':40}),}
           
 class LinkForm(forms.ModelForm):
      class Meta:
           model = Link
-          fields = ['resource','title','description','transformation', 'topics'] 
-          widgets = {'description':forms.Textarea(attrs={'rows':3,'cols':40}),}
+          fields = ['resource','title','description','category', 'transformation', 'topics'] 
+          widgets = {
+               'description':forms.Textarea(attrs={'rows':3,'cols':40}),
+          }
+          

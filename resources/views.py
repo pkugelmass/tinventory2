@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Attachment, Link
 from transformations.models import Transformation
+from topics.models import Topic
 from .forms import LinkForm, AttachmentForm
 from django.views import generic
 from django import forms
@@ -82,3 +83,24 @@ class DeleteFile(MyDeleteMixin, generic.edit.DeleteView):
      model = Attachment
      # success_url = reverse_lazy('index')
      template_name = 'core/confirm_delete.html'
+     
+# SECOND TRY
+
+def AddResource(request, type, topic_slug=None, trans_slug=None):
+
+    data = {}
+    if topic_slug: data = {'topics':[Topic.objects.get(slug=topic_slug)]}
+    if trans_slug: data = {'transformation':Transformation.objects.get(slug=trans_slug)}
+
+    if type == 'link':
+        resource_form = LinkForm(initial=data)
+    elif type == 'file':
+        resource_form = AttachmentForm(initial=data)
+    else:
+        raise FieldError('Type of resource not identified.')
+        
+    return render(
+        request,
+        'resources/resource_form.html',
+        {'form':resource_form}
+        )

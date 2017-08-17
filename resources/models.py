@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse
 from transformations.models import Transformation
 from topics.models import Topic
 from mptt.models import TreeManyToManyField
+from django.contrib.admin.widgets import FilteredSelectMultiple
 import os
 
 
@@ -18,16 +19,16 @@ class Resource_Tag(models.Model):
 class Resource(models.Model):
      
      CATEGORIES = (
-          ('example', 'Templates, Tools and Exampples'),
+          ('example', 'Templates, Tools and Examples'),
           ('reading', 'Guides, Articles, Books and other Reference'),
-          ('lessons', 'Lessons Learned / Your Perspective'),
+          ('lessons', 'Lessons Learned from Real Experience'),
      )
 
      transformation = models.ForeignKey('transformations.Transformation')
-     title = models.CharField('Title', max_length=50, help_text="Give this resource a descriptive name.")
-     description = models.TextField()
+     title = models.CharField('Title', max_length=50)
+     description = models.TextField(help_text='Describe the resource and how it may be useful to others.')
      topics = TreeManyToManyField('topics.Topic', blank=True, help_text="Ctrl-click to choose all that apply.")
-     category = models.CharField('Primary Category',max_length=10,choices=CATEGORIES)
+     category = models.CharField('Resource Category',max_length=10,choices=CATEGORIES)
      date_modified = models.DateTimeField(auto_now=True)
      
      class Meta:
