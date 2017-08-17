@@ -8,8 +8,8 @@ urlpatterns = [
      
      url(r'view/(?P<slug>[\w-]+)/$', views.TopicDetail.as_view(), name='topic-detail'),
      
-     url(r'(?P<topic_slug>[\w-]+)/add(?P<type>[a-z]+)/$', AddResource, name='add-resource'),
+     url(r'(?P<topic_slug>[\w-]+)/add(?P<type>[a-z]+)/$', AddResource, name='resource-add-topic'),
      
-     url(r'add(?P<type>[a-z]+)/$', AddResource, name='add-resource'),
+     url(r'add(?P<type>[a-z]+)/$', AddResource, name='resource-add-topic-base'),
 
      ]

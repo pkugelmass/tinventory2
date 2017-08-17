@@ -3,7 +3,7 @@
 {% load mptt_tags %}
 {% load hyperlink_list %}
 
-{% block title %}Topics {% endblock %}
+{% block title %}Topics - {{topic.title}} {% endblock %}
 
 {% block header %} 
      {{ topic.title }} 
@@ -12,11 +12,16 @@
           <small> (<a href="{% url 'topic-detail' slug=topic.parent.slug %}">{{topic.parent}}</a>)</small>
      {% endif %}
 
-     <!--<div class="pull-right">-->
-     <!--     <a class="btn btn-success" href="{% url 'transformation-add' %}" data-toggle="tooltip" title="New Transformation">-->
-     <!--          <span class="glyphicon glyphicon-plus-sign"></span>  Add New Transformation-->
-     <!--     </a>-->
-     <!--</div>-->
+     <div class="pull-right dropdown">
+        <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">
+        <span class="glyphicon glyphicon-plus-sign"></span>  Add a New Resource
+        <span class="caret"></span></button>
+         
+        <ul class="dropdown-menu">
+            <li><a href="{% url 'resource-add-topic' type='link' topic_slug=topic.slug %}">Add a new link</a></li>
+            <li><a href="{% url 'resource-add-topic' type='file' topic_slug=topic.slug %}">Add a new file</a></li>
+        </ul>
+     </div>
 
 {% endblock %}
 

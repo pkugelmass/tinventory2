@@ -24,7 +24,7 @@ class Resource(models.Model):
           ('lessons', 'Lessons Learned from Real Experience'),
      )
 
-     transformation = models.ForeignKey('transformations.Transformation')
+     transformation = models.ForeignKey('transformations.Transformation', blank=True)
      title = models.CharField('Title', max_length=50)
      description = models.TextField(help_text='Describe the resource and how it may be useful to others.')
      topics = TreeManyToManyField('topics.Topic', blank=True, help_text="Ctrl-click to choose all that apply.")
