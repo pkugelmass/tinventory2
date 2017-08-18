@@ -19,9 +19,9 @@ class Resource_Tag(models.Model):
 class Resource(models.Model):
      
      CATEGORIES = (
-          ('example', 'Templates, Tools and Examples'),
-          ('reading', 'Guides, Articles, Books and other Reference'),
-          ('lessons', 'Lessons Learned from Real Experience'),
+          ('example', 'Example'),
+          ('reading', 'Reading'),
+          ('lessons', 'Lessons Learned'),
      )
 
      transformation = models.ForeignKey('transformations.Transformation', blank=True, null=True)

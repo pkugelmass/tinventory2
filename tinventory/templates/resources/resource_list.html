@@ -14,42 +14,6 @@
 
 {% block content %}
      
-     <div class="row">
-          <div class="col-md-12">
-               <table class="table table-striped table-hover table-responsive align-middle col-md-12">
-                    <tbody>
-                    <tr>
-                         <th>Type</th>
-                         <th>Resource</th>
-                         <th>Transformation</th>
-                         <th>Topics</th>
-                    </tr>
-                    {% for resource in resources %}
-                    <tr>
-                         <td>
-                              {% if resource.type == 'Link' %}<span class="glyphicon glyphicon-link large"></span>
-                              {% elif resource.type == 'File' %}<span class="glyphicon glyphicon-file large"></span>{% endif %}
-                         </td>
-                         <td>
-                              {% if resource.type == 'Link' %}
-                                   <a href="{% url 'view-link' resource.pk %}">
-                              {% elif resource.type == 'File' %}
-                                   <a href="{% url 'view-file' resource.pk %}">
-                              {% endif %}
-                              <span class="strong">{{resource.title}}</span></a>
-                              <br>
-                              {{resource.description}}
-                         </td>
-                         <td>
-                              {% if resource.transformation %}
-                              <a href="{% url 'transformation-detail' resource.transformation.pk %}">{{ resource.transformation }}</td></a>
-                              {% endif %}
-                         <td>{% autoescape off %}{{resource.topics.all|hyperlink_list:"slug"}}{% endautoescape %}</td>
-                    </tr>
-                    {% endfor %}
-                    </tbody>
-               </table>
-          </div>
-     </div>
+     {% include 'resources/resource_table_include.html' with resource_list=resources %}
 
 {% endblock %}
