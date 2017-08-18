@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Attachment, Link
 from transformations.models import Transformation
 from topics.models import Topic
@@ -9,6 +9,7 @@ from django.core.urlresolvers import reverse_lazy, reverse
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from transformations.views import MyDeleteMixin
+from .helpers import viewthisresource, resourceformfactory
 
 
 # FILE MGMT VIEWS AND FORMS
@@ -86,21 +87,31 @@ class DeleteFile(MyDeleteMixin, generic.edit.DeleteView):
      
 # SECOND TRY
 
-def AddResource(request, type, topic_slug=None, trans_slug=None):
+def AddResource(request, type, base=None, slug=None):
+     
+     if request.method == 'POST':
+          
+          resource_form = resourceformfactory(type, base, request.POST, False)
+          
+          if resource_form.is_valid():
+               new_resource = resource_form.save()
+               new_resource.save()
+               messages.success(request,'Your %s \'%s\' has been saved.' % (type, new_resource.title))
+               
+               return viewthisresource(new_resource) #helper function (yet to be written) that views a resource regardless of type...
+               # If the form is not valid, we use the return line below.
 
-    data = {}
-    if topic_slug: data = {'topics':[Topic.objects.get(slug=topic_slug)]}
-    if trans_slug: data = {'transformation':Transformation.objects.get(slug=trans_slug)}
-
-    if type == 'link':
-        resource_form = LinkForm(initial=data)
-    elif type == 'file':
-        resource_form = AttachmentForm(initial=data)
-    else:
-        raise FieldError('Type of resource not identified.')
-        
-    return render(
-        request,
-        'resources/resource_form.html',
-        {'form':resource_form}
-        )
+     else:
+          
+          #assert False, 'I am in the else block with base %s and slug %s!' % (base, slug)
+          initial_data = {}
+          
+          if base == 'topic' and slug != None: 
+                    
+                    initial_data = {'topics':[Topic.objects.get(slug=slug)]}
+          elif base == 'transformation' and slug != None: 
+                    initial_data = {'transformation':Transformation.objects.get(slug=slug)}
+               
+          resource_form = resourceformfactory(type, base, initial_data, True)
+               
+     return render(request, 'resources/resource_form.html', {'form':resource_form} )

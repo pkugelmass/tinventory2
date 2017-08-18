@@ -61,7 +61,7 @@ class Attachment(Resource):
      # NB Deleting doesn't actually delete the file.
 
 class Link(Resource):
-     resource = models.URLField("Link")
+     resource = models.URLField("Link", help_text="The URL (address), starting with \'http.\'")
      
      def get_absolute_url(self):
         return reverse('view-link', kwargs={'pk': self.pk})

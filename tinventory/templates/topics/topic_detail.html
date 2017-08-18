@@ -18,8 +18,8 @@
         <span class="caret"></span></button>
          
         <ul class="dropdown-menu">
-            <li><a href="{% url 'resource-add-topic' type='link' topic_slug=topic.slug %}">Add a new link</a></li>
-            <li><a href="{% url 'resource-add-topic' type='file' topic_slug=topic.slug %}">Add a new file</a></li>
+            <li><a href="{% url 'resource-add-topic' type='link' slug=topic.slug %}">Add a new link</a></li>
+            <li><a href="{% url 'resource-add-topic' type='file' slug=topic.slug %}">Add a new file</a></li>
         </ul>
      </div>
 
