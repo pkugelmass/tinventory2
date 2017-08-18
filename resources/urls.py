@@ -3,13 +3,11 @@ from . import views
 
 urlpatterns = [
      
-     url(r'addlink/(?P<tID>\d+)$', views.AddLink.as_view(), name='add-link'), 
+     url(r'add(?P<type>[a-z]+)/$', views.AddResource, name='add-resource'),
      
-     url(r'addfile/(?P<tID>\d+)$', views.AddFile.as_view(), name='add-file'),
+     url(r'link/(?P<pk>\d+)$', views.ViewLink.as_view(), name='view-link'),
      
-     url(r'viewlink/(?P<pk>\d+)$', views.ViewLink.as_view(), name='view-link'),
-     
-     url(r'viewfile/(?P<pk>\d+)$', views.ViewFile.as_view(), name='view-file'),
+     url(r'file/(?P<pk>\d+)$', views.ViewFile.as_view(), name='view-file'),
      
      url(r'editlink/(?P<pk>\d+)$', views.EditLink.as_view(), name='edit-link'),
      

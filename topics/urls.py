@@ -10,6 +10,6 @@ urlpatterns = [
      
      url(r'(?P<slug>[\w-]+)/add(?P<type>[a-z]+)/$', AddResource, {'base':'topic'}, name='resource-add-topic'),
      
-     url(r'add(?P<type>[a-z]+)/$', AddResource, {'base':'topic'}, name='resource-add-topic-base'),
+     #url(r'add(?P<type>[a-z]+)/$', AddResource, {'base':'topic'}, name='resource-add-topic-base'),
 
      ]

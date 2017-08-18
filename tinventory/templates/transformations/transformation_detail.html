@@ -9,7 +9,7 @@
      
      <div class="pull-right">
           <a class="btn btn-default" href="{% url 'transformation-delete' transformation.pk %}" data-toggle="tooltip" title="Delete Transformation">
-               <span class="glyphicon glyphicon-trash"></span>
+               <span class="glyphicon glyphicon-trash"></span> Delete
           </a>
      </div>
 {% endblock %}
@@ -22,7 +22,7 @@
                
                     <div class="pull-right">
                          <a class="btn btn-default" href="{% url 'transformation-edit' transformation.pk %}" data-toggle="tooltip" title="Edit Details">
-                              <span class="glyphicon glyphicon-pencil"></span>
+                              <span class="glyphicon glyphicon-pencil"></span> Edit
                          </a>
                     </div>
                     
@@ -74,14 +74,16 @@
                
                <h3>Related Resources:
                
-                    <div class="pull-right">
-                         <a class="btn btn-default" href="{% url 'add-link' transformation.pk %}" data-toggle="tooltip" title="Add Link">
-                              <span class="glyphicon glyphicon-link"></span>
-                         </a>
-                         <a class="btn btn-default" href="{% url 'add-file' transformation.pk %}" data-toggle="tooltip" title="Add Attachment">
-                              <span class="glyphicon glyphicon-file"></span>
-                         </a>
-                    </div>
+               <div class="pull-right dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                  <span class="glyphicon glyphicon-plus-sign"></span>  Add
+                  <span class="caret"></span></button>
+                   
+                  <ul class="dropdown-menu">
+                      <li><a href="{% url 'transformation-add-resource' type='link' slug=transformation.slug %}">Add a new link</a></li>
+                      <li><a href="{% url 'transformation-add-resource' type='file' slug=transformation.slug %}">Add a new file</a></li>
+                  </ul>
+               </div>
      
                </h3>
      

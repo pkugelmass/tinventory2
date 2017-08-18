@@ -1,5 +1,6 @@
 from django.conf.urls import url
 from . import views
+from resources import views as resource_views
 
 urlpatterns = [
      
@@ -14,6 +15,10 @@ urlpatterns = [
      url(r'edit/(?P<pk>\d+)$', views.EditTransformation.as_view(), name='transformation-edit'),
      
      url(r'delete/(?P<pk>\d+)$', views.DeleteTransformation.as_view(), name='transformation-delete'),
+     
+     url(r'(?P<slug>[\w-]+)/add(?P<type>[a-z]+)/$', resource_views.AddResource, {'base':'transformation'}, name='transformation-add-resource'),
+     
+     url(r'add(?P<type>[a-z]+)/$', resource_views.AddResource, {'base':'transformation'}, name='transformation-add-topic-base'),
      
      ]
      
