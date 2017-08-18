@@ -7,7 +7,7 @@ urlpatterns = [
      
      url(r'^$', views.IndexView, name='index'),
      
-     url(r'view/(?P<pk>\d+)$', views.TransformationDetail.as_view(), name='transformation-detail'),
+     url(r'(?P<slug>[\w-]+)$', views.TransformationDetail.as_view(), name='transformation-detail'),
      
      url(r'add/$', views.AddTransformation.as_view(), name='transformation-add'),
      

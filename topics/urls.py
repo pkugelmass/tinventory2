@@ -6,7 +6,7 @@ urlpatterns = [
      
      url(r'^$', views.TopicsList.as_view(), name='topics'),
      
-     url(r'view/(?P<slug>[\w-]+)/$', views.TopicDetail.as_view(), name='topic-detail'),
+     url(r'(?P<slug>[\w-]+)/$', views.TopicDetail.as_view(), name='topic-detail'),
      
      url(r'(?P<slug>[\w-]+)/add(?P<type>[a-z]+)/$', AddResource, {'base':'topic'}, name='resource-add-topic'),
      

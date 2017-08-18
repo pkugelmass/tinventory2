@@ -30,7 +30,7 @@
                          <td>{{resource.get_category_display}}</td>
                          <td>
                               {% if resource.transformation %}
-                              <a href="{% url 'transformation-detail' resource.transformation.pk %}">{{ resource.transformation }}</td></a>
+                              <a href="{% url 'transformation-detail' resource.transformation.slug %}">{{ resource.transformation }}</td></a>
                               {% endif %}
                          <td>{% autoescape off %}{{resource.topics.all|hyperlink_list:"slug"}}{% endautoescape %}</td>
                     </tr>

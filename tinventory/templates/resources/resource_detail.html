@@ -65,7 +65,7 @@
                          <th class="col-md-2">Transformation</th>
                          <td class="col-md-10">
                               {% if object.transformation %} 
-                                   <a href="{% url 'transformation-detail' object.transformation.pk %}">
+                                   <a href="{% url 'transformation-detail' object.transformation.slug %}">
                                         {{object.transformation}}
                                    </a>
                               {% endif %}
