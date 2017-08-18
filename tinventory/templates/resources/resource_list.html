@@ -1,5 +1,6 @@
 {% extends "core/base.html" %}
 {% load widget_tweaks %}
+{% load hyperlink_list %}
 
 {% block header %}Resources
 
@@ -39,8 +40,11 @@
                               <br>
                               {{resource.description}}
                          </td>
-                         <td><a href="{% url 'transformation-detail' resource.transformation.pk %}">{{ resource.transformation }}</td></a>
-                         <td>{{ resource.topics.all|join:' ,' }}</td>
+                         <td>
+                              {% if resource.transformation %}
+                              <a href="{% url 'transformation-detail' resource.transformation.pk %}">{{ resource.transformation }}</td></a>
+                              {% endif %}
+                         <td>{% autoescape off %}{{resource.topics.all|hyperlink_list:"slug"}}{% endautoescape %}</td>
                     </tr>
                     {% endfor %}
                     </tbody>

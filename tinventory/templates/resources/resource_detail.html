@@ -1,4 +1,5 @@
 {% extends "core/base.html" %}
+{% load hyperlink_list %}
 
 {% block title %} 
      {{object.type}} - {{object.title}}
@@ -69,7 +70,7 @@
                     </tr>                    
                     <tr>
                          <th class="col-md-2">Topics</th>
-                         <td class="col-md-10">{{object.topics.all|join:', '}}</td>
+                         <td class="col-md-10">{% autoescape off %}{{object.topics.all|hyperlink_list:"slug"}}{% endautoescape %}</td>
                     </tr>
                     <tr>
                          <th class="col-md-2">Date</th>
