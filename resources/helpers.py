@@ -1,21 +1,22 @@
-from django.core.urlresolvers import reverse
+from django.shortcuts import redirect
 from .forms import AttachmentForm, LinkForm
 
 
-def resourceformfactory(resource_type, base, data, initial=False):
+def resourceformfactory(resource_type, base, data, files=None, initial=False):
     
-    if resource_type == 'file': form = AttachmentForm()
-    if resource_type == 'link': form = LinkForm()
-        
-    if initial == True: form.initial = data
-    #if initial == False: form = form
+    if initial == False:
+        if resource_type == 'file': form = AttachmentForm(data, files)
+        if resource_type == 'link': form = LinkForm(data)
+    if initial == True:
+        if resource_type == 'file': form = AttachmentForm(initial=data)
+        if resource_type == 'link': form = LinkForm(initial=data)
     
     return form
 
 def viewthisresource(resource_object):
     
     if resource_object.type == 'File':
-        return reverse('view-file', pk=resource_object.pk)
+        return redirect('view-file', pk=resource_object.pk)
     
     if resource_object.type == 'Link':
-        return reverse('view-link', pk=resource_object.pk)
+        return redirect('view-link', pk=resource_object.pk)

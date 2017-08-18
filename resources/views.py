@@ -91,19 +91,17 @@ def AddResource(request, type, base=None, slug=None):
      
      if request.method == 'POST':
           
-          resource_form = resourceformfactory(type, base, request.POST, False)
+          resource_form = resourceformfactory(type, base, request.POST, request.FILES, False)
           
           if resource_form.is_valid():
                new_resource = resource_form.save()
                new_resource.save()
                messages.success(request,'Your %s \'%s\' has been saved.' % (type, new_resource.title))
                
-               return viewthisresource(new_resource) #helper function (yet to be written) that views a resource regardless of type...
-               # If the form is not valid, we use the return line below.
+               return viewthisresource(new_resource) #helper function that redirects to resource detail regardless of type...
 
      else:
           
-          #assert False, 'I am in the else block with base %s and slug %s!' % (base, slug)
           initial_data = {}
           
           if base == 'topic' and slug != None: 
@@ -112,6 +110,6 @@ def AddResource(request, type, base=None, slug=None):
           elif base == 'transformation' and slug != None: 
                     initial_data = {'transformation':Transformation.objects.get(slug=slug)}
                
-          resource_form = resourceformfactory(type, base, initial_data, True)
+          resource_form = resourceformfactory(type, base, initial_data, None, True)
                
      return render(request, 'resources/resource_form.html', {'form':resource_form} )
