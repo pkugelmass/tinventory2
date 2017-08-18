@@ -24,7 +24,7 @@ class Resource(models.Model):
           ('lessons', 'Lessons Learned from Real Experience'),
      )
 
-     transformation = models.ForeignKey('transformations.Transformation', blank=True)
+     transformation = models.ForeignKey('transformations.Transformation', blank=True, null=True)
      title = models.CharField('Title', max_length=50)
      description = models.TextField(help_text='Describe the resource and how it may be useful to others.')
      topics = TreeManyToManyField('topics.Topic', blank=True, help_text="Ctrl-click to choose all that apply.")
@@ -43,7 +43,7 @@ class Resource(models.Model):
 class Attachment(Resource):
 
      def get_upload_path(instance, filename):
-          return os.path.join('transformations', str(instance.transformation.slug), filename)
+          return os.path.join('uploads', filename)
      
      resource = models.FileField("Attachment",upload_to=get_upload_path)
      

@@ -93,6 +93,7 @@ DATABASES = {
         'USER': 'pktcsb',
         'PASSWORD': 'what3v3r',
         'HOST': 'pktcsb.mysql.pythonanywhere-services.com',
+    
     },
 }
 
