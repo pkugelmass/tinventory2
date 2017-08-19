@@ -10,6 +10,13 @@ class TopicsList(generic.ListView):
     def get_queryset(self):
         return super(TopicsList,self).get_queryset().prefetch_related()
     
-class TopicDetail(generic.DetailView):
-    model = Topic
-    template_name = 'topics/topic_detail.html'
+def TopicDetail(request, slug):
+    
+    this_topic = Topic.objects.get(slug=slug)
+    
+    context = {
+        'topic':this_topic,
+        'resourcefamily':this_topic.resourcefamily
+        }
+        
+    return render(request,'topics/topic_detail.html',context)
