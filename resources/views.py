@@ -10,6 +10,7 @@ from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from transformations.views import MyDeleteMixin
 from .helpers import viewthisresource, resourceformfactory
+from .forms import ResourceFilterForm
 
 
 # FILE MGMT VIEWS AND FORMS
@@ -19,7 +20,12 @@ def ResourceList(request):
      resource_list = list(Link.objects.all()) + list(Attachment.objects.all())
      resource_list = sorted(resource_list, key=lambda r: r.date_modified, reverse=True)
      
-     return render(request, 'resources/resource_list.html', {'resources':resource_list})
+     context = {
+          'resources':resource_list,
+          'r_filter_form':ResourceFilterForm(),
+     }
+     
+     return render(request, 'resources/resource_list.html', context)
 
 class ResourceFormMixin:
      template_name='resources/resource_form.html'

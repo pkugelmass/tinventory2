@@ -13,6 +13,31 @@
 {% endblock %}
 
 {% block content %}
+
+     <div class="row form-group">
+          
+          <form action="" method="GET">
+               {% for field in r_filter_form %}
+                    <div class="col-md-2">
+                         <h5>{{ field.label }}</h5>
+                         {{ field|add_class:"form-control"}} 
+                    </div>
+               {% endfor %}
+               
+               <div class="col-md-2 align-bottom btn-group">
+                    <h5 class="invisible">Buttons</h5> <!-- pushes the buttons down for appearances -->
+                    <button class="btn btn-default text-right" type="submit" ><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                    </form> <!-- end the first form here -->
+                    
+                    <!-- second form to indicate the form should be cleared -->
+                    <form action="" method="GET"> 
+                         <button class="btn btn-default text-right" value="Clear" type="submit">
+                         <span class="glyphicon glyphicon-sunglasses"></span> Clear</button>
+                    </form>
+               </div>
+          
+     </div>
+
      
      {% include 'resources/resource_table_include.html' with resource_list=resources %}
 

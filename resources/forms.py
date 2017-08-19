@@ -1,6 +1,9 @@
 from django import forms
-from .models import Attachment, Link
-from transformations.models import Transformation
+from .models import Attachment, Link, Resource
+from transformations.models import Transformation, Ministry
+from topics.models import Topic
+from transformations.forms import ChoiceFieldEmpty
+from mptt.forms import TreeNodeChoiceField
 
 class AttachmentForm(forms.ModelForm):
      class Meta:
@@ -16,3 +19,34 @@ class LinkForm(forms.ModelForm):
                'description':forms.Textarea(attrs={'rows':3,'cols':40}),
           }
           
+class ResourceFilterForm(forms.Form):
+     
+     RESOURCE_TYPES = ( (Attachment, 'File'), (Link,'Link') )
+     
+     resourcetype = ChoiceFieldEmpty(
+          choices=RESOURCE_TYPES, 
+          label = 'Type', 
+          required=False)
+     
+     category = ChoiceFieldEmpty(
+          choices=Resource.CATEGORIES, 
+          label = 'Resource Category', 
+          required=False)
+     
+     topic = TreeNodeChoiceField(
+          Topic.objects.filter(level__gt=0), 
+          label='Topics', 
+          empty_label='', 
+          required=False)
+     
+     transformation = forms.ModelChoiceField(
+          Transformation.objects.all().order_by('title'),
+          label='Transformation', 
+          empty_label='', 
+          required=False)
+     
+     ministry__abbrev = ChoiceFieldEmpty(
+          choices = Ministry.objects.choices_list(), 
+          label="Ministry", 
+          required=False)
+
