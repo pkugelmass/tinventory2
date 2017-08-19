@@ -28,9 +28,10 @@ def ResourceList(request):
           
           q_list = []
           if request.GET['category'] != '': q_list = q_list + [Q(category=request.GET['category'])]
-          if request.GET['topic'] != '': q_list = q_list + [Q(topics=request.GET['topic'])]
+          #if request.GET['topic'] != '': q_list = q_list + [Q(topics=request.GET['topic'])]
           if request.GET['transformation'] != '': q_list = q_list + [Q(transformation=request.GET['transformation'])]
           if request.GET['ministry'] != '': q_list = q_list + [Q(transformation__ministry__abbrev=request.GET['ministry'])]
+          
           
           if len(q_list) > 0:
                combined_q = q_list.pop()
@@ -47,9 +48,18 @@ def ResourceList(request):
           if request.GET['resourcetype'] == 'File': links = []
           if request.GET['resourcetype'] == 'Link': attachments = []
           
+          
           # Combine it into a resource list:
           resource_list = list(links) + list(attachments)
           resource_list = sorted(resource_list, key=lambda r: r.date_modified, reverse=True)
+          
+          # Now filter for the topic's whole family...
+          if request.GET['topic'] != '': 
+               topiczz = Topic.objects.get(pk=request.GET['topic'])
+               topic_resources = topiczz.resourcefamily()
+               topic_resources_set = set(topic_resources)
+               resource_set = set(resource_list)
+               resource_list = list(set.intersection(topic_resources_set,resource_set))
           
           # Set the forms to show the criteria used when they are reloaded.
           for fieldname in request.GET:
