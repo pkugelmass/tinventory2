@@ -19,8 +19,9 @@ class Resource_Tag(models.Model):
 class Resource(models.Model):
      
      CATEGORIES = (
-          ('example', 'Example'),
-          ('reading', 'Reading'),
+          ('example', 'Real World Example'),
+          ('template', 'Tool or Template'),
+          ('reading', 'Theory, Guide, Article or Book'),
           ('lessons', 'Lessons Learned'),
      )
 
