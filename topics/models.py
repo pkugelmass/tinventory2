@@ -8,7 +8,7 @@ import operator
 class Topic(MPTTModel):
     title = models.CharField(max_length=50)
     parent = TreeForeignKey('self', null=True, blank=True, related_name='subtopics', db_index=True)
-    description = models.TextField(blank=True)
+    description = models.CharField(max_length=240,blank=True)
     slug = AutoSlugField(populate_from='title')
     
     class MPTTMeta:
