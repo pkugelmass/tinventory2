@@ -11,42 +11,56 @@ from django.contrib.messages.views import SuccessMessageMixin
 from transformations.views import MyDeleteMixin
 from .helpers import viewthisresource, resourceformfactory
 from .forms import ResourceFilterForm
+from django.db.models import Q
 
 
 # FILE MGMT VIEWS AND FORMS
 
 def ResourceList(request):
      
+     form = ResourceFilterForm()
      resource_list = list(Link.objects.all()) + list(Attachment.objects.all())
      resource_list = sorted(resource_list, key=lambda r: r.date_modified, reverse=True)
      
+     if request.GET:
+          
+          # Get ready for some bad programming!
+          
+          q_list = []
+          if request.GET['category'] != '': q_list = q_list + [Q(category=request.GET['category'])]
+          if request.GET['topic'] != '': q_list = q_list + [Q(topics=request.GET['topic'])]
+          if request.GET['transformation'] != '': q_list = q_list + [Q(transformation=request.GET['transformation'])]
+          if request.GET['ministry'] != '': q_list = q_list + [Q(transformation__ministry__abbrev=request.GET['ministry'])]
+          
+          if len(q_list) > 0:
+               combined_q = q_list.pop()
+               for q in q_list:
+                    combined_q &= q
+          else:
+               combined_q = Q(pk__gt=0)
+          
+          # Filter the query based on those arguments (if any).
+          links = Link.objects.filter(combined_q)
+          attachments = Attachment.objects.filter(combined_q)
+          
+          # Zero/"filter" out the 'other' resource type if one has been set.
+          if request.GET['resourcetype'] == 'File': links = []
+          if request.GET['resourcetype'] == 'Link': attachments = []
+          
+          # Combine it into a resource list:
+          resource_list = list(links) + list(attachments)
+          resource_list = sorted(resource_list, key=lambda r: r.date_modified, reverse=True)
+          
+          # Set the forms to show the criteria used when they are reloaded.
+          for fieldname in request.GET:
+               form.fields[fieldname].initial = request.GET[fieldname]
+     
      context = {
           'resources':resource_list,
-          'r_filter_form':ResourceFilterForm(),
+          'r_filter_form':form,
      }
      
      return render(request, 'resources/resource_list.html', context)
-
-class ResourceFormMixin:
-     template_name='resources/resource_form.html'
-     
-     def get_initial(self):
-          initial = super(generic.edit.CreateView, self).get_initial()
-          try:
-               initial['transformation'] = Transformation.objects.get(pk=self.kwargs['tID'])
-          except:
-               pass
-          return initial
-          
-class AddLink(SuccessMessageMixin, ResourceFormMixin, generic.edit.CreateView):
-     model = Link
-     form_class = LinkForm
-     success_message = 'New link added.'
-     
-class AddFile(SuccessMessageMixin, ResourceFormMixin, generic.edit.CreateView):
-     model = Attachment
-     form_class = AttachmentForm
-     success_message = 'New file added.'
      
 class EditLink(SuccessMessageMixin,generic.edit.UpdateView):
      model = Link

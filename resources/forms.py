@@ -21,7 +21,7 @@ class LinkForm(forms.ModelForm):
           
 class ResourceFilterForm(forms.Form):
      
-     RESOURCE_TYPES = ( (Attachment, 'File'), (Link,'Link') )
+     RESOURCE_TYPES = ( ('File', 'File'), ('Link','Link') )
      
      resourcetype = ChoiceFieldEmpty(
           choices=RESOURCE_TYPES, 
@@ -35,7 +35,7 @@ class ResourceFilterForm(forms.Form):
      
      topic = TreeNodeChoiceField(
           Topic.objects.filter(level__gt=0), 
-          label='Topics', 
+          label='Topic', 
           empty_label='', 
           required=False)
      
@@ -45,7 +45,7 @@ class ResourceFilterForm(forms.Form):
           empty_label='', 
           required=False)
      
-     ministry__abbrev = ChoiceFieldEmpty(
+     ministry = ChoiceFieldEmpty(
           choices = Ministry.objects.choices_list(), 
           label="Ministry", 
           required=False)
