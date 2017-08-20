@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from mptt.models import TreeManyToManyField
 from django.conf import settings
 from autoslug import AutoSlugField
+import datetime
 import os
 
 class Resource(models.Model):
@@ -22,11 +23,14 @@ class Resource(models.Model):
           ('link', 'Link')
      )
      
-     def resourceTypeList(self):
-          return [ ( x , x.__name__.capitalize() ) for x in self.__class__.__subclasses__()]
+     # def resourceTypeList(self):
+     #      return [ ( x , x.__name__.capitalize() ) for x in self.__class__.__subclasses__()]
      
      def get_upload_path(instance, filename):
-          return os.path.join('created_by', filename)
+          return os.path.join('resources', datetime.date.today().strftime("%y-%m-%d"), filename)
+          
+     def filename(self):
+        return os.path.basename(self.file.name)
 
      type = models.CharField('Resource Type', max_length=5, choices=RESOURCE_TYPES)
      

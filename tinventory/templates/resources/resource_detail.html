@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block header %}
-     {{object.title}}<small> ({{ object.type }})</small>
+     {{object.title}}<small> ({{ object.type|title }})</small>
      
      <div class="pull-right"> <!-- Edit & delete buttons -->
           
@@ -39,13 +39,13 @@
           <div class="col-md-12">
                <table class="table table-striped table-condensed table-hover align-middle">
                     <tr>
-                         <th class="col-md-2">{{object.type}}</th>
+                         <th class="col-md-2">{{object.type|title}}</th>
                          <td class="col-md-10">
-                              {%if object.type == 'Link' %}
-                                   <a href="{{object.resource}}">{{object.resource}}</a>
+                              {%if object.type == 'link' %}
+                                   <a href="{{object.link}}">{{object.link}}</a>
                               {% endif %}
-                              {%if object.type == 'File' %}
-                                   <a href="/media/{{ object.resource }}">{{object.filename}}</a>
+                              {%if object.type == 'file' %}
+                                   <a href="{{ object.file.url }}">{{object.filename}}</a>
                               {% endif %}
                          </td>
                     </tr>
@@ -77,7 +77,11 @@
                          <td class="col-md-10">{% autoescape off %}{{object.topics.all|hyperlink_list:"slug"}}{% endautoescape %}</td>
                     </tr>
                     <tr>
-                         <th class="col-md-2">Date</th>
+                         <th class="col-md-2">Created By</th>
+                         <td class="col-md-10">{{object.created_by.get_full_name}} ({{object.created_by}})</td>
+                    </tr>
+                    <tr>
+                         <th class="col-md-2">Date Modified</th>
                          <td class="col-md-10">{{object.date_modified}}</td>
                     </tr>
 
