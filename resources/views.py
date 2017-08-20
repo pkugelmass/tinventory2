@@ -20,8 +20,6 @@ def ResourceList(request):
      form = ResourceFilterForm()
      resource_list = Resource.objects.all()
      
-     assert False, resource_list
-     
      if request.GET:
           
           # So much filtering!

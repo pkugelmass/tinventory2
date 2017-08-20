@@ -16,7 +16,6 @@ def TopicDetail(request, slug):
     
     context = {
         'topic':this_topic,
-        'resourcefamily':this_topic.resourcefamily
         }
         
     return render(request,'topics/topic_detail.html',context)
