@@ -20,7 +20,9 @@ class FileForm(ValidateResourceFormMixin, forms.ModelForm):
      class Meta:
           model = File
           fields = ['file','title','description', 'category', 'transformation', 'topics']
-          widgets = {'description':forms.Textarea(attrs={'rows':3,'cols':40})}
+          widgets = {
+               'description':forms.Textarea(attrs={'rows':3,'cols':40}),
+          }
           
      def __init__(self, *args, **kwargs):
           super(FileForm, self).__init__(*args, **kwargs)

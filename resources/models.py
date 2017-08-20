@@ -36,7 +36,7 @@ class Resource(models.Model):
      
      title = models.CharField('Title', max_length=50)
      description = models.TextField(help_text='Describe the resource and how it may be useful to others.')
-     slug = AutoSlugField(populate_from='title', unique=True)
+     slug = AutoSlugField(populate_from='title', unique=True, always_update=True)
      
      file = models.FileField("File",upload_to=get_upload_path, blank=True, null=True)
      link = models.URLField("Link", help_text="The URL (address), starting with \'http.\'", blank=True, null=True)
@@ -67,9 +67,6 @@ class Resource(models.Model):
      def __str__(self):
           return self.title
           
-     def get_absolute_url(self):
-          return reverse('view-resource', kwargs={'slug': self.slug})
-          
      class Meta:
           ordering = ['-date_modified']
           
@@ -83,6 +80,9 @@ class File(Resource):
      
      class Meta:
           proxy = True
+          
+     def get_absolute_url(self):
+          return reverse('view-file', kwargs={'slug': self.slug})
 
 class Link(Resource):
      
@@ -90,4 +90,7 @@ class Link(Resource):
      
      class Meta:
           proxy = True
+          
+     def get_absolute_url(self):
+          return reverse('view-link', kwargs={'slug': self.slug})
           

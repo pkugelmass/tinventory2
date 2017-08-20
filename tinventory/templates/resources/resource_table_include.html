@@ -14,14 +14,14 @@
                     {% for resource in resource_list %}
                     <tr>
                          <td>
-                              {% if resource.type == 'Link' %}<span class="glyphicon glyphicon-link large"></span>
-                              {% elif resource.type == 'File' %}<span class="glyphicon glyphicon-file large"></span>{% endif %}
+                              {% if resource.type == 'link' %}<span class="glyphicon glyphicon-link large"></span>
+                              {% elif resource.type == 'file' %}<span class="glyphicon glyphicon-file large"></span>{% endif %}
                          </td>
                          <td>
-                              {% if resource.type == 'Link' %}
-                                   <a href="{% url 'view-link' resource.pk %}">
-                              {% elif resource.type == 'File' %}
-                                   <a href="{% url 'view-file' resource.pk %}">
+                              {% if resource.type == 'link' %}
+                                   <a href="{% url 'view-link' resource.slug %}">
+                              {% elif resource.type == 'file' %}
+                                   <a href="{% url 'view-file' resource.slug %}">
                               {% endif %}
                               <span class="strong">{{resource.title}}</span></a>
                               <br>

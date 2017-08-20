@@ -1,0 +1,12 @@
+{% extends "core/base.html" %}
+<script type="text/javascript" src="/static/admin/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
+{{ myform.media }}
+{% load widget_tweaks %}
+
+{% block title %}Edit {{object.type|title}}{% endblock %}
+{% block header %}Edit {{object.type|title}}{% endblock %}
+
+{% block content %}
+{% include 'core/form_table_layout.html' %}
+{% endblock %}

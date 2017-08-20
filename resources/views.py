@@ -45,14 +45,16 @@ def ResourceList(request):
 class EditLink(SuccessMessageMixin,generic.edit.UpdateView):
      model = Link
      form_class = LinkForm
-     template_name='resources/resource_form.html'
+     template_name='resources/resource_update_form.html'
      success_message = 'Link updated.'
+     slug_field = 'slug'
      
 class EditFile(SuccessMessageMixin,generic.edit.UpdateView):
      model = File
      form_class = FileForm
-     template_name='resources/resource_form.html'
+     template_name='resources/resource_update_form.html'
      success_message = 'File updated.'
+     slug_field = 'slug'
      
 class ViewLink(generic.DetailView):
      model = Link
@@ -64,25 +66,15 @@ class ViewFile(generic.DetailView):
 
 class DeleteLink(MyDeleteMixin, generic.edit.DeleteView):
 
-     def get_success_url(self):
-          # Assuming there is a ForeignKey from Comment to Post in your model
-          transformation = self.object.transformation
-          return reverse_lazy( 'transformation-detail', kwargs={'pk': transformation.pk})
-
      model = Link
-     success_url = reverse_lazy('index')
+     success_url = reverse_lazy('resources')
      template_name = 'core/confirm_delete.html'
      
      
 class DeleteFile(MyDeleteMixin, generic.edit.DeleteView):
      
-     def get_success_url(self):
-          # Assuming there is a ForeignKey from Comment to Post in your model
-          transformation = self.object.transformation
-          return reverse_lazy( 'transformation-detail', kwargs={'pk': transformation.pk})
-     
      model = File
-     # success_url = reverse_lazy('index')
+     success_url = reverse_lazy('resources')
      template_name = 'core/confirm_delete.html'
      
 # SECOND TRY
@@ -113,4 +105,4 @@ def AddResource(request, type, base=None, slug=None):
                
           resource_form = resourceformfactory(type, base, initial_data, None, True)
                
-     return render(request, 'resources/resource_form.html', {'form':resource_form, 'type':type,} )
+     return render(request, 'resources/resource_create_form.html', {'form':resource_form, 'type':type,} )

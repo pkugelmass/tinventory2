@@ -2,7 +2,7 @@
 {% load hyperlink_list %}
 
 {% block title %} 
-     {{object.type}} - {{object.title}}
+     {{object.type}} - {{object.title|title}}
 {% endblock %}
 
 {% block header %}
@@ -11,19 +11,19 @@
      <div class="pull-right"> <!-- Edit & delete buttons -->
           
           <a class="btn btn-default" href=
-               "{% if object.type == 'Link' %}{% url 'edit-link' object.pk %}{% endif %}
-               {% if object.type == 'File' %}{% url 'edit-file' object.pk %}{% endif %}"
+               "{% if object.type == 'link' %}{% url 'edit-link' object.slug %}{% endif %}
+               {% if object.type == 'file' %}{% url 'edit-file' object.slug %}{% endif %}"
                data-toggle="tooltip" title="Edit">
                
-               <span class="glyphicon glyphicon-pencil"></span>
+               <span class="glyphicon glyphicon-pencil"></span> Edit
           </a>
           
           <a class="btn btn-default" href=
-               "{% if object.type == 'Link' %}{% url 'delete-link' object.pk %}{% endif %}
-               {% if object.type == 'File' %}{% url 'delete-file' object.pk %}{% endif %}"
+               "{% if object.type == 'link' %}{% url 'delete-link' object.slug %}{% endif %}
+               {% if object.type == 'file' %}{% url 'delete-file' object.slug %}{% endif %}"
                data-toggle="tooltip" title="Delete">
                
-               <span class="glyphicon glyphicon-trash"></span>
+               <span class="glyphicon glyphicon-trash"></span> Delete
           </a>
 
      </div>
