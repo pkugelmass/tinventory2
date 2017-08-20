@@ -15,8 +15,8 @@ def resourceformfactory(resource_type, base, data, files=None, initial=False):
 
 def viewthisresource(resource_object):
     
-    if resource_object.type == 'File':
+    if resource_object.type == 'file':
         return redirect('view-file', slug=resource_object.slug)
     
-    if resource_object.type == 'Link':
+    if resource_object.type == 'link':
         return redirect('view-link', slug=resource_object.slug)

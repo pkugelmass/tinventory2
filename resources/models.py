@@ -2,6 +2,7 @@ from django.db import models
 from django.core.urlresolvers import reverse
 from transformations.models import Transformation
 from topics.models import Topic
+from django.contrib.auth.models import User
 from mptt.models import TreeManyToManyField
 from django.conf import settings
 from autoslug import AutoSlugField
@@ -29,9 +30,9 @@ class Resource(models.Model):
 
      type = models.CharField('Resource Type', max_length=5, choices=RESOURCE_TYPES)
      
-     title = models.CharField('Title', max_length=50, unique=True)
+     title = models.CharField('Title', max_length=50)
      description = models.TextField(help_text='Describe the resource and how it may be useful to others.')
-     slug = AutoSlugField()
+     slug = AutoSlugField(populate_from='title', unique=True)
      
      file = models.FileField("File",upload_to=get_upload_path, blank=True, null=True)
      link = models.URLField("Link", help_text="The URL (address), starting with \'http.\'", blank=True, null=True)
@@ -40,7 +41,7 @@ class Resource(models.Model):
      transformation = models.ForeignKey('transformations.Transformation', blank=True, null=True)
      topics = TreeManyToManyField('topics.Topic', help_text="Ctrl-click to choose all that apply.", blank=True)
      
-     created_by = models.ForeignKey(settings.AUTH_USER_MODEL)
+     created_by = models.ForeignKey('auth.User')
      date_modified = models.DateTimeField(auto_now=True)
      
      def __init__(self, *args, **kwargs):

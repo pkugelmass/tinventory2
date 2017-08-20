@@ -4,8 +4,19 @@ from transformations.models import Transformation, Ministry
 from topics.models import Topic
 from transformations.forms import ChoiceFieldEmpty
 from mptt.forms import TreeNodeChoiceField
+from django.core.exceptions import ValidationError
 
-class FileForm(forms.ModelForm):
+
+class ValidateResourceFormMixin:
+     
+     def clean(self):
+          
+          cleaned_data = super(ValidateResourceFormMixin,self).clean()
+          
+          if cleaned_data['topics'].count() == 0 and cleaned_data['transformation'] == None:
+               raise ValidationError("Please specify topics and/or a transformation.")
+
+class FileForm(ValidateResourceFormMixin, forms.ModelForm):
      class Meta:
           model = File
           fields = ['file','title','description', 'category', 'transformation', 'topics']
@@ -14,8 +25,9 @@ class FileForm(forms.ModelForm):
      def __init__(self, *args, **kwargs):
           super(FileForm, self).__init__(*args, **kwargs)
           self.fields['topics'].widget.attrs['size']='15'
+          self.fields['file'].required = True
           
-class LinkForm(forms.ModelForm):
+class LinkForm(ValidateResourceFormMixin, forms.ModelForm):
      class Meta:
           model = Link
           fields = ['link','title','description', 'category', 'transformation', 'topics']
@@ -26,6 +38,7 @@ class LinkForm(forms.ModelForm):
           
           self.fields['topics'].widget.attrs['size']='15'
           self.fields['link'].initial="http://"
+          self.fields['link'].required = True
           
 class ResourceFilterForm(forms.Form):
      

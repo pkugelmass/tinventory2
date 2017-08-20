@@ -159,3 +159,6 @@ EMAIL_HOST_USER = "tinventory900@gmail.com"
 EMAIL_HOST_PASSWORD = 'what3v3r'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+AUTH_USER_MODEL = 'auth.User'
+

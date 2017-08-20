@@ -96,7 +96,7 @@ def AddResource(request, type, base=None, slug=None):
           if resource_form.is_valid():
                new_resource = resource_form.save(commit=False)
                new_resource.type = type
-               new_resource.owner = request.user
+               new_resource.created_by = request.user
                new_resource.save()
                messages.success(request,'Your %s \'%s\' has been saved.' % (type, new_resource.title))
                
