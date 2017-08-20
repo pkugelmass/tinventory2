@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import Topic
 from django.views import generic
-from resources.forms import LinkForm, AttachmentForm
+from resources.forms import LinkForm, FileForm
 
 class TopicsList(generic.ListView):
     model = Topic

@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
                 ('title', models.CharField(help_text='Give this resource a descriptive name.', max_length=50, verbose_name='Title')),
                 ('description', models.TextField()),
                 ('date_modified', models.DateTimeField(auto_now=True)),
-                ('resource', models.FileField(upload_to=resources.models.Attachment.get_upload_path, verbose_name='Attachment')),
+                #('resource', models.FileField(upload_to=resources.models.Attachment.get_upload_path, verbose_name='Attachment')),
             ],
             options={
                 'abstract': False,

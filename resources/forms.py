@@ -1,23 +1,31 @@
 from django import forms
-from .models import Attachment, Link, Resource
+from .models import File, Link, Resource
 from transformations.models import Transformation, Ministry
 from topics.models import Topic
 from transformations.forms import ChoiceFieldEmpty
 from mptt.forms import TreeNodeChoiceField
 
-class AttachmentForm(forms.ModelForm):
+class FileForm(forms.ModelForm):
      class Meta:
-          model = Attachment
-          fields = ['resource','title','description', 'category', 'transformation', 'topics']
-          widgets = {'description':forms.Textarea(attrs={'rows':3,'cols':40}),}
+          model = File
+          fields = ['file','title','description', 'category', 'transformation', 'topics']
+          widgets = {'description':forms.Textarea(attrs={'rows':3,'cols':40})}
+          
+     def __init__(self, *args, **kwargs):
+          super(FileForm, self).__init__(*args, **kwargs)
+          self.fields['topics'].widget.attrs['size']='15'
           
 class LinkForm(forms.ModelForm):
      class Meta:
           model = Link
-          fields = ['resource','title','description','category', 'transformation', 'topics'] 
-          widgets = {
-               'description':forms.Textarea(attrs={'rows':3,'cols':40}),
-          }
+          fields = ['link','title','description', 'category', 'transformation', 'topics']
+          widgets = {'description':forms.Textarea(attrs={'rows':3,'cols':40}),}
+          
+     def __init__(self, *args, **kwargs):
+          super(LinkForm, self).__init__(*args, **kwargs)
+          
+          self.fields['topics'].widget.attrs['size']='15'
+          self.fields['link'].initial="http://"
           
 class ResourceFilterForm(forms.Form):
      
@@ -34,7 +42,7 @@ class ResourceFilterForm(forms.Form):
           required=False)
      
      topic = TreeNodeChoiceField(
-          Topic.objects.filter(level__gt=0), 
+          Topic.objects.all(), 
           label='Topic', 
           empty_label='', 
           required=False)

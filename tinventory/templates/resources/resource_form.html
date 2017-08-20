@@ -4,8 +4,8 @@
 {{ myform.media }}
 {% load widget_tweaks %}
 
-{% block title %}Add {{form.resource.label}}{% endblock %}
-{% block header %}Add {{form.resource.label}}{% endblock %}
+{% block title %}Add {{type|title}}{% endblock %}
+{% block header %}Add {{type|title}}{% endblock %}
 
 {% block content %}
 {% include 'core/form_table_layout.html' %}
