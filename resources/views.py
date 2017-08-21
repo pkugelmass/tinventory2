@@ -50,6 +50,36 @@ def ResourceList(request):
      
      return render(request, 'resources/resource_list.html', context)
      
+def AddResource(request, type, base=None, slug=None):
+     
+     if request.method == 'POST':
+          
+          resource_form = resourceformfactory(type, base, request.POST, request.FILES, False)
+          
+          if resource_form.is_valid():
+               new_resource = resource_form.save(commit=False)
+               new_resource.type = type
+               #assert False, new_resource.topics
+               new_resource.created_by = request.user
+               new_resource.save()
+               resource_form.save_m2m() # Who knew that save_m2m must happon on the form, not the saved object...
+               messages.success(request,'Your %s \'%s\' has been saved.' % (type, new_resource.title))
+               
+               return viewthisresource(new_resource) #helper function that redirects to resource detail regardless of type...
+
+     else:
+          
+          initial_data = {}
+          
+          if base == 'topic' and slug != None: 
+                    initial_data = {'topics':[Topic.objects.get(slug=slug)]}
+          elif base == 'transformation' and slug != None: 
+                    initial_data = {'transformation':Transformation.objects.get(slug=slug)}
+               
+          resource_form = resourceformfactory(type, base, initial_data, None, True)
+               
+     return render(request, 'resources/resource_create_form.html', {'form':resource_form, 'type':type,} )
+     
 class EditLink(SuccessMessageMixin,generic.edit.UpdateView):
      model = Link
      form_class = LinkForm
@@ -78,39 +108,9 @@ class DeleteLink(MyDeleteMixin, generic.edit.DeleteView):
      success_url = reverse_lazy('resources')
      template_name = 'core/confirm_delete.html'
      
-     
 class DeleteFile(MyDeleteMixin, generic.edit.DeleteView):
      
      model = File
      success_url = reverse_lazy('resources')
      template_name = 'core/confirm_delete.html'
-     
-# SECOND TRY
 
-def AddResource(request, type, base=None, slug=None):
-     
-     if request.method == 'POST':
-          
-          resource_form = resourceformfactory(type, base, request.POST, request.FILES, False)
-          
-          if resource_form.is_valid():
-               new_resource = resource_form.save(commit=False)
-               new_resource.type = type
-               new_resource.created_by = request.user
-               new_resource.save()
-               messages.success(request,'Your %s \'%s\' has been saved.' % (type, new_resource.title))
-               
-               return viewthisresource(new_resource) #helper function that redirects to resource detail regardless of type...
-
-     else:
-          
-          initial_data = {}
-          
-          if base == 'topic' and slug != None: 
-                    initial_data = {'topics':[Topic.objects.get(slug=slug)]}
-          elif base == 'transformation' and slug != None: 
-                    initial_data = {'transformation':Transformation.objects.get(slug=slug)}
-               
-          resource_form = resourceformfactory(type, base, initial_data, None, True)
-               
-     return render(request, 'resources/resource_create_form.html', {'form':resource_form, 'type':type,} )
