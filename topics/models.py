@@ -25,13 +25,14 @@ class Topic(MPTTModel):
         from resources.models import Resource
         
         tree = self.get_descendants(include_self=True)
-        q_set = [ models.Q(topics__pk=leaf.pk) for leaf in tree]
+        q_list = [Resource.objects.filter(topics=leaf) for leaf in tree ]
         
-        combined_q = q_set.pop()
-        for q in q_set:
+        # Turns list of querysets into a bunch of queries connected by 'OR'
+        combined_q = q_list.pop()
+        for q in q_list:
             combined_q |= q
             
-        return self.resource_set.filter(combined_q)
+        return combined_q.distinct()
 
     def get_absolute_url(self):
         return reverse('topic-detail', args=[str(self.slug)])
