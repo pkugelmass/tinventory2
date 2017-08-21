@@ -42,7 +42,7 @@
                          <th class="col-md-2">{{object.type|title}}</th>
                          <td class="col-md-10">
                               {%if object.type == 'link' %}
-                                   <a href="{{object.link}}">{{object.link}}</a>
+                                   {{object.link|urlize}}
                               {% endif %}
                               {%if object.type == 'file' %}
                                    <a href="{{ object.file.url }}">{{object.filename}}</a>

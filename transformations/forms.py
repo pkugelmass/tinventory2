@@ -31,7 +31,12 @@ class TransformationForm(forms.ModelForm):
                'description':forms.Textarea(attrs={'rows':4,'cols':40}),
                'problem':forms.Textarea(attrs={'rows':4,'cols':40}),}
           help_texts = {
-               'ministry':'Crtl-click to select all that apply.',
-               'tags':'Ctrl-click to select all that apply.'
+               'ministry':'You can select more than one. Ctrl-click to select all that apply.',
+               'tags':'What are some other areas of focus? You can select more than one. Ctrl-click to select all that apply.',
+               'category':'What is the primary focus?'
                }
 
+     def __init__(self, *args, **kwargs):
+          super(TransformationForm, self).__init__(*args, **kwargs)
+          self.fields['ministry'].widget.attrs['size']='7'
+          self.fields['tags'].widget.attrs['size']='7'
