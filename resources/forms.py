@@ -44,7 +44,7 @@ class LinkForm(ValidateResourceFormMixin, forms.ModelForm):
           
 class ResourceFilterForm(forms.Form):
      
-     RESOURCE_TYPES = ( ('File', 'File'), ('Link','Link') )
+     RESOURCE_TYPES = ( ('file', 'File'), ('link','Link') )
      
      resourcetype = ChoiceFieldEmpty(
           choices=RESOURCE_TYPES, 

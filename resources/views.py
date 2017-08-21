@@ -11,6 +11,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from transformations.views import MyDeleteMixin
 from .helpers import viewthisresource, resourceformfactory
 from .forms import ResourceFilterForm
+from django.db.models import Q 
 
 
 # FILE MGMT VIEWS AND FORMS
@@ -22,12 +23,21 @@ def ResourceList(request):
      
      if request.GET:
           
-          # So much filtering!
-          if request.GET['type'] != '': resource_list.filter(type=request.GET['type'])
-          if request.GET['category'] != '': resource_list.filter(category=request.GET['category'])
-          if request.GET['topic'] != '': resource_list.filter(Topic.objects.get(pk=request.GET['topic']).resourceTreeQuery())
-          if request.GET['transformation'] != '': resource_list.filter(transformation=request.GET['transformation'])
-          if request.GET['ministry'] != '': resource_list.filter(transformation__ministry__abbrev=request.GET['ministry'])
+          q_list = []
+          
+          if request.GET['resourcetype'] != '': q_list = q_list + [Q(type=request.GET['resourcetype'])]
+          if request.GET['category'] != '': q_list = q_list + [Q(category=request.GET['category'])]
+          if request.GET['topic'] != '': q_list = q_list + [Q(pk__in=Topic.objects.get(pk=request.GET['topic']).resourcefamily())]
+          if request.GET['transformation'] != '': q_list = q_list + [Q(transformation=request.GET['transformation'])]
+          if request.GET['ministry'] != '': q_list = q_list + [Q(transformation__ministry__abbrev=request.GET['ministry'])]
+          
+          if len(q_list) > 0: # Only if there is something to filter...
+               
+               combined_q = Q(pk__gt=0) # Initialize a combined query.
+               
+               while len(q_list) > 0:
+                    combined_q &= q_list.pop()
+               resource_list = resource_list.filter(combined_q) # Filter resources by the combined query.
           
           # Set the forms to show the criteria used when they are reloaded.
           for fieldname in request.GET:
