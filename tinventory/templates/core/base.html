@@ -50,9 +50,9 @@
         <div id="navbar" class="collapse navbar-collapse">
           
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="{% url 'index' %}">Transformations</a></li>
-            <li><a href="{% url 'topics' %}">Topics</a></li>
-            <li><a href="{% url 'resources' %}">Resources</a></li>
+            <li {% if "transformations" in request.path %}class="active"{% endif %}><a href="{% url 'index' %}">Transformations</a></li>
+            <li {% if "topics" in request.path %}class="active"{% endif %}><a href="{% url 'topics' %}">Topics</a></li>
+            <li {% if "resources" in request.path %}class="active"{% endif %}><a href="{% url 'resources' %}">Resources</a></li>
             
             <!-- Site dropdown menu -->
             <li class="dropdown">

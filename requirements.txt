@@ -1,0 +1,11 @@
+Django==1.10.7
+django-autoslug==1.9.3
+django-debug-toolbar==1.8
+django-mptt==0.8.7
+django-mptt-admin==0.4.6
+django-sortedm2m==1.5.0
+django-stronghold==0.2.9
+django-widget-tweaks==1.4.1
+mysqlclient==1.3.10
+six==1.10.0
+sqlparse==0.2.3
