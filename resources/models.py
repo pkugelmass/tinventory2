@@ -34,7 +34,7 @@ class Resource(models.Model):
 
      type = models.CharField('Resource Type', max_length=5, choices=RESOURCE_TYPES)
      
-     title = models.CharField('Title', max_length=50)
+     title = models.CharField('Title', max_length=80)
      description = models.TextField(help_text='Describe the resource and how it may be useful to others.')
      slug = AutoSlugField(populate_from='title', unique=True, always_update=True)
      

@@ -61,8 +61,8 @@ class Transformation(models.Model):
      def ministries_list(self):
           return ', '.join(map(str, self.ministry.all()))
           
-     def resources(self):
-          return self.resource_set.all()
+     # def resources(self):
+     #      return self.resource_set.all()
 
 class Ministry(models.Model):
      abbrev = models.CharField(max_length=6)

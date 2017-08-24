@@ -17,8 +17,8 @@ class Topic(MPTTModel):
     def __str__(self):
         return self.title
         
-    def resources(self):
-        return self.resource_set.all()
+    # def resources(self):
+    #     return self.resource_set.all()
         
     def resourcefamily(self):
         
