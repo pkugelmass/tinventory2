@@ -53,7 +53,7 @@ class Transformation(models.Model):
           ordering = ['-date_modified']
      
      def get_absolute_url(self):
-          return reverse('transformation-detail', kwargs={'pk':self.pk})
+          return reverse('transformation-detail', kwargs={'slug':self.slug})
           
      def __str__(self):
           return self.title
