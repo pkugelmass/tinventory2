@@ -24,7 +24,7 @@
 
 {% block content %}
 
-     <h3>Details:</h3>
+
      
      <div class="row">
          
@@ -32,7 +32,7 @@
          
              <div class="col-md-3">
                  
-                 <img src="{user.profile.profile_picture.url}" class="img-responsive img-circle" alt="{user.get_full_name}">
+                 <img src="{{user.profile.profile_picture.url}}" class="img-responsive img-thumbnail" alt="{{user.get_full_name}}">
                  
             </div>
                  
@@ -43,7 +43,6 @@
             <div class="col-md-12">
                 
         {% endif %}
-         
                <table class="table table-striped table-condensed align-middle">
                     <tr>
                          <th class="col-md-2">User</th>
