@@ -10,7 +10,7 @@
         <form action="" method="post">
             {% csrf_token %}
             <button class="btn btn-large btn-danger" type="submit" value="Delete" />Delete</button>
-            <a class="btn btn-large btn-default" href="{% url 'transformation-detail' object.pk %}">Cancel</a>
+            <a class="btn btn-large btn-default" href="{{ request.META.HTTP_REFERER }}">Cancel</a>
         </form>
     </div>
 </div>
