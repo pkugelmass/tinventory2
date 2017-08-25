@@ -18,6 +18,8 @@ urlpatterns = [
     
     url(r'^topics/', include('topics.urls')),
     
+    url(r'^users/', include('people.urls')),
+    
     url(r'^login/$', auth_views.login, name='login'),
     
     url(r'^logout/$', auth_views.logout, name='logout'),

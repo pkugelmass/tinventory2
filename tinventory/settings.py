@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'mptt',
     'django_mptt_admin',
     'topics',
+    'people',
 ]
 
 MIDDLEWARE = [
@@ -58,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'stronghold.middleware.LoginRequiredMiddleware',
+    'people.middleware.SetLastVisitMiddleware',
 ]
 
 ROOT_URLCONF = 'tinventory.urls'

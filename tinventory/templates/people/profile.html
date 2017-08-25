@@ -1,0 +1,78 @@
+{% extends 'core/base.html' %}
+
+{% block title %} 
+     Profile - {{user.get_full_name}})
+{% endblock %}
+
+{% block header %}
+
+    {{user.get_full_name}}<small> (User)</small>
+     
+    {% if user == request.user %}
+    
+    <div class="pull-right"> 
+    
+        <a class="btn btn-default" href="{% url 'index' %}" data-toggle="tooltip" title="Edit Profile">
+        <span class="glyphicon glyphicon-pencil"></span> Edit Your Profile
+        </a>
+        
+    </div>
+    
+    {% endif %}
+     
+{% endblock %}
+
+{% block content %}
+
+     <h3>Details:</h3>
+     
+     <div class="row">
+         
+         {% if user.profile.profile_picture %}
+         
+             <div class="col-md-3">
+                 
+                 <img src="{user.profile.profile_picture.url}" class="img-responsive img-circle" alt="{user.get_full_name}">
+                 
+            </div>
+                 
+            <div class="col-md-9">
+                
+        {% else %}
+        
+            <div class="col-md-12">
+                
+        {% endif %}
+         
+               <table class="table table-striped table-condensed align-middle">
+                    <tr>
+                         <th class="col-md-2">User</th>
+                         <td>{{user.get_full_name}} ({{user.username}})</td>
+                    </tr>
+                    <tr>
+                         <th class="col-md-2">Ministry</th>
+                         <td>{{user.profile.ministry}}</td>
+                    </tr>
+                    <tr>
+                         <th class="col-md-2">Role</th>
+                         <td>{{user.profile.role}}</td>
+                    </tr>
+                    <tr>
+                         <th class="col-md-2">Email</th>
+                         <td>{{user.email|urlize}}</td>
+                    </tr>                    
+                    <tr>
+                         <th class="col-md-2">Joined</th>
+                         <td>{{user.profile.date_joined}}</td>
+                    </tr>
+                    <tr>
+                         <th class="col-md-2">Last Seen</th>
+                         <td>{{user.profile.last_login}}</td>
+                    </tr>
+               </table>
+               
+          </div>
+     </div>
+
+{% endblock %}
+
