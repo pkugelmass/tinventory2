@@ -17,6 +17,9 @@ class Profile(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     last_login = models.DateTimeField(null=True, blank=True, default=datetime.now)
     
+    def get_absolute_url(self):
+        return "/users/%s" % (self.user.username)
+    
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:

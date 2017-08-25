@@ -1,0 +1,74 @@
+{% extends "core/base.html" %}
+{% load widget_tweaks %}
+
+{% block title %}Edit Profile{% endblock %}
+{% block header %}Edit Profile{% endblock %}
+
+{% block content %}
+{% load widget_tweaks %}
+
+     <form method="POST" action="" class="form-group form-horizontal" enctype="multipart/form-data">
+     {% csrf_token %}
+     
+     <div class="row">
+          <div class="col-md-12">
+          
+          <div class="row">
+               <div class="col-md-12">
+                    
+                    {% if form.non_field_errors %}
+                         <div class="alert alert-info"> 
+                              {{form.non_field_errors|join:", "}}
+                         </div>
+                    {% endif %}
+                    
+                    <table class="table table-striped align-middle">
+                         {% for field in user_form %}
+                         <tr>
+                              <th class="col-md-2">
+                                   {{field.label}}
+                                   {% if field.help_text %}
+                                        <br/><span class="small info">{{field.help_text }}</span>
+                                   {% endif %}
+                              </th>
+                              <td class="col-md-10">
+                                   {% if field.errors %}
+                                        {{ field.errors }}
+                                   {% endif %}
+                                   {{field|add_class:"form-control"}}
+                              </td>
+                         </tr>
+                         {% endfor %}
+                         {% for field in profile_form %}
+                         <tr>
+                              <th class="col-md-2">
+                                   {{field.label}}
+                                   {% if field.help_text %}
+                                        <br/><span class="small info">{{field.help_text }}</span>
+                                   {% endif %}
+                              </th>
+                              <td class="col-md-10">
+                                   {% if field.errors %}
+                                        {{ field.errors }}
+                                   {% endif %}
+                                   {{field|add_class:"form-control"}}
+                              </td>
+                         </tr>
+                         {% endfor %}
+                    </table>
+               
+               </div>
+               </div>
+          </div>
+          
+     <div class="row">
+          <div class="col-md-4 col-md-offset-4 btn-group">
+               <button type="submit" class="btn btn-success btn-lg">Submit</button>
+               </form>
+               <form method="GET" action="{% url 'index' %}">
+                    <button type="cancel" class="btn btn-default btn-lg">Cancel</button>
+               </form>
+          </div>
+     </div>          
+               
+{% endblock %}

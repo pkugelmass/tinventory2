@@ -12,7 +12,7 @@
     
     <div class="pull-right"> 
     
-        <a class="btn btn-default" href="{% url 'index' %}" data-toggle="tooltip" title="Edit Profile">
+        <a class="btn btn-default" href="{% url 'edit-profile' username=user.username %}" data-toggle="tooltip" title="Edit Profile">
         <span class="glyphicon glyphicon-pencil"></span> Edit Your Profile
         </a>
         
@@ -63,11 +63,11 @@
                     </tr>                    
                     <tr>
                          <th class="col-md-2">Joined</th>
-                         <td>{{user.profile.date_joined}}</td>
+                         <td>{{user.profile.date_created|date:"M j, Y"}}</td>
                     </tr>
                     <tr>
-                         <th class="col-md-2">Last Seen</th>
-                         <td>{{user.profile.last_login}}</td>
+                         <th class="col-md-2">Last Visited</th>
+                         <td>{{user.profile.last_login|date:"M j, Y"}}</td>
                     </tr>
                </table>
                
