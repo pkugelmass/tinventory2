@@ -5,6 +5,10 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from datetime import datetime
 import os
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.fields import GenericForeignKey
+
+# PROFILE ------------
 
 class Profile(models.Model):
 
@@ -32,3 +36,16 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
+    
+# ACTIVITY STREAM -------------
+
+class Action(models.Model):
+    user = models.ForeignKey(User, related_name='actions', db_index=True)
+    verb = models.CharField(max_length=255)
+    target_type = models.ForeignKey(ContentType, blank=True, null=True, related_name='target_obj')
+    target_id = models.PositiveIntegerField(null=True, blank=True, db_index=True)
+    target = GenericForeignKey('target_type', 'target_id')
+    created = models.DateTimeField(auto_now_add=True, db_index=True)
+    
+    class Meta:
+        ordering=('-created',)
