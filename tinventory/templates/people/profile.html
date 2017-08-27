@@ -2,7 +2,7 @@
 {% load humanize %}
 
 {% block title %} 
-     Profile - {{user.get_full_name}})
+     Profile - {{user.get_full_name}}
 {% endblock %}
 
 {% block header %}
@@ -38,12 +38,17 @@
             </div>
                  
             <div class="col-md-9">
+                 
+               <div class="row">
                 
         {% else %}
         
             <div class="col-md-12">
                 
         {% endif %}
+        
+             
+        
                <table class="table table-striped table-condensed align-middle">
                     <tr>
                          <th class="col-md-2">User</th>
@@ -70,36 +75,37 @@
                          <td>{{user.profile.last_login|naturaltime|capfirst}}</td>
                     </tr>
                </table>
-               
-          </div>
-     </div>
+               </div>
      
+     
+     {% if user.actions.all %}
      <div class='row'>
-          <div class='col-md-12'>
-               <h3>Activities</h3>
-                    
-               {% regroup user.actions.all by created|date:"d-m-Y" as actions_by_date %}
+               <h4>Recent Contributions <small>(Last 10)</small></h4>
                
-               <ul>
+               <table class="table table-condensed table-striped">
                     
-               {% for day in actions_by_date %}
+                    <tr>
+                         <th>When</th>
+                         <th>Activity</th>
+                    </tr>
+                    
+               {% for action in user.actions.all|slice:'10' %}
                
-                    <li><b>{{day.grouper}}</b></li>
-                    
-                    <ul>{% for action in day.list %}
-                         <li>{{action.verb|capfirst}} {{action.target.type}} 
+                    <tr>
+                         <td class="col-md-2">{{action.created|naturalday|capfirst}}</td>
+                         <td>
+                              {{action.verb|capfirst}} {{action.target.type}} 
                              <a href="{{action.target.get_absolute_url}}">'{{action.target}}'</a>
-                             <span class="small">({{action.created|naturalday}})</span>
-                         </li>
-                         {% endfor %}
-                    </ul>
-
+                         </td>
+                    </tr>
+                    
                {% endfor %}
                
                </ul>
 
           </div>
      </div>
+     {% endif %}
 
 {% endblock %}
 
