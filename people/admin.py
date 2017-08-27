@@ -9,9 +9,9 @@ class ProfileAdmin(admin.ModelAdmin):
 admin.site.register(Profile, ProfileAdmin)
 
 class ActionAdmin(admin.ModelAdmin):
-    list_display=('user', 'verb', 'target', 'created')
+    list_display=('__str__','user', 'verb', 'target', 'target_type', 'created')
     list_filter=('created',)
-    search_fields = ('verb',)
+    search_fields = ('verb','target')
     
 admin.site.register(Action, ActionAdmin)
     

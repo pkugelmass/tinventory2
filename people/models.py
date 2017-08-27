@@ -49,3 +49,6 @@ class Action(models.Model):
     
     class Meta:
         ordering=('-created',)
+        
+    def __str__(self):
+        return '%s - %s %s %s \'%s\'.' % (self.created.strftime('%m%d%y-%H%M'), self.user.get_full_name(), self.verb, self.target_type, self.target)
