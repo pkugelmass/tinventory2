@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
 from .models import File, Link, Resource
 from transformations.models import Transformation
 from topics.models import Topic
@@ -7,12 +8,20 @@ from django.views import generic
 from django import forms
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.contrib import messages
-from django.contrib.messages.views import SuccessMessageMixin
 from transformations.views import MyDeleteMixin
 from .helpers import viewthisresource, resourceformfactory
 from .forms import ResourceFilterForm
 from django.db.models import Q 
+from people.helpers import create_action
 
+class UpdatedResourceMixin:
+     
+     def form_valid(self, form):
+          updated_object = self.get_object()
+          super(UpdatedResourceMixin,self).form_valid(form)
+          messages.success(self.request,'Your %s \'%s\' has been updated.' % (updated_object.type, updated_object.title))
+          create_action(self.request.user, 'updated', updated_object)
+          return HttpResponseRedirect(self.get_success_url())
 
 # FILE MGMT VIEWS AND FORMS
 
@@ -65,6 +74,8 @@ def AddResource(request, type, base=None, slug=None):
                resource_form.save_m2m() # Who knew that save_m2m must happon on the form, not the saved object...
                messages.success(request,'Your %s \'%s\' has been saved.' % (type, new_resource.title))
                
+               create_action(request.user, 'added', new_resource)
+               
                return viewthisresource(new_resource) #helper function that redirects to resource detail regardless of type...
 
      else:
@@ -80,19 +91,28 @@ def AddResource(request, type, base=None, slug=None):
                
      return render(request, 'resources/resource_create_form.html', {'form':resource_form, 'type':type,} )
      
-class EditLink(SuccessMessageMixin,generic.edit.UpdateView):
+class EditLink(UpdatedResourceMixin,generic.edit.UpdateView):
      model = Link
      form_class = LinkForm
      template_name='resources/resource_update_form.html'
-     success_message = 'Link updated.'
      slug_field = 'slug'
      
-class EditFile(SuccessMessageMixin,generic.edit.UpdateView):
+     def form_valid(self, form):
+          updated_object = self.get_object()
+          super(EditLink,self).form_valid(form)
+          messages.success(request,'Your %s \'%s\' has been saved.' % (type, updated_object.title))
+          create_action(self.request.user, 'updated', updated_object)
+          return HttpResponseRedirect(self.get_success_url())
+     
+class EditFile(UpdatedResourceMixin,generic.edit.UpdateView):
      model = File
      form_class = FileForm
      template_name='resources/resource_update_form.html'
-     success_message = 'File updated.'
      slug_field = 'slug'
+     
+     
+          
+          
      
 class ViewLink(generic.DetailView):
      model = Link

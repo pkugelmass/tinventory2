@@ -1,7 +1,8 @@
 {% extends 'core/base.html' %}
+{% load humanize %}
 
 {% block title %} 
-     Profile - {{user.get_full_name}})
+     Profile - {{user.get_full_name}}
 {% endblock %}
 
 {% block header %}
@@ -37,12 +38,17 @@
             </div>
                  
             <div class="col-md-9">
+                 
+               <div class="row">
                 
         {% else %}
         
             <div class="col-md-12">
                 
         {% endif %}
+        
+             
+        
                <table class="table table-striped table-condensed align-middle">
                     <tr>
                          <th class="col-md-2">User</th>
@@ -66,12 +72,40 @@
                     </tr>
                     <tr>
                          <th class="col-md-2">Last Visited</th>
-                         <td>{{user.profile.last_login|date:"M j, Y"}}</td>
+                         <td>{{user.profile.last_login|naturaltime|capfirst}}</td>
                     </tr>
                </table>
+               </div>
+     
+     
+     {% if user.actions.all %}
+     <div class='row'>
+               <h4>Recent Contributions <small>(Last 10)</small></h4>
                
+               <table class="table table-condensed table-striped">
+                    
+                    <tr>
+                         <th>When</th>
+                         <th>Activity</th>
+                    </tr>
+                    
+               {% for action in user.actions.all|slice:'10' %}
+               
+                    <tr>
+                         <td class="col-md-2">{{action.created|naturalday|capfirst}}</td>
+                         <td>
+                              {{action.verb|capfirst}} {{action.target.type}} 
+                             <a href="{{action.target.get_absolute_url}}">'{{action.target}}'</a>
+                         </td>
+                    </tr>
+                    
+               {% endfor %}
+               
+               </ul>
+
           </div>
      </div>
+     {% endif %}
 
 {% endblock %}
 
