@@ -1,4 +1,5 @@
 {% extends 'core/base.html' %}
+{% load humanize %}
 
 {% block title %} 
      Profile - {{user.get_full_name}})
@@ -66,10 +67,37 @@
                     </tr>
                     <tr>
                          <th class="col-md-2">Last Visited</th>
-                         <td>{{user.profile.last_login|date:"M j, Y"}}</td>
+                         <td>{{user.profile.last_login|naturaltime|capfirst}}</td>
                     </tr>
                </table>
                
+          </div>
+     </div>
+     
+     <div class='row'>
+          <div class='col-md-12'>
+               <h3>Activities</h3>
+                    
+               {% regroup user.actions.all by created|date:"d-m-Y" as actions_by_date %}
+               
+               <ul>
+                    
+               {% for day in actions_by_date %}
+               
+                    <li><b>{{day.grouper}}</b></li>
+                    
+                    <ul>{% for action in day.list %}
+                         <li>{{action.verb|capfirst}} {{action.target.type}} 
+                             <a href="{{action.target.get_absolute_url}}">'{{action.target}}'</a>
+                             <span class="small">({{action.created|naturalday}})</span>
+                         </li>
+                         {% endfor %}
+                    </ul>
+
+               {% endfor %}
+               
+               </ul>
+
           </div>
      </div>
 
