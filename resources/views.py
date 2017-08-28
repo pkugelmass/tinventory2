@@ -19,7 +19,7 @@ class UpdatedResourceMixin:
      def form_valid(self, form):
           updated_object = self.get_object()
           super(UpdatedResourceMixin,self).form_valid(form)
-          messages.success(self.request,'Your %s \'%s\' has been updated.' % (updated_object.type, updated_object.title))
+          messages.success(self.request,'\'%s\' has been updated.' % (updated_object.title))
           create_action(self.request.user, 'updated', updated_object)
           return HttpResponseRedirect(self.get_success_url())
 
@@ -97,12 +97,6 @@ class EditLink(UpdatedResourceMixin,generic.edit.UpdateView):
      template_name='resources/resource_update_form.html'
      slug_field = 'slug'
      
-     def form_valid(self, form):
-          updated_object = self.get_object()
-          super(EditLink,self).form_valid(form)
-          messages.success(request,'Your %s \'%s\' has been saved.' % (type, updated_object.title))
-          create_action(self.request.user, 'updated', updated_object)
-          return HttpResponseRedirect(self.get_success_url())
      
 class EditFile(UpdatedResourceMixin,generic.edit.UpdateView):
      model = File

@@ -7,6 +7,7 @@ from django import forms
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
+from people.viewmixins import UpdatedActionMixin, CreateActionMixin
 
 # GENERAL MIXINS
 
@@ -53,10 +54,10 @@ class TransformationFormMixin:
 class TransformationDetail(generic.DetailView):
      model = Transformation
 
-class AddTransformation(SuccessMessageMixin, TransformationFormMixin, generic.edit.CreateView):
+class AddTransformation(CreateActionMixin, TransformationFormMixin, generic.edit.CreateView):
      success_message = "Transformation created."
      
-class EditTransformation(SuccessMessageMixin, generic.edit.UpdateView):
+class EditTransformation(UpdatedActionMixin, generic.edit.UpdateView):
      model = Transformation
      form_class = TransformationForm
      success_message = "Transformation updated."
