@@ -5,6 +5,7 @@ from datetime import datetime
 from .forms import UserForm, ProfileForm
 from django.urls import reverse
 from django.contrib import messages
+from .helpers import create_action
 
 def UserProfile(request, username):
     
@@ -32,6 +33,7 @@ def EditProfile(request, username):
             profile_form.save()
             user_form.save()
             messages.success(request,'Your profile has been updated.')
+            create_action(request.user, 'updated', Profile.objects.get(user=this_user))
             return redirect(reverse('user-profile', kwargs={'username':username}))
             
     else:
