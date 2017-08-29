@@ -5,6 +5,7 @@ from . import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from tinventory.core import views as core_views
+from people import views as people_views
 
 urlpatterns = [
     
@@ -25,6 +26,8 @@ urlpatterns = [
     url(r'^logout/$', auth_views.logout, name='logout'),
     
     url(r'^signup/$', core_views.signup, name='signup'),
+    
+    url(r'^feed/$', people_views.ActivityFeed.as_view(), name='activity-feed')
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
