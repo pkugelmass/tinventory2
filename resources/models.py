@@ -8,6 +8,8 @@ from django.conf import settings
 from autoslug import AutoSlugField
 import datetime
 import os
+from people.models import Action
+from django.contrib.contenttypes.models import ContentType
 
 class Resource(models.Model):
      
@@ -69,6 +71,9 @@ class Resource(models.Model):
           
      class Meta:
           ordering = ['-date_modified']
+          
+     def actions(self):
+          return Action.objects.filter(target_id=self.pk, target_type=ContentType.objects.get_for_model(Resource))
           
 class ProxyManager(models.Manager):
      def get_query_set(self):

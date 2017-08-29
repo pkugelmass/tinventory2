@@ -1,0 +1,52 @@
+{% extends "core/base.html" %}
+{% load widget_tweaks %}
+{% load hyperlink_list %}
+
+{% block title %}Activities{% endblock %}
+
+{% block header %}All Activities
+
+     <!--<div class="pull-right dropdown">-->
+     <!--   <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">-->
+     <!--   <span class="glyphicon glyphicon-plus-sign"></span>  Add a New Resource-->
+     <!--   <span class="caret"></span></button>-->
+         
+     <!--   <ul class="dropdown-menu">-->
+     <!--       <li><a href="{% url 'add-resource' type='link' %}">Add a new link</a></li>-->
+     <!--       <li><a href="{% url 'add-resource' type='file' %}">Add a new file</a></li>-->
+     <!--   </ul>-->
+     <!--</div>-->
+
+{% endblock %}
+
+{% block content %}
+
+     <div class="row">
+          <div class="col-md-12">
+               <table class="table table-striped table-responsive table-condensed">
+                    <tr>
+                         <th>Time</th>
+                         <th>User</th>
+                         <th>Activity</th>
+                    </tr>
+                    {% for activity in action_list %}
+                    <tr>
+                         <td>{{activity.created}}</td>
+                         <td><a href="{{activity.user.profile.get_absolute_url}}">{{activity.user}}</a></td>
+                         <td>{{activity.verb|capfirst}} 
+                         {% if activity.target %}
+                              <a href="{{activity.target.get_absolute_url}}">'{{activity.target}}'</a>
+                          {% endif %}
+                         </td>
+                    </tr>
+                    {% endfor %}
+               </table>
+
+               
+               
+          </div>
+          
+          
+     </div>
+
+{% endblock %}
