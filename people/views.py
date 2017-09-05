@@ -1,10 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Profile
+from .models import Profile, Action
 from django.contrib.auth.models import User
 from datetime import datetime
 from .forms import UserForm, ProfileForm
 from django.urls import reverse
 from django.contrib import messages
+from .helpers import create_action
+from django.views import generic
 
 def UserProfile(request, username):
     
@@ -32,6 +34,7 @@ def EditProfile(request, username):
             profile_form.save()
             user_form.save()
             messages.success(request,'Your profile has been updated.')
+            create_action(request.user, 'updated', Profile.objects.get(user=this_user))
             return redirect(reverse('user-profile', kwargs={'username':username}))
             
     else:
@@ -45,3 +48,8 @@ def EditProfile(request, username):
             }
     
     return render(request,'people/edit_profile.html', context)
+    
+class ActivityFeed(generic.ListView):
+    model=Action
+    template_name='people/activity_feed.html'
+    

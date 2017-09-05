@@ -1,5 +1,6 @@
 {% extends "core/base.html" %}
 {% load hyperlink_list %}
+{% load humanize %}
 
 {% block title %} 
      {{object.type|title}} - {{object.title}}
@@ -34,13 +35,15 @@
 
 {% block content %}
 
-     <h3>Details:</h3>
+     
      <div class="row">
+          
           <div class="col-md-12">
-               <table class="table table-striped table-condensed table-hover align-middle">
+               <h3>Details:</h3>
+               <table class="table table-striped table-condensed align-middle">
                     <tr>
                          <th class="col-md-2">{{object.type|title}}</th>
-                         <td class="col-md-10">
+                         <td>
                               {%if object.type == 'link' %}
                                    {{object.link|urlize}}
                               {% endif %}
@@ -51,44 +54,45 @@
                     </tr>
                     <tr>
                          <th class="col-md-2">Title</th>
-                         <td class="col-md-10 strong">{{object.title}}</td>
+                         <td class="strong">{{object.title}}</td>
                     </tr>
                     <tr>
                          <th class="col-md-2">Description</th>
-                         <td class="col-md-10">{{object.description}}</td>
+                         <td>{{object.description}}</td>
                     </tr>
                     <tr>
                          <th class="col-md-2">Category</th>
-                         <td class="col-md-10">{{object.get_category_display}}</td>
+                         <td>{{object.get_category_display}}</td>
                     </tr>
                     <tr>
                          <th class="col-md-2">Transformation</th>
-                         <td class="col-md-10">
+                         <td>
                               {% if object.transformation %} 
                                    <a href="{% url 'transformation-detail' object.transformation.slug %}">
                                         {{object.transformation}}
                                    </a>
                               {% endif %}
-                              
                          </td>
                     </tr>                    
                     <tr>
                          <th class="col-md-2">Topics</th>
-                         <td class="col-md-10">{% autoescape off %}{{object.topics.all|hyperlink_list:"slug"}}{% endautoescape %}</td>
+                         <td>{% autoescape off %}{{object.topics.all|hyperlink_list:"slug"}}{% endautoescape %}</td>
                     </tr>
+                    {% with object.created as created %}{% if created %}
                     <tr>
-                         <th class="col-md-2">Created By</th>
-                         <td class="col-md-10"><a href="{{object.created_by.profile.get_absolute_url}}">
-                              {{object.created_by.get_full_name}} ({{object.created_by}})</a></td>
+                         <th>Created</th>
+                         <td>{{created.created|naturalday|capfirst}} by <a href="{{created.user.profile.get_absolute_url}}">{{created.user.get_full_name|title}}</a>.</td>
                     </tr>
+                    {% endif %}{% endwith %}
+                    {% with object.modified as modified %}{% if modified %}
                     <tr>
-                         <th class="col-md-2">Date Modified</th>
-                         <td class="col-md-10">{{object.date_modified}}</td>
+                         <th>Last Modified</th>
+                         <td>{{modified.created|naturalday|capfirst}} by <a href="{{modified.user.profile.get_absolute_url}}">{{modified.user.get_full_name|title}}</a>.</td>
                     </tr>
-
+                    {% endif %}{% endwith %}
+                    
                </table>
-               
           </div>
      </div>
-
+     
 {% endblock %}

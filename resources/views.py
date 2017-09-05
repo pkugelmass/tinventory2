@@ -68,7 +68,6 @@ def AddResource(request, type, base=None, slug=None):
           if resource_form.is_valid():
                new_resource = resource_form.save(commit=False)
                new_resource.type = type
-               #assert False, new_resource.topics
                new_resource.created_by = request.user
                new_resource.save()
                resource_form.save_m2m() # Who knew that save_m2m must happon on the form, not the saved object...
@@ -103,10 +102,6 @@ class EditFile(UpdatedResourceMixin,generic.edit.UpdateView):
      form_class = FileForm
      template_name='resources/resource_update_form.html'
      slug_field = 'slug'
-     
-     
-          
-          
      
 class ViewLink(generic.DetailView):
      model = Link
