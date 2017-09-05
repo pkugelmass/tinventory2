@@ -1,5 +1,5 @@
 from django import forms
-from .models import File, Link, Resource
+from .models import File, Link, Resource, Post
 from transformations.models import Transformation, Ministry
 from topics.models import Topic
 from transformations.forms import ChoiceFieldEmpty
@@ -41,6 +41,20 @@ class LinkForm(ValidateResourceFormMixin, forms.ModelForm):
           self.fields['topics'].widget.attrs['size']='15'
           self.fields['link'].initial="http://"
           self.fields['link'].required = True
+          
+class PostForm(ValidateResourceFormMixin, forms.ModelForm):
+     class Meta:
+          model = Post
+          fields = ['title','description', 'category', 'transformation', 'topics']
+          widgets = {'description':forms.Textarea(attrs={'rows':10,'cols':40}),}
+          
+     def __init__(self, *args, **kwargs):
+          super(PostForm, self).__init__(*args, **kwargs)
+          
+          self.fields['topics'].widget.attrs['size']='15'
+          self.fields['description'].label='Your Post'
+          self.fields['description'].help_text='Type your post here.'
+
           
 class ResourceFilterForm(forms.Form):
      

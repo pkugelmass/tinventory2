@@ -22,7 +22,8 @@ class Resource(models.Model):
      
      RESOURCE_TYPES = (
           ('file', 'File'),
-          ('link', 'Link')
+          ('link', 'Link'),
+          ('post', 'Post'),
      )
      
      # def resourceTypeList(self):
@@ -105,4 +106,14 @@ class Link(Resource):
           
      def get_absolute_url(self):
           return reverse('view-link', kwargs={'slug': self.slug})
+          
+class Post(Resource):
+     
+     objects = ProxyManager()
+     
+     class Meta:
+          proxy = True
+          
+     def get_absolute_url(self):
+          return reverse('view-post', kwargs={'slug': self.slug})
           
