@@ -75,6 +75,13 @@ class Resource(models.Model):
      def actions(self):
           return Action.objects.filter(target_id=self.pk, target_type=ContentType.objects.get_for_model(Resource))
           
+     def created(self):
+          return Action.objects.filter(target_id=self.pk, target_type=ContentType.objects.get_for_model(Resource), verb="added").first()
+          
+     def modified(self):
+          return Action.objects.filter(target_id=self.pk, target_type=ContentType.objects.get_for_model(Resource), verb="updated").first()
+          
+          
 class ProxyManager(models.Manager):
      def get_query_set(self):
           return super(ProxyManager, self).get_query_set().filter(type=self.model.__name__.lower())
