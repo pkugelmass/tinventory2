@@ -45,20 +45,18 @@ class LinkForm(ValidateResourceFormMixin, forms.ModelForm):
 class PostForm(ValidateResourceFormMixin, forms.ModelForm):
      class Meta:
           model = Post
-          fields = ['title','description', 'category', 'transformation', 'topics']
-          widgets = {'description':forms.Textarea(attrs={'rows':10,'cols':40}),}
+          fields = ['title','description', 'post', 'category', 'transformation', 'topics']
           
      def __init__(self, *args, **kwargs):
           super(PostForm, self).__init__(*args, **kwargs)
           
           self.fields['topics'].widget.attrs['size']='15'
-          self.fields['description'].label='Your Post'
-          self.fields['description'].help_text='Type your post here.'
+          self.fields['description'].help_text='What is your post about?'
 
           
 class ResourceFilterForm(forms.Form):
      
-     RESOURCE_TYPES = ( ('file', 'File'), ('link','Link') )
+     RESOURCE_TYPES = ( ('file', 'File'), ('link','Link'), ('post','Post'), )
      
      resourcetype = ChoiceFieldEmpty(
           choices=RESOURCE_TYPES, 
