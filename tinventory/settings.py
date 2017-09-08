@@ -43,11 +43,11 @@ INSTALLED_APPS = [
     'autoslug',
     'debug_toolbar',
     'stronghold',
-    #'polymorphic',
     'mptt',
     'django_mptt_admin',
     'topics',
     'people',
+    'tinymce',
 ]
 
 MIDDLEWARE = [

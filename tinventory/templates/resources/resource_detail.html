@@ -50,6 +50,9 @@
                               {%if object.type == 'file' %}
                                    <a href="{{ object.file.url }}">{{object.filename}}</a>
                               {% endif %}
+                              {%if object.type == 'post' %}
+                                   {% autoescape off %} {{object.post}} {% endautoescape %}
+                              {% endif %}
                          </td>
                     </tr>
                     <tr>
