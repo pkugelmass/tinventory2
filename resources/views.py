@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from .models import File, Link, Resource, Post
 from transformations.models import Transformation
 from topics.models import Topic
-from .forms import LinkForm, FileForm
+from .forms import LinkForm, FileForm, PostForm
 from django.views import generic
 from django import forms
 from django.core.urlresolvers import reverse_lazy, reverse
@@ -106,7 +106,7 @@ class EditFile(UpdatedResourceMixin,generic.edit.UpdateView):
      
 class EditPost(UpdatedResourceMixin,generic.edit.UpdateView):
      model = Post
-     form_class = FileForm # I HAVE TO MAKE A DIFFERENT FORM...
+     form_class = PostForm
      template_name='resources/resource_update_form.html'
      slug_field = 'slug'
      
