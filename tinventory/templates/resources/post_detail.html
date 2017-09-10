@@ -43,13 +43,11 @@
           <div class="col-md-8">
               <div class="panel panel-success">
                     <div class="panel-heading-custom panel-heading">
-                        <span class="strong">{{object.title}}</span>
+                         <span class="strong">{{object.title}}</span>
                         <span class="pull-right">Posted {{object.created.created}} by {{object.created.user}}</span>
                     </div>
                   <div class="panel-body">
                       {% autoescape off %} {{object.post}} {% endautoescape %}
-                      <hr>
-                      <span class="italic small">Posted {{object.created.created|naturalday}} by {{object.created.user}}.</small>
                     </div>
               </div>
 

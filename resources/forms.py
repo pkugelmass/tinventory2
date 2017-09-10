@@ -52,6 +52,7 @@ class PostForm(ValidateResourceFormMixin, forms.ModelForm):
           
           self.fields['topics'].widget.attrs['size']='15'
           self.fields['description'].help_text='What is your post about?'
+          self.fields['category'].initial='lessons'
 
           
 class ResourceFilterForm(forms.Form):

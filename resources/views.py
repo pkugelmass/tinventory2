@@ -85,8 +85,6 @@ def AddResource(request, type, base=None, slug=None):
                initial_data = {'topics':[Topic.objects.get(slug=slug)]}
           elif base == 'transformation' and slug != None: 
                initial_data = {'transformation':Transformation.objects.get(slug=slug)}
-          elif type == 'post':
-               initial_data['category'] = 'lessons'
                
           resource_form = resourceformfactory(type, base, initial_data, None, True)
                

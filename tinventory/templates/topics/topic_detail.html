@@ -12,7 +12,17 @@
           <small> (<a href="{% url 'topic-detail' slug=topic.parent.slug %}">{{topic.parent}}</a>)</small>
      {% endif %}
 
-     {% include 'resources/resource_add_menu_include.html' %}
+     <div class="pull-right dropdown">
+        <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">
+        <span class="glyphicon glyphicon-plus-sign"></span>  Add a New Resource
+        <span class="caret"></span></button>
+         
+        <ul class="dropdown-menu">
+            <li><a href="{% url 'resource-add-topic' type='link' slug=topic.slug %}">Add a new link</a></li>
+            <li><a href="{% url 'resource-add-topic' type='file' slug=topic.slug %}">Add a new file</a></li>
+            <li><a href="{% url 'resource-add-topic' type='post' slug=topic.slug %}">Add a new post</a></li>
+        </ul>
+     </div>
 
 {% endblock %}
 
