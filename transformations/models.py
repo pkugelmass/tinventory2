@@ -3,6 +3,8 @@ from django.core.urlresolvers import reverse
 from .managers import ChoicesManager
 #from resources.models import Attachment, Link
 from autoslug import AutoSlugField
+from people.models import Action
+from django.contrib.contenttypes.models import ContentType
 import os
 
 # TAG MODELS
@@ -63,6 +65,15 @@ class Transformation(models.Model):
           
      def type(self):
           return 'transformation'
+          
+     def actions(self):
+          return Action.objects.filter(target_id=self.pk, target_type=ContentType.objects.get_for_model(Transformation))
+          
+     def created(self):
+          return Action.objects.filter(target_id=self.pk, target_type=ContentType.objects.get_for_model(Transformation), verb="created").first()
+          
+     def modified(self):
+          return Action.objects.filter(target_id=self.pk, target_type=ContentType.objects.get_for_model(Transformation), verb="updated").first()
 
 class Ministry(models.Model):
      abbrev = models.CharField(max_length=6)
