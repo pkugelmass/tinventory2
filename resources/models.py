@@ -10,6 +10,7 @@ import datetime
 import os
 from people.models import Action
 from django.contrib.contenttypes.models import ContentType
+from ckeditor_uploader.fields import RichTextUploadingField
 
 class Resource(models.Model):
      
@@ -22,7 +23,8 @@ class Resource(models.Model):
      
      RESOURCE_TYPES = (
           ('file', 'File'),
-          ('link', 'Link')
+          ('link', 'Link'),
+          ('post', 'Post'),
      )
      
      # def resourceTypeList(self):
@@ -37,11 +39,12 @@ class Resource(models.Model):
      type = models.CharField('Resource Type', max_length=5, choices=RESOURCE_TYPES)
      
      title = models.CharField('Title', max_length=80)
-     description = models.TextField(help_text='Describe the resource and how it may be useful to others.')
+     description = models.CharField(max_length=255, help_text='Describe the resource and how it may be useful to others.')
      slug = AutoSlugField(populate_from='title', unique=True, always_update=True)
      
      file = models.FileField("File",upload_to=get_upload_path, blank=True, null=True)
      link = models.URLField("Link", help_text="The URL (address), starting with \'http.\'", blank=True, null=True)
+     post = RichTextUploadingField("Post", help_text="Type your post here.",  blank=True, null=True)
      
      category = models.CharField('Resource Category',max_length=10,choices=CATEGORIES)
      transformation = models.ForeignKey('transformations.Transformation', blank=True, null=True)
@@ -75,6 +78,13 @@ class Resource(models.Model):
      def actions(self):
           return Action.objects.filter(target_id=self.pk, target_type=ContentType.objects.get_for_model(Resource))
           
+     def created(self):
+          return Action.objects.filter(target_id=self.pk, target_type=ContentType.objects.get_for_model(Resource), verb="added").first()
+          
+     def modified(self):
+          return Action.objects.filter(target_id=self.pk, target_type=ContentType.objects.get_for_model(Resource), verb="updated").first()
+          
+          
 class ProxyManager(models.Manager):
      def get_query_set(self):
           return super(ProxyManager, self).get_query_set().filter(type=self.model.__name__.lower())
@@ -98,4 +108,14 @@ class Link(Resource):
           
      def get_absolute_url(self):
           return reverse('view-link', kwargs={'slug': self.slug})
+          
+class Post(Resource):
+     
+     objects = ProxyManager()
+     
+     class Meta:
+          proxy = True
+          
+     def get_absolute_url(self):
+          return reverse('view-post', kwargs={'slug': self.slug})
           

@@ -1,0 +1,11 @@
+     <div class="pull-right dropdown">
+        <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">
+        <span class="glyphicon glyphicon-plus-sign"></span>  Add a New Resource
+        <span class="caret"></span></button>
+         
+        <ul class="dropdown-menu">
+            <li><a href="{% url 'add-resource' type='link' %}"><span class="glyphicon glyphicon-link large"></span> Add a new link</a></li>
+            <li><a href="{% url 'add-resource' type='file' %}"><span class="glyphicon glyphicon-file large"></span> Add a new file</a></li>
+            <li><a href="{% url 'add-resource' type='post' %}"><span class="glyphicon glyphicon-comment large"></span> Add a new post</a></li>
+        </ul>
+     </div>

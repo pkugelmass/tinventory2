@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
-from .models import File, Link, Resource
+from .models import File, Link, Resource, Post
 from transformations.models import Transformation
 from topics.models import Topic
-from .forms import LinkForm, FileForm
+from .forms import LinkForm, FileForm, PostForm
 from django.views import generic
 from django import forms
 from django.core.urlresolvers import reverse_lazy, reverse
@@ -82,9 +82,9 @@ def AddResource(request, type, base=None, slug=None):
           initial_data = {}
           
           if base == 'topic' and slug != None: 
-                    initial_data = {'topics':[Topic.objects.get(slug=slug)]}
+               initial_data = {'topics':[Topic.objects.get(slug=slug)]}
           elif base == 'transformation' and slug != None: 
-                    initial_data = {'transformation':Transformation.objects.get(slug=slug)}
+               initial_data = {'transformation':Transformation.objects.get(slug=slug)}
                
           resource_form = resourceformfactory(type, base, initial_data, None, True)
                
@@ -96,10 +96,15 @@ class EditLink(UpdatedResourceMixin,generic.edit.UpdateView):
      template_name='resources/resource_update_form.html'
      slug_field = 'slug'
      
-     
 class EditFile(UpdatedResourceMixin,generic.edit.UpdateView):
      model = File
      form_class = FileForm
+     template_name='resources/resource_update_form.html'
+     slug_field = 'slug'
+     
+class EditPost(UpdatedResourceMixin,generic.edit.UpdateView):
+     model = Post
+     form_class = PostForm
      template_name='resources/resource_update_form.html'
      slug_field = 'slug'
      
@@ -110,6 +115,10 @@ class ViewLink(generic.DetailView):
 class ViewFile(generic.DetailView):
      model = File
      template_name = 'resources/resource_detail.html'
+     
+class ViewPost(generic.DetailView):
+     model = Post
+     template_name = 'resources/post_detail.html'
 
 class DeleteLink(MyDeleteMixin, generic.edit.DeleteView):
 
@@ -120,6 +129,12 @@ class DeleteLink(MyDeleteMixin, generic.edit.DeleteView):
 class DeleteFile(MyDeleteMixin, generic.edit.DeleteView):
      
      model = File
+     success_url = reverse_lazy('resources')
+     template_name = 'core/confirm_delete.html'
+     
+class DeletePost(MyDeleteMixin, generic.edit.DeleteView): #I'm pretty sure I can consolidate these delete views...
+     
+     model = Post
      success_url = reverse_lazy('resources')
      template_name = 'core/confirm_delete.html'
 

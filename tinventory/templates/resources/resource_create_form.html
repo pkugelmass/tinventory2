@@ -1,8 +1,9 @@
 {% extends "core/base.html" %}
 <script type="text/javascript" src="/static/admin/js/jquery.min.js"></script>
 <script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
-{{ myform.media }}
-{% load widget_tweaks %}
+{% block extrahead %}{{ form.media }} {% endblock %}
+
+
 
 {% block title %}Add New {{type|title}}{% endblock %}
 {% block header %}Add New {{type|title}}{% endblock %}

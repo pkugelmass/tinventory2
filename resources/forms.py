@@ -1,5 +1,5 @@
 from django import forms
-from .models import File, Link, Resource
+from .models import File, Link, Resource, Post
 from transformations.models import Transformation, Ministry
 from topics.models import Topic
 from transformations.forms import ChoiceFieldEmpty
@@ -42,9 +42,22 @@ class LinkForm(ValidateResourceFormMixin, forms.ModelForm):
           self.fields['link'].initial="http://"
           self.fields['link'].required = True
           
+class PostForm(ValidateResourceFormMixin, forms.ModelForm):
+     class Meta:
+          model = Post
+          fields = ['title','description', 'post', 'category', 'transformation', 'topics']
+          
+     def __init__(self, *args, **kwargs):
+          super(PostForm, self).__init__(*args, **kwargs)
+          
+          self.fields['topics'].widget.attrs['size']='15'
+          self.fields['description'].help_text='What is your post about?'
+          self.fields['category'].initial='lessons'
+
+          
 class ResourceFilterForm(forms.Form):
      
-     RESOURCE_TYPES = ( ('file', 'File'), ('link','Link') )
+     RESOURCE_TYPES = ( ('file', 'File'), ('link','Link'), ('post','Post'), )
      
      resourcetype = ChoiceFieldEmpty(
           choices=RESOURCE_TYPES, 

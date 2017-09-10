@@ -33,8 +33,9 @@
                     <tr>
                          <td>{{activity.created}}</td>
                          <td><a href="{{activity.user.profile.get_absolute_url}}">{{activity.user}}</a></td>
-                         <td>{{activity.verb|capfirst}} 
+                         <td>{{activity.verb|capfirst}}
                          {% if activity.target %}
+                              {{activity.target.type}} 
                               <a href="{{activity.target.get_absolute_url}}">'{{activity.target}}'</a>
                           {% endif %}
                          </td>

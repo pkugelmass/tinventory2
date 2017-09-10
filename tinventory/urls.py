@@ -27,7 +27,9 @@ urlpatterns = [
     
     url(r'^signup/$', core_views.signup, name='signup'),
     
-    url(r'^feed/$', people_views.ActivityFeed.as_view(), name='activity-feed')
+    url(r'^feed/$', people_views.ActivityFeed.as_view(), name='activity-feed'),
+    
+    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

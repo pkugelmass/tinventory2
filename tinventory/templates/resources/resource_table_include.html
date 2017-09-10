@@ -15,13 +15,16 @@
                     <tr>
                          <td>
                               {% if resource.type == 'link' %}<span class="glyphicon glyphicon-link large"></span>
-                              {% elif resource.type == 'file' %}<span class="glyphicon glyphicon-file large"></span>{% endif %}
+                              {% elif resource.type == 'file' %}<span class="glyphicon glyphicon-file large"></span>
+                              {% elif resource.type == 'post' %}<span class="glyphicon glyphicon-comment large"></span>{% endif %}
                          </td>
                          <td>
                               {% if resource.type == 'link' %}
                                    <a href="{% url 'view-link' resource.slug %}">
                               {% elif resource.type == 'file' %}
                                    <a href="{% url 'view-file' resource.slug %}">
+                              {% elif resource.type == 'post' %}
+                                   <a href="{% url 'view-post' resource.slug %}">
                               {% endif %}
                               {{resource.title}}</a>
                               <br>

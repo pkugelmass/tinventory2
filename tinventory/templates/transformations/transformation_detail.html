@@ -1,4 +1,5 @@
 {% extends "core/base.html" %}
+{% load humanize %}
 
 {% block title %} 
      Transformation Inventory - {{transformation.title}}
@@ -65,6 +66,18 @@
                          <th class="col-md-2">Tags</th>
                          <td class="col-md-10">{{transformation.tags.all|join:', '}}</td>
                     </tr>
+                    {% with transformation.created as created %}{% if created %}
+                    <tr>
+                         <th>Created</th>
+                         <td>{{created.created|naturalday|capfirst}} by <a href="{{created.user.profile.get_absolute_url}}">{{created.user.get_full_name|title}}</a>.</td>
+                    </tr>
+                    {% endif %}{% endwith %}
+                    {% with transformation.modified as modified %}{% if modified %}
+                    <tr>
+                         <th>Last Modified</th>
+                         <td>{{modified.created|naturalday|capfirst}} by <a href="{{modified.user.profile.get_absolute_url}}">{{modified.user.get_full_name|title}}</a>.</td>
+                    </tr>
+                    {% endif %}{% endwith %}
 
                </table>
                
@@ -82,6 +95,7 @@
                   <ul class="dropdown-menu">
                       <li><a href="{% url 'transformation-add-resource' type='link' slug=transformation.slug %}">Add a new link</a></li>
                       <li><a href="{% url 'transformation-add-resource' type='file' slug=transformation.slug %}">Add a new file</a></li>
+                      <li><a href="{% url 'transformation-add-resource' type='post' slug=transformation.slug %}">Add a new post</a></li>
                   </ul>
                </div>
      
