@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'django_mptt_admin',
     'topics',
     'people',
-    'tinymce',
     'ckeditor', #required a collectstatic command.
     'ckeditor_uploader',
 ]

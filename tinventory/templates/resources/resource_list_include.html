@@ -20,6 +20,14 @@
                             <span class="strong">{{resource.title}}</span>
                        </a>
                   {% endif %}
+                    {% if resource.type == 'post' %}
+                       <span class="glyphicon glyphicon-comment"></span>
+                       </td>
+                       <td>
+                       <a href="{% url 'view-post' resource.slug %}">
+                            <span class="strong">{{resource.title}}</span>
+                       </a>
+                  {% endif %}
                   <br/>
                   <span class="small">{{resource.description}}</span>
              </td>
