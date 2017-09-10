@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'topics',
     'people',
     'tinymce',
+    'ckeditor', #required a collectstatic command.
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -141,6 +143,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static') 
+# To run collectstatic, comment out line 2 and uncomment line 3 above.
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -164,4 +168,21 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 AUTH_USER_MODEL = 'auth.User'
+
+# ---------- CKEDITOR SETTINGS
+
+CKEDITOR_UPLOAD_PATH = "posts/"
+CKEDITOR_IMAGE_BACKEND = 'pillow'
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Format'],
+            ['Bold', 'Italic', 'Underline', 'TextColor', 'CopyFormatting', 'RemoveFormat'],
+            ['Undo', 'Redo'],
+            ['NumberedList', 'BulletedList', 'Blockquote', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight'],
+            ['Link', 'Unlink', 'Image', 'Table', 'HorizontalRule', 'Smiley']
+        ]
+    }
+}
 

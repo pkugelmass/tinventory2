@@ -120,7 +120,7 @@ class ViewFile(generic.DetailView):
      
 class ViewPost(generic.DetailView):
      model = Post
-     template_name = 'resources/resource_detail.html'
+     template_name = 'resources/post_detail.html'
 
 class DeleteLink(MyDeleteMixin, generic.edit.DeleteView):
 
