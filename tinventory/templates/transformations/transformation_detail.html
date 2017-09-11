@@ -31,15 +31,15 @@
                
                <table class="table table-striped align-middle">
                     <tr>
-                         <th class="col-md-2">Transformation Title</th>
-                         <td class="col-md-10">{{transformation.title}}</td>
+                         <th class="col-md-3">Transformation Title</th>
+                         <td class="col-md-9">{{transformation.title}}</td>
                     </tr>
                     <tr>
                          <th class="col-md-2">Ministry</th>
                          <td class="col-md-10">{{transformation.ministries_list}}</td>
                     </tr>
                     <tr>
-                         <th class="col-md-2">Specific Areas & Other Orgs</th>
+                         <th class="col-md-2">Specific Orgs</th>
                          <td class="col-md-10">{{transformation.specific_orgs}}</td>
                     </tr>
                     <tr>
@@ -47,12 +47,16 @@
                          <td class="col-md-10">{{transformation.description}}</td>
                     </tr>                    
                     <tr>
-                         <th class="col-md-2">Problem</th>
+                         <th class="col-md-2">What Problem is it Addressing?</th>
                          <td class="col-md-10">{{transformation.problem}}</td>
                     </tr>
                     <tr>
-                         <th class="col-md-2">Category</th>
+                         <th class="col-md-2">Primary Category</th>
                          <td class="col-md-10">{{transformation.get_category_display}}</td>
+                    </tr>
+                    <tr>
+                         <th class="col-md-2">Areas of Focus</th>
+                         <td class="col-md-10">{{transformation.tags.all|join:', '}}</td>
                     </tr>
                     <tr>
                          <th class="col-md-2">Status</th>
@@ -61,10 +65,6 @@
                     <tr>
                          <th class="col-md-2">Primary Contact</th>
                          <td class="col-md-10">{{transformation.primary_contact}}</td>
-                    </tr>
-                    <tr>
-                         <th class="col-md-2">Tags</th>
-                         <td class="col-md-10">{{transformation.tags.all|join:', '}}</td>
                     </tr>
                     {% with transformation.created as created %}{% if created %}
                     <tr>

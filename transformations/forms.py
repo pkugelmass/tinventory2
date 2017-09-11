@@ -46,15 +46,17 @@ class TransformationForm(forms.ModelForm):
      
      class Meta:
           model = Transformation
-          fields = ['title','ministry','specific_orgs','description','problem','category', \
-               'status','primary_contact', 'tags']
+          fields = ['title','ministry','specific_orgs','description','problem','category', 'tags',\
+               'status','primary_contact',]
           widgets = {
                'description':forms.Textarea(attrs={'rows':4,'cols':40}),
                'problem':forms.Textarea(attrs={'rows':4,'cols':40}),}
           help_texts = {
                'ministry':'You can select more than one. Ctrl-click to select all that apply.',
                'tags':'What are some other areas of focus? You can select more than one. Ctrl-click to select all that apply.',
-               'category':'What is the primary focus?'
+               'category':'What is the primary focus?',
+               'problem':'What problem is it trying to solve?',
+               'specific_orgs':'What specific internal/external orgs/groups are involved?',
                }
 
      def __init__(self, *args, **kwargs):

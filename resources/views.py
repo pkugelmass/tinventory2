@@ -38,7 +38,7 @@ def ResourceList(request):
           if request.GET['category'] != '': q_list = q_list + [Q(category=request.GET['category'])]
           if request.GET['topic'] != '': q_list = q_list + [Q(pk__in=Topic.objects.get(pk=request.GET['topic']).resourcefamily())]
           if request.GET['transformation'] != '': q_list = q_list + [Q(transformation=request.GET['transformation'])]
-          if request.GET['ministry'] != '': q_list = q_list + [Q(transformation__ministry__abbrev=request.GET['ministry'])]
+          if request.GET['ministry'] != '': q_list = q_list + [Q(transformation__ministry=request.GET['ministry'])]
           
           if len(q_list) > 0: # Only if there is something to filter...
                

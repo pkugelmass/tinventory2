@@ -1,6 +1,5 @@
 from django.db import models
 from django.core.urlresolvers import reverse
-from .managers import ChoicesManager
 from autoslug import AutoSlugField
 from people.models import Action
 from django.contrib.contenttypes.models import ContentType
@@ -24,8 +23,8 @@ class Transformation(models.Model):
      title = models.CharField("Transformation Title", max_length=100)
      ministry = models.ManyToManyField('Ministry')
      description = models.TextField("High-Level Description")
-     problem = models.TextField("What problem is it trying to solve?", blank=True)
-     specific_orgs = models.CharField("Which specific areas or other organizations are involved?", max_length=240, blank=True)
+     problem = models.TextField("Core Problem", blank=True)
+     specific_orgs = models.CharField("Specific Orgs", max_length=240, blank=True)
      primary_contact = models.CharField("Primary Contact", max_length=100, blank=True)
      
      CATEGORIES = (
@@ -42,7 +41,7 @@ class Transformation(models.Model):
           ('complete', 'Past/Complete'),
      )
      
-     category = models.CharField(verbose_name='Primary Focus', max_length=20, choices=CATEGORIES, blank=True)
+     category = models.CharField(verbose_name='Category', max_length=20, choices=CATEGORIES, blank=True)
      status = models.CharField(max_length=20, choices=STATUSES, blank=True)
      tags = models.ManyToManyField('Transformation_Tag', verbose_name='Areas of Focus', blank=True)
      archived = models.BooleanField(default=False)
@@ -81,15 +80,7 @@ class Ministry(models.Model):
      
      class Meta:
           ordering = ['abbrev']
-     
-     # def __str__(self):
-     #      return self.abbrev 
           
      def __str__(self):
           return self.abbrev + ' - ' + self.name
-          
-     def long(self):
-          return self.abbrev + ' - ' + self.name
-          
-     objects = ChoicesManager()
      

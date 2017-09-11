@@ -81,8 +81,9 @@ class ResourceFilterForm(forms.Form):
           empty_label='', 
           required=False)
      
-     ministry = ChoiceFieldEmpty(
-          choices = Ministry.objects.choices_list(), 
+     ministry = forms.ModelChoiceField(
+          Ministry.objects.all(), 
           label="Ministry", 
+          empty_label='',
           required=False)
 
