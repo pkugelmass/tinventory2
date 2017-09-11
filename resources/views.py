@@ -13,6 +13,7 @@ from .helpers import viewthisresource, resourceformfactory
 from .forms import ResourceFilterForm
 from django.db.models import Q 
 from people.helpers import create_action
+from people.viewmixins import UpdatedActionMixin
 
 class UpdatedResourceMixin:
      
@@ -90,19 +91,19 @@ def AddResource(request, type, base=None, slug=None):
                
      return render(request, 'resources/resource_create_form.html', {'form':resource_form, 'type':type,} )
      
-class EditLink(UpdatedResourceMixin,generic.edit.UpdateView):
+class EditLink(UpdatedActionMixin,generic.edit.UpdateView):
      model = Link
      form_class = LinkForm
      template_name='resources/resource_update_form.html'
      slug_field = 'slug'
      
-class EditFile(UpdatedResourceMixin,generic.edit.UpdateView):
+class EditFile(UpdatedActionMixin,generic.edit.UpdateView):
      model = File
      form_class = FileForm
      template_name='resources/resource_update_form.html'
      slug_field = 'slug'
      
-class EditPost(UpdatedResourceMixin,generic.edit.UpdateView):
+class EditPost(UpdatedActionMixin,generic.edit.UpdateView):
      model = Post
      form_class = PostForm
      template_name='resources/resource_update_form.html'

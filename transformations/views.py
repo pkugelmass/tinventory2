@@ -65,16 +65,11 @@ class TransformationDetail(generic.DetailView):
      model = Transformation
 
 class AddTransformation(CreateActionMixin, TransformationFormMixin, generic.edit.CreateView):
-     success_message = "Transformation created."
+     pass
      
 class EditTransformation(UpdatedActionMixin, generic.edit.UpdateView):
      model = Transformation
      form_class = TransformationForm
-     success_message = "Transformation updated."
-     
-     # def form_valid(self,form):
-     #      messages.success(self.request,'Transformation updated.')
-     #      return super(EditTransformation,self).form_valid(form)
      
      
 class DeleteTransformation(MyDeleteMixin, generic.edit.DeleteView):

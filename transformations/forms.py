@@ -14,8 +14,6 @@ class ChoiceFieldEmpty(forms.ChoiceField):
 
 class TransformationFilterForm(forms.Form):
      
-     TAG_LIST = ( (tag,tag) for tag in Transformation_Tag.objects.all() )
-     
      ministry = forms.ModelChoiceField(
           Ministry.objects.all().order_by('abbrev'),
           label="Ministry",
@@ -29,17 +27,17 @@ class TransformationFilterForm(forms.Form):
           required=False
           )
           
-     status = ChoiceFieldEmpty(
-          choices = Transformation.STATUSES, 
-          label="Status", 
-          required=False
-          )
-          
      tags = forms.ModelChoiceField(
           Transformation_Tag.objects.all().order_by('name'),
           label="Area of Focus",
           empty_label='',
           required=False,
+          )
+          
+     status = ChoiceFieldEmpty(
+          choices = Transformation.STATUSES, 
+          label="Status", 
+          required=False
           )
      
 class TransformationForm(forms.ModelForm):
