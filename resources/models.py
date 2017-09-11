@@ -50,7 +50,7 @@ class Resource(models.Model):
      transformation = models.ForeignKey('transformations.Transformation', blank=True, null=True)
      topics = TreeManyToManyField('topics.Topic', help_text="Ctrl-click to choose all that apply.", blank=True)
      
-     created_by = models.ForeignKey('auth.User')
+     # created_by = models.ForeignKey('auth.User')
      date_modified = models.DateTimeField(auto_now=True)
      
      def __init__(self, *args, **kwargs):
@@ -83,6 +83,12 @@ class Resource(models.Model):
           
      def modified(self):
           return Action.objects.filter(target_id=self.pk, target_type=ContentType.objects.get_for_model(Resource), verb="updated").first()
+          
+     def related_objects(self):
+          bases = [ x for x in self.topics.all()]
+          # if self.transformation: 
+          #      bases += self.transformation
+          return bases
           
           
 class ProxyManager(models.Manager):

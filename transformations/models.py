@@ -1,7 +1,6 @@
 from django.db import models
 from django.core.urlresolvers import reverse
 from .managers import ChoicesManager
-#from resources.models import Attachment, Link
 from autoslug import AutoSlugField
 from people.models import Action
 from django.contrib.contenttypes.models import ContentType
@@ -16,6 +15,7 @@ class Transformation_Tag(models.Model):
           ordering = ['name']
           
      def __str__(self):
+          #return 'Change to %s' % (self.name)
           return self.name
 
 # TRANSFORMATION MODELS
@@ -33,20 +33,18 @@ class Transformation(models.Model):
           ('strategy', 'Strategy/Policy'),
           ('service', 'Service Delivery'),
           ('people', 'People Development'),
-          ('all', 'All of the Above'),
+          ('all', '\'All of the Above\''),
      )
      
      STATUSES = (
-          ('direction', 'Defining Direction'),
-          ('design', 'Design Stage'),
-          ('implementation', 'Implementation'),
-          ('sustainment', 'Sustainment'),
-          ('complete', 'Past Transformation')
+          ('prospective', 'Prospective'),
+          ('ongoing', 'Ongoing'),
+          ('complete', 'Past/Complete'),
      )
      
-     category = models.CharField(max_length=20, choices=CATEGORIES, blank=True)
+     category = models.CharField(verbose_name='Primary Focus', max_length=20, choices=CATEGORIES, blank=True)
      status = models.CharField(max_length=20, choices=STATUSES, blank=True)
-     tags = models.ManyToManyField('Transformation_Tag', blank=True)
+     tags = models.ManyToManyField('Transformation_Tag', verbose_name='Areas of Focus', blank=True)
      archived = models.BooleanField(default=False)
      slug = AutoSlugField(populate_from='title')
      date_modified = models.DateTimeField(auto_now=True)
@@ -61,7 +59,9 @@ class Transformation(models.Model):
           return self.title
           
      def ministries_list(self):
-          return ', '.join(map(str, self.ministry.all()))
+          #return ', '.join(map(str, self.ministry.all()))
+          mins_list = [ min.abbrev for min in self.ministry.all() ]
+          return ', '.join(mins_list)
           
      def type(self):
           return 'transformation'
@@ -82,8 +82,11 @@ class Ministry(models.Model):
      class Meta:
           ordering = ['abbrev']
      
+     # def __str__(self):
+     #      return self.abbrev 
+          
      def __str__(self):
-          return self.abbrev 
+          return self.abbrev + ' - ' + self.name
           
      def long(self):
           return self.abbrev + ' - ' + self.name

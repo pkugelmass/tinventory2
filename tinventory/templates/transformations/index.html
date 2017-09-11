@@ -43,20 +43,20 @@
                     <tbody>
                     <tr>
                          <th>Ministry</th>
-                         <th class="col-md-5">Title</th>
+                         <th class="col-md-4">Title</th>
                          <th>Category</th>
+                         <th>Areas of Focus</th>
                          <th>Status</th>
-                         <th>Tags</th>
                     </tr>
                     {% for transformation in transformation_list %}
                     <tr>
                          <td>{{ transformation.ministries_list}}</td>
                          <td><a href="{% url 'transformation-detail' transformation.slug %}" class="">{{ transformation.title|truncatewords:12 }}</a></td>
                          <td>{{ transformation.get_category_display }}</td>
-                         <td>{{ transformation.get_status_display }}</td>
                          <td>
                               {{ transformation.tags.all|join:", " }}
                          </td>
+                         <td>{{ transformation.get_status_display }}</td>
                     </tr>
                     {% endfor %}
                     </tbody>

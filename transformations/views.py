@@ -8,6 +8,7 @@ from django.core.urlresolvers import reverse_lazy, reverse
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from people.viewmixins import UpdatedActionMixin, CreateActionMixin
+from django.db.models import Q 
 
 # GENERAL MIXINS
 
@@ -28,15 +29,24 @@ def IndexView(request):
      
      if request.GET:
           
-          # Format the input into keyword arguments (eg. category:structure)
-          criteria = { a.lower():request.GET[a] for a in request.GET if request.GET[a] != ''}
+          q_list = []
           
-          # Filter the query based on those arguments (if any).
-          query_set = query_set.filter(**criteria).prefetch_related('ministry')
+          if request.GET['ministry'] != '': q_list = q_list + [Q(ministry=request.GET['ministry'])]
+          if request.GET['category'] != '': q_list = q_list + [Q(category=request.GET['category'])]
+          if request.GET['status'] != '': q_list = q_list + [Q(status=request.GET['status'])]
+          if request.GET['tags'] != '': q_list = q_list + [Q(tags=request.GET['tags'])]
           
+          if len(q_list) > 0: # Only if there is something to filter...
+               
+               combined_q = Q(pk__gt=0) # Initialize a blank combined query.
+               
+               while len(q_list) > 0:
+                    combined_q &= q_list.pop()
+               query_set = query_set.filter(combined_q) # Filter resources by the combined query.
+               
           # Set the forms to show the criteria used when they are reloaded.
-          for fieldname in criteria:
-               form.fields[fieldname].initial = criteria[fieldname]
+          for fieldname in request.GET:
+               form.fields[fieldname].initial = request.GET[fieldname]
 
      package = {
           'transformation_list' : query_set,
