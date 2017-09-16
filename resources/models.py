@@ -14,6 +14,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from django.conf import settings
 from django.core.validators import MaxValueValidator, MinValueValidator
 
+
 class Resource(models.Model):
      
      CATEGORIES = (
@@ -131,18 +132,28 @@ class Post(Resource):
           
 class Review(models.Model):
      
-     REVIEW_DESCRIPTIONS = ('','Great','Really Great')
+     REVIEW_DESCRIPTIONS = (
+          (2,'Really Great'),
+          (1,'Great'),
+          (0,'Interesting'),
+          )
+     
+     rating = models.SmallIntegerField(
+          'Your Rating', 
+          default=0, 
+          choices=REVIEW_DESCRIPTIONS, 
+          validators=[MaxValueValidator(2),MinValueValidator(0)])
      
      user = models.ForeignKey(settings.AUTH_USER_MODEL)
      resource = models.ForeignKey(Resource, related_name='reviews')
-     rating = models.SmallIntegerField('Your Rating', default=0, validators=[MaxValueValidator(2),MinValueValidator(0)])
+     
      review = models.TextField(blank=True,null=True, help_text='What\'s valuable about this resource?')
      date_modified = models.DateTimeField(auto_now=True)
      
      unique_together = (("user", "resource"),)
      
      def description(self):
-          return self.REVIEW_DESCRIPTIONS[self.rating]
+          return self.REVIEW_DESCRIPTIONS[self.rating][1]
           
      def __str__(self):
           stars = '*' * self.rating

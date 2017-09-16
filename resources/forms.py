@@ -91,8 +91,8 @@ class ResourceFilterForm(forms.Form):
 class MyReviewForm(forms.ModelForm):
      class Meta:
           model=Review
-          fields=['resource','rating','review']
+          fields=['rating','review']
           
      def __init__(self,*args,**kwargs):
           super(MyReviewForm,self).__init__(*args,**kwargs)
-          self.fields['resource'].disabled=True
+          self.fields['rating'].initial = 2

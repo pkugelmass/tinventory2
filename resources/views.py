@@ -15,15 +15,6 @@ from django.db.models import Q
 from people.helpers import create_action
 from people.viewmixins import UpdatedActionMixin, CreateActionMixin
 
-class UpdatedResourceMixin:
-     
-     def form_valid(self, form):
-          updated_object = self.get_object()
-          super(UpdatedResourceMixin,self).form_valid(form)
-          messages.success(self.request,'\'%s\' has been updated.' % (updated_object.title))
-          create_action(self.request.user, 'updated', updated_object)
-          return HttpResponseRedirect(self.get_success_url())
-
 # FILE MGMT VIEWS AND FORMS
 
 def ResourceList(request):
@@ -141,13 +132,40 @@ class DeletePost(MyDeleteMixin, generic.edit.DeleteView): #I'm pretty sure I can
      
 # REVIEW VIEWS -----------
 
-class AddReview(CreateActionMixin, generic.edit.CreateView):
-     model = Review
-     form_class = MyReviewForm
-     template_name='resources/review_form.html'
-     slug_field = 'slug'
+# class AddReview(CreateActionMixin, generic.edit.CreateView):
+#      model = Review
+#      form_class = MyReviewForm
+#      template_name='resources/review_form.html'
+#      slug_field = 'slug'
      
-class EditLink(UpdatedActionMixin,generic.edit.UpdateView):
+def AddReview(request, slug):
+
+     if request.method == 'POST':
+          
+          review_form = MyReviewForm(request.POST)
+          
+          if review_form.is_valid():
+               new_review = review_form.save(commit=False)
+               new_review.resource = Resource.objects.get(slug=slug)
+               new_review.user = request.user
+               new_review.save()
+               messages.success(request,'Your review of \'%s\' has been saved.' % (new_review.resource))
+               
+               create_action(request.user, 'reviewed', new_review.resource)
+               
+               return redirect(new_review.resource)
+     
+     else:
+          
+          review_form = MyReviewForm()
+          base_resource = Resource.objects.get(slug=slug)
+          
+     return render(request, 'resources/review_form.html',{'form':review_form,'resource':base_resource})
+          
+          
+
+     
+class EditReview(UpdatedActionMixin,generic.edit.UpdateView):
      model = Review
      form_class = MyReviewForm
      template_name='resources/review_form.html'
