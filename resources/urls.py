@@ -23,6 +23,10 @@ urlpatterns = [
      
      url(r'^deletepost/(?P<slug>[-\w]+)$', views.DeletePost.as_view(), name='delete-post'),
      
+     url(r'^addreview/(?P<slug>[-\w]+)$', views.AddReview.as_view(), name='add-review'),
+     
+     url(r'^editreview/(?P<slug>[-\w]+)$', views.EditPost.as_view(), name='edit-review'),
+     
      url(r'^$', views.ResourceList, name='resources'),
      
      ]

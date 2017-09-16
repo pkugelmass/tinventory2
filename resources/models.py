@@ -93,6 +93,8 @@ class Resource(models.Model):
           return bases
           
           
+          
+          
 class ProxyManager(models.Manager):
      def get_query_set(self):
           return super(ProxyManager, self).get_query_set().filter(type=self.model.__name__.lower())
@@ -129,9 +131,20 @@ class Post(Resource):
           
 class Review(models.Model):
      
+     REVIEW_DESCRIPTIONS = ('','Great','Really Great')
+     
      user = models.ForeignKey(settings.AUTH_USER_MODEL)
-     resource = models.ForeignKey(Resource)
+     resource = models.ForeignKey(Resource, related_name='reviews')
      rating = models.SmallIntegerField('Your Rating', default=0, validators=[MaxValueValidator(2),MinValueValidator(0)])
      review = models.TextField(blank=True,null=True, help_text='What\'s valuable about this resource?')
      date_modified = models.DateTimeField(auto_now=True)
+     
+     unique_together = (("user", "resource"),)
+     
+     def description(self):
+          return self.REVIEW_DESCRIPTIONS[self.rating]
+          
+     def __str__(self):
+          stars = '*' * self.rating
+          return '%s Review of %s by %s' % (stars, self.resource, self.user)
      

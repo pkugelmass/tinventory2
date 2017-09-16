@@ -1,5 +1,5 @@
 from django import forms
-from .models import File, Link, Resource, Post
+from .models import File, Link, Resource, Post, Review
 from transformations.models import Transformation, Ministry
 from topics.models import Topic
 from transformations.forms import ChoiceFieldEmpty
@@ -15,6 +15,7 @@ class ValidateResourceFormMixin:
           
           if cleaned_data['topics'].count() == 0 and cleaned_data['transformation'] == None:
                raise ValidationError("Please specify topics and/or a transformation.")
+
 
 class FileForm(ValidateResourceFormMixin, forms.ModelForm):
      class Meta:
@@ -87,3 +88,11 @@ class ResourceFilterForm(forms.Form):
           empty_label='',
           required=False)
 
+class MyReviewForm(forms.ModelForm):
+     class Meta:
+          model=Review
+          fields=['resource','rating','review']
+          
+     def __init__(self,*args,**kwargs):
+          super(MyReviewForm,self).__init__(*args,**kwargs)
+          self.fields['resource'].disabled=True

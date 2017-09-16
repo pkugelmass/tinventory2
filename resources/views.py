@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
-from .models import File, Link, Resource, Post
+from .models import File, Link, Resource, Post, Review
 from transformations.models import Transformation
 from topics.models import Topic
-from .forms import LinkForm, FileForm, PostForm
+from .forms import LinkForm, FileForm, PostForm, MyReviewForm
 from django.views import generic
 from django import forms
 from django.core.urlresolvers import reverse_lazy, reverse
@@ -13,7 +13,7 @@ from .helpers import viewthisresource, resourceformfactory
 from .forms import ResourceFilterForm
 from django.db.models import Q 
 from people.helpers import create_action
-from people.viewmixins import UpdatedActionMixin
+from people.viewmixins import UpdatedActionMixin, CreateActionMixin
 
 class UpdatedResourceMixin:
      
@@ -138,4 +138,17 @@ class DeletePost(MyDeleteMixin, generic.edit.DeleteView): #I'm pretty sure I can
      model = Post
      success_url = reverse_lazy('resources')
      template_name = 'core/confirm_delete.html'
+     
+# REVIEW VIEWS -----------
 
+class AddReview(CreateActionMixin, generic.edit.CreateView):
+     model = Review
+     form_class = MyReviewForm
+     template_name='resources/review_form.html'
+     slug_field = 'slug'
+     
+class EditLink(UpdatedActionMixin,generic.edit.UpdateView):
+     model = Review
+     form_class = MyReviewForm
+     template_name='resources/review_form.html'
+     slug_field = 'slug'
