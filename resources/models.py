@@ -11,6 +11,8 @@ import os
 from people.models import Action
 from django.contrib.contenttypes.models import ContentType
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.conf import settings
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 class Resource(models.Model):
      
@@ -125,3 +127,11 @@ class Post(Resource):
      def get_absolute_url(self):
           return reverse('view-post', kwargs={'slug': self.slug})
           
+class Review(models.Model):
+     
+     user = models.ForeignKey(settings.AUTH_USER_MODEL)
+     resource = models.ForeignKey(Resource)
+     rating = models.SmallIntegerField('Your Rating', default=0, validators=[MaxValueValidator(2),MinValueValidator(0)])
+     review = models.TextField(blank=True,null=True, help_text='What\'s valuable about this resource?')
+     date_modified = models.DateTimeField(auto_now=True)
+     
