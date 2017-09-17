@@ -150,10 +150,11 @@ class Review(models.Model):
      review = models.TextField(blank=True,null=True, help_text='What\'s valuable about this resource?')
      date_modified = models.DateTimeField(auto_now=True)
      
-     unique_together = (("user", "resource"),)
+     class Meta:
+          unique_together = ("user", "resource")
      
      def description(self):
-          return self.REVIEW_DESCRIPTIONS[self.rating][1]
+          return self.REVIEW_DESCRIPTIONS[2-self.rating][1]
           
      def __str__(self):
           stars = '*' * self.rating

@@ -14,6 +14,7 @@ from .forms import ResourceFilterForm
 from django.db.models import Q 
 from people.helpers import create_action
 from people.viewmixins import UpdatedActionMixin, CreateActionMixin
+from django.db import IntegrityError
 
 # FILE MGMT VIEWS AND FORMS
 
@@ -139,18 +140,24 @@ class DeletePost(MyDeleteMixin, generic.edit.DeleteView): #I'm pretty sure I can
 #      slug_field = 'slug'
      
 def AddReview(request, slug):
+     
+     # Catch duplicates
+     if Review.objects.filter(user=request.user, resource__slug=slug).count() > 0:
+          messages.info(request,'You have already reviewed \'%s.\' Try editing your review instead.' % (Resource.objects.get(slug=slug)))
+          return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
      if request.method == 'POST':
           
           review_form = MyReviewForm(request.POST)
           
           if review_form.is_valid():
+               
                new_review = review_form.save(commit=False)
                new_review.resource = Resource.objects.get(slug=slug)
                new_review.user = request.user
                new_review.save()
+
                messages.success(request,'Your review of \'%s\' has been saved.' % (new_review.resource))
-               
                create_action(request.user, 'reviewed', new_review.resource)
                
                return redirect(new_review.resource)
