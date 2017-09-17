@@ -9,42 +9,7 @@
 {% block header %}
      {{object.title}}<small> ({{ object.type|title }})</small>
      
-     <div class="pull-right"> <!-- Edit & delete buttons -->
-          
-
-          <a class="btn btn-default" href=
-               "{% if object.type == 'link' %}{% url 'edit-link' object.slug %}{% endif %}
-               {% if object.type == 'file' %}{% url 'edit-file' object.slug %}{% endif %}
-               {% if object.type == 'post' %}{% url 'edit-post' object.slug %}{% endif %}"
-               data-toggle="tooltip" title="Edit">
-               
-               <span class="glyphicon glyphicon-pencil"></span> Edit Details
-          </a>
-          
-          {% if not user_review %}
-               <a class="btn btn-default" href="{% url 'add-review' object.slug %}">
-                    <span class="glyphicon glyphicon-star"></span> Review
-               </a>
-          {% else %}
-               <a class="btn btn-default" href="{% url 'edit-review' object.slug %}">
-                    <span class="glyphicon glyphicon-star-empty"></span> Edit Review
-               </a>
-          {% endif %}
-          
-          <a class="btn btn-default" href=
-               "{% if object.type == 'link' %}{% url 'delete-link' object.slug %}{% endif %}
-               {% if object.type == 'file' %}{% url 'delete-file' object.slug %}{% endif %}
-               {% if object.type == 'post' %}{% url 'delete-post' object.slug %}{% endif %}"
-               data-toggle="tooltip" title="Delete">
-               
-               <span class="glyphicon glyphicon-trash"></span> Delete
-          </a>
-          
-
-
-     </div>
-     
-     
+{% include 'resources/resource_buttons_include.html' %}
 
 {% endblock %}
 
@@ -117,48 +82,6 @@
           </div>
      </div>
      
-     {% for review in object.reviews.all %}
-          {% if forloop.first %}
-     
-     
-               <div class="row">
-                    <div class="col-md-12">
-               
-                         
-                         <h3>Reviews:</h3>
-                         
-                    <table class="table table-condensed">
-          
-                              <tr>
-                                   <th class="col-md-2">Rating</th>
-                                   <th>Review</th>
-                                   <th>User/Date</th>
-                              </tr>
-                              {% endif %}
-                              <tr {% if review.user == request.user %}class="active"{% endif %} >
-                                   <td>
-                                        {{ review.description }}
-                                        {% if review.rating > 0 %}
-                                             ( <span class="glyphicon glyphicon-large glyphicon-star"></span>
-                                             {% if review.rating == 2 %}
-                                                  <span class="glyphicon glyphicon-large glyphicon-star"></span> 
-                                             {% endif %}
-                                              )
-                                        {% endif %}
-                                   </td>
-                                   <td>{{review.review|linebreaks}}</td>
-                                   <td>{{review.date_modified|naturalday|capfirst}} by <a href="{{ review.user.profile.get_absolute_url }}">{{review.user}}</a></td>
-                              {% empty %}
-                              {% endfor %}
-                         
-                    </tr>
-               
-               
-               
-          </table>
-               
-          </div>
-               
-     </div>
+{% include 'resources/review_list_include.html' %}
      
 {% endblock %}

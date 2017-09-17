@@ -1,0 +1,39 @@
+{% load humanize %}
+
+     {% for review in object.reviews.all %}
+          {% if forloop.first %}
+     
+     
+     <div class="row">
+          <div class="col-md-12">
+               
+          <h3>Reviews:</h3>
+                         
+          <table class="table">
+                    <tr>
+                         <th class="col-md-2">Rating</th>
+                         <th>Review</th>
+                         <th>User/Date</th>
+                    </tr>
+                    {% endif %}
+                    <tr {% if review.user == request.user %}class="active"{% endif %} >
+                         <td>
+                              {{ review.description }}
+                              {% if review.rating > 0 %}
+                                   ( <span class="glyphicon glyphicon-large glyphicon-star"></span>
+                                   {% if review.rating == 2 %}
+                                        <span class="glyphicon glyphicon-large glyphicon-star"></span> 
+                                   {% endif %}
+                                    )
+                              {% endif %}
+                         </td>
+                         <td>{{review.review|linebreaks}}</td>
+                         <td>{{review.date_modified|naturalday|capfirst}} by <a href="{{ review.user.profile.get_absolute_url }}">{{review.user}}</a></td>
+                    {% empty %}
+                    {% endfor %}
+                    </tr>
+          </table>
+               
+          </div>
+               
+     </div>
