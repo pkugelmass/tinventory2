@@ -51,10 +51,10 @@ class Resource(models.Model):
      post = RichTextUploadingField("Post", help_text="Type your post here.",  blank=True, null=True)
      
      category = models.CharField('Resource Category',max_length=10,choices=CATEGORIES)
-     transformation = models.ForeignKey('transformations.Transformation', blank=True, null=True)
+     transformation = models.ForeignKey('transformations.Transformation', blank=True, null=True, related_name='resources')
      topics = TreeManyToManyField('topics.Topic', help_text="Ctrl-click to choose all that apply.", blank=True)
      
-     created_by = models.ForeignKey('auth.User')
+     created_by = models.ForeignKey('auth.User', related_name='resources_created')
      date_modified = models.DateTimeField(auto_now=True)
      
      def __init__(self, *args, **kwargs):
@@ -147,7 +147,7 @@ class Review(models.Model):
           choices=REVIEW_DESCRIPTIONS, 
           validators=[MaxValueValidator(2),MinValueValidator(0)])
      
-     user = models.ForeignKey(settings.AUTH_USER_MODEL)
+     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='reviews')
      resource = models.ForeignKey(Resource, related_name='reviews')
      
      review = models.TextField(blank=True,null=True, help_text='What\'s valuable about this resource?')

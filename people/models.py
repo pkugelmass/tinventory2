@@ -15,7 +15,7 @@ class Profile(models.Model):
         return os.path.join('users', datetime.now().strftime("%y-%m-%d"), filename)
     
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    ministry = models.ForeignKey('transformations.Ministry', blank=True, null=True)
+    ministry = models.ForeignKey('transformations.Ministry', blank=True, null=True, related_name='profiles')
     role = models.CharField(max_length=200, blank=True, null=True)
     profile_picture = models.ImageField(upload_to=get_upload_path, blank=True, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
