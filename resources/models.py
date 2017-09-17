@@ -13,6 +13,7 @@ from django.contrib.contenttypes.models import ContentType
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.conf import settings
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.db.models import Sum
 
 
 class Resource(models.Model):
@@ -87,14 +88,16 @@ class Resource(models.Model):
      def modified(self):
           return Action.objects.filter(target_id=self.pk, target_type=ContentType.objects.get_for_model(Resource), verb="updated").first()
           
+     def total_stars(self):
+          stars = Review.objects.filter(resource=self).aggregate(total=Sum('rating'))
+          return stars['total']
+          
+          
      def related_objects(self):
           bases = [ x for x in self.topics.all()]
           # if self.transformation: 
           #      bases += self.transformation
           return bases
-          
-          
-          
           
 class ProxyManager(models.Manager):
      def get_query_set(self):
@@ -152,6 +155,7 @@ class Review(models.Model):
      
      class Meta:
           unique_together = ("user", "resource")
+          ordering = ['-date_modified']
      
      def description(self):
           return self.REVIEW_DESCRIPTIONS[2-self.rating][1]

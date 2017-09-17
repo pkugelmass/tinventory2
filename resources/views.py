@@ -15,13 +15,14 @@ from django.db.models import Q
 from people.helpers import create_action
 from people.viewmixins import UpdatedActionMixin, CreateActionMixin
 from django.db import IntegrityError
+from django.db.models import Sum
 
 # FILE MGMT VIEWS AND FORMS
 
 def ResourceList(request):
      
      form = ResourceFilterForm()
-     resource_list = Resource.objects.all()
+     resource_list = Resource.objects.all().annotate(stars=Sum('reviews__rating'))
      
      if request.GET:
           
@@ -105,9 +106,19 @@ class ViewLink(generic.DetailView):
      model = Link
      template_name = 'resources/resource_detail.html'
      
+     def get_context_data(self,*args,**kwargs):
+          context = super(ViewLink,self).get_context_data(*args,**kwargs)
+          context['user_review'] = Review.objects.filter(user=self.request.user, resource=context['object']).exists()
+          return context
+     
 class ViewFile(generic.DetailView):
      model = File
      template_name = 'resources/resource_detail.html'
+     
+     def get_context_data(self,*args,**kwargs):
+          context = super(ViewLink,self).get_context_data(*args,**kwargs)
+          context['user_review'] = Review.objects.filter(user=self.request.user, resource=context['object']).exists()
+          return context
      
 class ViewPost(generic.DetailView):
      model = Post
@@ -141,7 +152,7 @@ class DeletePost(MyDeleteMixin, generic.edit.DeleteView): #I'm pretty sure I can
      
 def AddReview(request, slug):
      
-     # Catch duplicates
+     # Catch if you've already reviewed it; bounce back to previous page if so.
      if Review.objects.filter(user=request.user, resource__slug=slug).count() > 0:
           messages.info(request,'You have already reviewed \'%s.\' Try editing your review instead.' % (Resource.objects.get(slug=slug)))
           return HttpResponseRedirect(request.META['HTTP_REFERER'])
