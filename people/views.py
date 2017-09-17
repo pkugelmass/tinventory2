@@ -8,7 +8,7 @@ from django.contrib import messages
 from .helpers import create_action
 from django.views import generic
 from django.conf import settings
-from django.db.models import Sum, Count
+from django.db.models import Sum, Count, Avg
 from resources.models import Resource, Review
 from django.contrib.auth import get_user_model
 from transformations.models import Transformation, Ministry
@@ -60,11 +60,11 @@ class ActivityFeed(generic.ListView):
     
 class Standings(object):
     
-    def __init__(self,title,xaxis,measure,queryset):
+    def __init__(self,title,xaxis,measure,queryset=None, model=None, func=None, measure_var=None):
         self.title=title
         self.xaxis=xaxis
         self.measure=measure
-        self.queryset = queryset
+        self.queryset = model.objects.annotate(number=func(measure_var)).filter(number__gt=0).order_by('-number')[:5]
 
 def Leaderboard(request):
     
@@ -76,54 +76,73 @@ def Leaderboard(request):
             title='Most Active Users',
             xaxis='User',
             measure='Actions',
-            queryset=User.objects.annotate(number=Count('actions')).filter(number__gt=0).order_by('-number')[:5]
+            model=User,
+            func=Count,
+            measure_var='actions'
             ),
                         
         Standings(
             title='Users with most Stars',
             xaxis='User',
             measure='Stars',
-            queryset=User.objects.annotate(number=Sum('resources_created__reviews__rating')).filter(number__gt=0).order_by('-number')[:5]
+            model=User,
+            func=Sum,
+            measure_var='resources_created__reviews__rating'
             ),
         
         Standings(
             title='Top Resources',
             xaxis='Resource',
             measure='Stars',
-            queryset=Resource.objects.annotate(number=Sum('reviews__rating')).filter(number__gt=0).order_by('-number')[:5]
+            model=Resource,
+            func=Sum,
+            measure_var='reviews__rating'
             ),
             
+        Standings(
+            title='Highest Avg Rating',
+            xaxis='Resource',
+            measure='Stars',
+            model=Resource,
+            func=Avg,
+            measure_var='reviews__rating'
+            ),
                     
         Standings(
             title='Top Reviewers',
             xaxis='User',
             measure='Reviews',
-            queryset=User.objects.annotate(number=Count('reviews')).filter(number__gt=0).order_by('-number')[:5]
+            model=User,
+            func=Count,
+            measure_var='reviews'
             ),
             
         Standings(
             title='Transformations with Most Resources',
             xaxis='Transformation',
             measure='Resources',
-            queryset=Transformation.objects.annotate(number=Count('resources')).filter(number__gt=0).order_by('-number')[:5]
+            model=Transformation,
+            func=Count,
+            measure_var='resources'
             ),
             
         Standings(
             title='Ministry with most Transformations',
             xaxis='Ministry',
             measure='Transformations',
-            queryset=Ministry.objects.annotate(number=Count('transformations')).filter(number__gt=0).order_by('-number')[:5]
+            model=Ministry,
+            func=Count,
+            measure_var='transformations'
             ),
             
         Standings(
             title='Ministry with most Users',
             xaxis='Ministry',
             measure='Users',
-            queryset=Ministry.objects.annotate(number=Count('profiles')).filter(number__gt=0).order_by('-number')[:5]
+            model=Ministry,
+            func=Count,
+            measure_var='profiles'
             ),
-
-
-        
     ]
     
     context = {'leaderboards':leaderboards}
