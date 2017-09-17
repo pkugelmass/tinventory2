@@ -52,11 +52,10 @@
 
      
      <div class="row">
-          
           <div class="col-md-12">
                <h3>Details:</h3>
-               <table class="table table-striped table-condensed align-middle">
-                    <tr>
+               <table class="table table-condensed align-middle">
+                    <tr class="active">
                          <th class="col-md-2">{{object.type|title}}</th>
                          <td>
                               {%if object.type == 'link' %}
@@ -128,7 +127,7 @@
                          
                          <h3>Reviews:</h3>
                          
-                    <table class="table table-striped table-condensed">
+                    <table class="table table-condensed">
           
                               <tr>
                                    <th class="col-md-2">Rating</th>
@@ -136,7 +135,7 @@
                                    <th>User/Date</th>
                               </tr>
                               {% endif %}
-                              <tr>
+                              <tr {% if review.user == request.user %}class="active"{% endif %} >
                                    <td>
                                         {{ review.description }}
                                         {% if review.rating > 0 %}
