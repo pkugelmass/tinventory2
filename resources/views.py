@@ -22,7 +22,7 @@ from django.db.models import Sum
 def ResourceList(request):
      
      form = ResourceFilterForm()
-     resource_list = Resource.objects.all().annotate(stars=Sum('reviews__rating'))
+     resource_list = Resource.objects.all().annotate(stars=Sum('reviews__rating')).order_by('-stars','-date_modified')
      
      if request.GET:
           
@@ -116,7 +116,7 @@ class ViewFile(generic.DetailView):
      template_name = 'resources/resource_detail.html'
      
      def get_context_data(self,*args,**kwargs):
-          context = super(ViewLink,self).get_context_data(*args,**kwargs)
+          context = super(ViewFile,self).get_context_data(*args,**kwargs)
           context['user_review'] = Review.objects.filter(user=self.request.user, resource=context['object']).exists()
           return context
      

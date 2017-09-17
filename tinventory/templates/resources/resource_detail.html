@@ -148,7 +148,7 @@
                                         {% endif %}
                                    </td>
                                    <td>{{review.review|linebreaks}}</td>
-                                   <td>{{review.date_modified|naturalday|capfirst}} by <a href="{{ review.user.get_absolute_url }}">{{review.user}}</a></td>
+                                   <td>{{review.date_modified|naturalday|capfirst}} by <a href="{{ review.user.profile.get_absolute_url }}">{{review.user}}</a></td>
                               {% empty %}
                               {% endfor %}
                          

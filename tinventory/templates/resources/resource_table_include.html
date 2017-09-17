@@ -2,7 +2,7 @@
 
      <div class="row">
           <div class="col-md-12">
-               <table class="table table-striped table-hover table-responsive table-condensed align-middle col-md-12">
+               <table class="table table-striped table-hover table-responsive align-middle col-md-12">
                     <tbody>
                     <tr>
                          <th class=>Type</th>
@@ -14,7 +14,7 @@
                     </tr>
                     {% for resource in resource_list %}
                     <tr>
-                         <td>
+                         <td align=center>
                               {% if resource.type == 'link' %}<span class="glyphicon glyphicon-link large"></span>
                               {% elif resource.type == 'file' %}<span class="glyphicon glyphicon-file large"></span>
                               {% elif resource.type == 'post' %}<span class="glyphicon glyphicon-comment large"></span>{% endif %}
@@ -39,7 +39,7 @@
                               <a href="{% url 'transformation-detail' resource.transformation.slug %}">{{ resource.transformation|truncatewords:6 }}</td></a>
                               {% endif %}
                          <td>{% autoescape off %}{{resource.topics.all|hyperlink_list:"slug"}}{% endautoescape %}</td>
-                         <td align=center>{{resource.stars|default_if_none:''}}</td>
+                         <td align=center><span class="badge">{{resource.stars|default_if_none:''}}</span></td>
                     </tr>
                     {% endfor %}
                     </tbody>
