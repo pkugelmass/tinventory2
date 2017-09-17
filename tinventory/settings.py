@@ -167,6 +167,9 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 AUTH_USER_MODEL = 'auth.User'
+ABSOLUTE_URL_OVERRIDES = {
+    'auth.user': lambda u: "/users/%s/" % u.username,
+}
 
 # ---------- CKEDITOR SETTINGS
 
