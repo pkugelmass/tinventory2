@@ -54,6 +54,7 @@ class Resource(models.Model):
      transformation = models.ForeignKey('transformations.Transformation', blank=True, null=True)
      topics = TreeManyToManyField('topics.Topic', help_text="Ctrl-click to choose all that apply.", blank=True)
      
+     credit = models.CharField('Credit',max_length=100,help_text='Who made or contributed to this?', blank=True, null=True)
      created_by = models.ForeignKey('auth.User')
      date_modified = models.DateTimeField(auto_now=True)
      

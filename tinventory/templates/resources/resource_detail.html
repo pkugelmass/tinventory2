@@ -114,6 +114,12 @@
                          <td>{{stars}}</td>
                     </tr>
                     {% endif %}{% endwith %}
+                    {% if object.credit %}
+                    <tr>
+                         <th>Credit</th>
+                         <td>object.credit</td>
+                    </tr>
+                    {% endif %}
                </table>
           </div>
      </div>

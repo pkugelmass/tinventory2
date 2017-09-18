@@ -20,7 +20,7 @@ class ValidateResourceFormMixin:
 class FileForm(ValidateResourceFormMixin, forms.ModelForm):
      class Meta:
           model = File
-          fields = ['file','title','description', 'category', 'transformation', 'topics']
+          fields = ['file','title','description', 'category', 'transformation', 'topics', 'credit']
           widgets = {
                'description':forms.Textarea(attrs={'rows':3,'cols':40}),
           }
@@ -33,7 +33,7 @@ class FileForm(ValidateResourceFormMixin, forms.ModelForm):
 class LinkForm(ValidateResourceFormMixin, forms.ModelForm):
      class Meta:
           model = Link
-          fields = ['link','title','description', 'category', 'transformation', 'topics']
+          fields = ['link','title','description', 'category', 'transformation', 'topics', 'credit']
           widgets = {'description':forms.Textarea(attrs={'rows':3,'cols':40}),}
           
      def __init__(self, *args, **kwargs):
