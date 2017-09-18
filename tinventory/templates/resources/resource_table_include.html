@@ -10,7 +10,7 @@
                          <th>Category</th>
                          <th>Transformation</th>
                          <th>Topic(s)</th>
-                         <!--<th>Stars</th>-->
+                         <th>Stars</th>
                     </tr>
                     {% for resource in resource_list %}
                     <tr>
@@ -30,8 +30,6 @@
                               {{resource.title}}</a>
                               <br>
                               {{resource.description}}
-                              <!--<br>
-                              <small>{{resource.created_by}} | {{resource.date_modified|timesince}}</small>-->
                          </td>
                          <td>{{resource.get_category_display}}</td>
                          <td>
@@ -39,7 +37,14 @@
                               <a href="{% url 'transformation-detail' resource.transformation.slug %}">{{ resource.transformation|truncatewords:6 }}</td></a>
                               {% endif %}
                          <td>{% autoescape off %}{{resource.topics.all|hyperlink_list:"slug"}}{% endautoescape %}</td>
-                         <!--<td align=center><span class="badge">{{resource.stars|default_if_none:''}}</span></td>-->
+                         
+                         <td align=center>
+                              {% with resource.total_stars as stars %}
+                              {% if stars > 0 %}
+                                   <span class="label label-primary">{{stars}}<span class="glyphicon glyphicon-star"></span></span>
+                              {% endif %}
+                              {% endwith %}
+                         </td>
                     </tr>
                     {% endfor %}
                     </tbody>

@@ -102,25 +102,21 @@ class EditPost(UpdatedActionMixin,generic.edit.UpdateView):
      template_name='resources/resource_update_form.html'
      slug_field = 'slug'
      
-class ViewLink(generic.DetailView):
+class ViewResourceMixin:
+     def get_context_data(self,*args,**kwargs):
+          context = super(ViewResourceMixin,self).get_context_data(*args,**kwargs)
+          context['user_review'] = Review.objects.filter(user=self.request.user, resource=context['object']).exists()
+          return context
+     
+class ViewLink(ViewResourceMixin, generic.DetailView):
      model = Link
      template_name = 'resources/resource_detail.html'
      
-     def get_context_data(self,*args,**kwargs):
-          context = super(ViewLink,self).get_context_data(*args,**kwargs)
-          context['user_review'] = Review.objects.filter(user=self.request.user, resource=context['object']).exists()
-          return context
-     
-class ViewFile(generic.DetailView):
+class ViewFile(ViewResourceMixin, generic.DetailView):
      model = File
      template_name = 'resources/resource_detail.html'
      
-     def get_context_data(self,*args,**kwargs):
-          context = super(ViewFile,self).get_context_data(*args,**kwargs)
-          context['user_review'] = Review.objects.filter(user=self.request.user, resource=context['object']).exists()
-          return context
-     
-class ViewPost(generic.DetailView):
+class ViewPost(ViewResourceMixin, generic.DetailView):
      model = Post
      template_name = 'resources/post_detail.html'
 

@@ -9,27 +9,7 @@
 {% block header %}
      {{object.title}}<small> ({{ object.type|title }})</small>
      
-     <div class="pull-right"> <!-- Edit & delete buttons -->
-          
-          <a class="btn btn-default" href=
-               "{% if object.type == 'link' %}{% url 'edit-link' object.slug %}{% endif %}
-               {% if object.type == 'file' %}{% url 'edit-file' object.slug %}{% endif %}
-               {% if object.type == 'post' %}{% url 'edit-post' object.slug %}{% endif %}"
-               data-toggle="tooltip" title="Edit">
-               
-               <span class="glyphicon glyphicon-pencil"></span> Edit
-          </a>
-          
-          <a class="btn btn-default" href=
-               "{% if object.type == 'link' %}{% url 'delete-link' object.slug %}{% endif %}
-               {% if object.type == 'file' %}{% url 'delete-file' object.slug %}{% endif %}
-               {% if object.type == 'post' %}{% url 'delete-post' object.slug %}{% endif %}"
-               data-toggle="tooltip" title="Delete">
-               
-               <span class="glyphicon glyphicon-trash"></span> Delete
-          </a>
-
-     </div>
+{% include 'resources/resource_buttons_include.html' %}
      
      
 
@@ -93,5 +73,7 @@
                </table>
           </div>
      </div>
+     
+     {% include 'resources/review_list_include.html' %}
      
 {% endblock %}
