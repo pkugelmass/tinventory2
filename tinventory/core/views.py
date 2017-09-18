@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from tinventory.core.forms import SignUpForm
 from stronghold.decorators import public
 from django.core.mail import send_mail
+from people.helpers import create_action
 
 def notify_paul(user):
     new_user_string = "%s (%s)" % (user.get_full_name(), user.username)
@@ -26,6 +27,7 @@ def signup(request):
             user = authenticate(username=username, password=raw_password)
             login(request, user)
             notify_paul(user)
+            create_action(user,'joined the site')
             return redirect('index')
     else:
         form = SignUpForm()
