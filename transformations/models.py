@@ -21,7 +21,7 @@ class Transformation_Tag(models.Model):
 
 class Transformation(models.Model):
      title = models.CharField("Transformation Title", max_length=100)
-     ministry = models.ManyToManyField('Ministry')
+     ministry = models.ManyToManyField('Ministry', related_name='transformations')
      description = models.TextField("High-Level Description")
      problem = models.TextField("Core Problem", blank=True)
      specific_orgs = models.CharField("Specific Orgs", max_length=240, blank=True)
