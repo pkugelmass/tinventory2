@@ -1,0 +1,40 @@
+{% extends "core/base.html" %}
+{% load widget_tweaks %}
+{% load hyperlink_list %}
+
+{% block title %}Leaderboard{% endblock %}
+
+{% block header %}Site Leaderboards{% endblock %}
+
+{% block content %}
+
+{% for board in leaderboards %}
+    {% cycle '<div class="row"><div class="col-md-4">' '<div class="col-md-4">' '<div class="col-md-4">' %}
+        <h4>{{board.title}}</h4>
+        <table class="table table-striped table-hover table-condensed">
+            <tr>
+                <th>{{board.xaxis}}</th>
+                <th>{{board.measure}}</th>
+            </tr>
+            {% for x in board.queryset %}
+                <tr>
+                    <td>{{forloop.counter}}.  <a href="{{x.get_absolute_url}}">{{x}}</a></td>
+                    <td>{{x.number}}</td>
+                </tr>
+            {% empty %}
+                <div class="panel panel-default">None yet.</div>
+            {% endfor %}
+        </table>
+    {% cycle '</div>' '</div>' '</div></div>' %}
+{% endfor %}
+            
+
+
+               
+               
+          </div>
+          
+          
+     </div>
+
+{% endblock %}

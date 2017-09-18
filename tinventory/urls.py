@@ -29,6 +29,8 @@ urlpatterns = [
     
     url(r'^feed/$', people_views.ActivityFeed.as_view(), name='activity-feed'),
     
+    url(r'^leaderboard/$', people_views.Leaderboard, name='leaderboard'),
+    
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

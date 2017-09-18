@@ -74,9 +74,14 @@
               </a>
               
               <ul class="dropdown-menu">
-                <li><a href="{% url 'activity-feed' %}">All Activity</a></li>
+                <!--<li><a href="{% url 'activity-feed' %}">All Activity</a></li>-->
                 <li><a href="#about">About</a></li>
                 <li><a href="mailto:paul.kugelmass@ontario.ca">Contact</a></li>
+                {% if request.user.is_staff %}
+                  <div class="dropdown-divider"></div>
+                  <li><a href="{% url 'activity-feed' %}">All Activity</a></li>
+                  <li><a href="{% url 'leaderboard' %}">Leaderboards</a></li>
+                {% endif %}
               </ul>
               
             </li>

@@ -7,6 +7,11 @@ from django.urls import reverse
 from django.contrib import messages
 from .helpers import create_action
 from django.views import generic
+from django.conf import settings
+from django.db.models import Sum, Count, Avg
+from resources.models import Resource, Review
+from django.contrib.auth import get_user_model
+from transformations.models import Transformation, Ministry
 
 def UserProfile(request, username):
     
@@ -52,4 +57,95 @@ def EditProfile(request, username):
 class ActivityFeed(generic.ListView):
     model=Action
     template_name='people/activity_feed.html'
+    
+class Standings(object):
+    
+    def __init__(self,title,xaxis,measure,queryset=None, model=None, func=None, measure_var=None):
+        self.title=title
+        self.xaxis=xaxis
+        self.measure=measure
+        self.queryset = model.objects.annotate(number=func(measure_var)).filter(number__gt=0).order_by('-number')[:5]
+
+def Leaderboard(request):
+    
+    User = get_user_model()
+    
+    leaderboards = [
+        
+        Standings(
+            title='Most Active Users',
+            xaxis='User',
+            measure='Actions',
+            model=User,
+            func=Count,
+            measure_var='actions'
+            ),
+                        
+        Standings(
+            title='Users with most Stars',
+            xaxis='User',
+            measure='Stars',
+            model=User,
+            func=Sum,
+            measure_var='resources_created__reviews__rating'
+            ),
+        
+        Standings(
+            title='Top Resources',
+            xaxis='Resource',
+            measure='Stars',
+            model=Resource,
+            func=Sum,
+            measure_var='reviews__rating'
+            ),
+            
+        Standings(
+            title='Highest Avg Rating',
+            xaxis='Resource',
+            measure='Stars',
+            model=Resource,
+            func=Avg,
+            measure_var='reviews__rating'
+            ),
+                    
+        Standings(
+            title='Top Reviewers',
+            xaxis='User',
+            measure='Reviews',
+            model=User,
+            func=Count,
+            measure_var='reviews'
+            ),
+            
+        Standings(
+            title='Transformations with Most Resources',
+            xaxis='Transformation',
+            measure='Resources',
+            model=Transformation,
+            func=Count,
+            measure_var='resources'
+            ),
+            
+        Standings(
+            title='Ministry with most Transformations',
+            xaxis='Ministry',
+            measure='Transformations',
+            model=Ministry,
+            func=Count,
+            measure_var='transformations'
+            ),
+            
+        Standings(
+            title='Ministry with most Users',
+            xaxis='Ministry',
+            measure='Users',
+            model=Ministry,
+            func=Count,
+            measure_var='profiles'
+            ),
+    ]
+    
+    context = {'leaderboards':leaderboards}
+    
+    return render(request,'people/leaderboard.html',context)
     
