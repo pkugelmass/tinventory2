@@ -140,12 +140,6 @@ class DeletePost(MyDeleteMixin, generic.edit.DeleteView): #I'm pretty sure I can
      
 # REVIEW VIEWS -----------
 
-# class AddReview(CreateActionMixin, generic.edit.CreateView):
-#      model = Review
-#      form_class = MyReviewForm
-#      template_name='resources/review_form.html'
-#      slug_field = 'slug'
-     
 def AddReview(request, slug):
      
      # Catch if you've already reviewed it; bounce back to previous page if so.
@@ -184,4 +178,14 @@ class EditReview(UpdatedActionMixin,generic.edit.UpdateView):
      def get_object(self):
           return Review.objects.filter(user=self.request.user).get(resource__slug=self.kwargs['slug'])
 
+class DeleteReview(MyDeleteMixin,generic.edit.DeleteView):
+     model = Review
+     template_name = 'core/confirm_delete.html'
+     
+     def get_object(self):
+          return Review.objects.filter(user=self.request.user).get(resource__slug=self.kwargs['slug'])
 
+     def get_success_url(self):
+          this_resource = Resource.objects.get(slug=self.kwargs['slug'])
+          return this_resource.get_absolute_url()
+     

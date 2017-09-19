@@ -25,7 +25,9 @@ urlpatterns = [
      
      url(r'^addreview/(?P<slug>[-\w]+)$', views.AddReview, name='add-review'),
      
-     url(r'^editreview/(?P<slug>[-\w]+)$', views.EditReview.as_view(), name='edit-review'),
+     url(r'^editmyreview/(?P<slug>[-\w]+)$', views.EditReview.as_view(), name='edit-review'),
+     
+     url(r'^deletemyreview/(?P<slug>[-\w]+)$', views.DeleteReview.as_view(), name='delete-review'),
      
      url(r'^$', views.ResourceList, name='resources'),
      
