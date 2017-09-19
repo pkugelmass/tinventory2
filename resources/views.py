@@ -177,6 +177,10 @@ class EditReview(UpdatedActionMixin,generic.edit.UpdateView):
      
      def get_object(self):
           return Review.objects.filter(user=self.request.user).get(resource__slug=self.kwargs['slug'])
+          
+     def get_success_url(self):
+          this_resource = Resource.objects.get(slug=self.kwargs['slug'])
+          return this_resource.get_absolute_url()
 
 class DeleteReview(MyDeleteMixin,generic.edit.DeleteView):
      model = Review

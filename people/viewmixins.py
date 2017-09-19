@@ -7,7 +7,7 @@ class UpdatedActionMixin:
      def form_valid(self, form):
           updated_object = self.get_object()
           super(UpdatedActionMixin,self).form_valid(form)
-          messages.success(self.request,'\'%s\' has been updated.' % (updated_object.title))
+          messages.success(self.request,'\'%s\' has been updated.' % (updated_object))
           create_action(self.request.user, 'updated', updated_object)
           return HttpResponseRedirect(self.get_success_url())
           
