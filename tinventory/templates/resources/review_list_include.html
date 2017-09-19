@@ -33,14 +33,14 @@
                          <td>{{review.review|linebreaks}}</td>
                          <td>{{review.date_modified|naturalday|capfirst}} by <a href="{{ review.user.profile.get_absolute_url }}">{{review.user}}</a></td>
                          {% if user_review %}
-                         <td>
+                         <td>{% if review.user == request.user %}
                               <a class="btn btn-sm btn-default" href="{% url 'edit-review' object.slug %}">
                                    <span class="glyphicon glyphicon-pencil"></span> Edit
                               </a>
                               <a class="btn btn-sm btn-default" href="{% url 'delete-review' object.slug %}">
                                    <span class="glyphicon glyphicon-trash"></span> Delete
                               </a>
-                         </td>
+                         </td>{% endif %}
                          {% endif %}
                     {% empty %}
                     {% endfor %}
