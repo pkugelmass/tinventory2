@@ -14,6 +14,9 @@
                          <th class="col-md-2">Rating</th>
                          <th>Review</th>
                          <th>User/Date</th>
+                         {% if user_review %}
+                              <th class="col-md-2">Actions</th>
+                         {% endif %}
                     </tr>
                     {% endif %}
                     <tr {% if review.user == request.user %}class="active"{% endif %} >
@@ -29,6 +32,16 @@
                          </td>
                          <td>{{review.review|linebreaks}}</td>
                          <td>{{review.date_modified|naturalday|capfirst}} by <a href="{{ review.user.profile.get_absolute_url }}">{{review.user}}</a></td>
+                         {% if user_review %}
+                         <td>
+                              <a class="btn btn-sm btn-default" href="{% url 'edit-review' object.slug %}">
+                                   <span class="glyphicon glyphicon-pencil"></span> Edit
+                              </a>
+                              <a class="btn btn-sm btn-default" href="{% url 'edit-review' object.slug %}">
+                                   <span class="glyphicon glyphicon-trash"></span> Delete
+                              </a>
+                         </td>
+                         {% endif %}
                     {% empty %}
                     {% endfor %}
                     </tr>

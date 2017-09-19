@@ -14,10 +14,6 @@
                <a class="btn btn-default" href="{% url 'add-review' object.slug %}">
                     <span class="glyphicon glyphicon-star"></span> Review
                </a>
-          {% else %}
-               <a class="btn btn-default" href="{% url 'edit-review' object.slug %}">
-                    <span class="glyphicon glyphicon-star-empty"></span> Edit Review
-               </a>
           {% endif %}
           
           <a class="btn btn-default" href=
