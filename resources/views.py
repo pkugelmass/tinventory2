@@ -176,11 +176,12 @@ def AddReview(request, slug):
           
      return render(request, 'resources/review_form.html',{'form':review_form,'resource':base_resource})
           
-          
-
-     
 class EditReview(UpdatedActionMixin,generic.edit.UpdateView):
      model = Review
      form_class = MyReviewForm
      template_name='resources/review_form.html'
-     slug_field = 'slug'
+     
+     def get_object(self):
+          return Review.objects.filter(user=self.request.user).get(resource__slug=self.kwargs['slug'])
+
+
