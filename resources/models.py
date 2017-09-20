@@ -164,4 +164,7 @@ class Review(models.Model):
      def __str__(self):
           stars = '*' * self.rating
           return '%s Review of %s by %s' % (stars, self.resource, self.user)
+          
+     def get_absolute_url(self):
+          return self.resource.get_absolute_url()
      

@@ -1,8 +1,7 @@
 {% extends "core/base.html" %}
-{% block extrahead %}{{ form.media }} {% endblock %}
 
-{% block title %} {%if object%}Edit Review{%else%}Add Review{%endif%} of {{resource}} {% endblock %}
-{% block header %}{%if object%}Edit Review{%else%}Add Review{%endif%} <span class="small">({{resource}})</small> {% endblock %}
+{% block title %} {%if object%}Edit Review{%else%}Add Review{%endif%} of {{review.resource}} {% endblock %}
+{% block header %}{%if object%}Edit Review{%else%}Add Review{%endif%} <span class="small">({{review.resource}})</small> {% endblock %}
 
 {% block content %}
 {% include 'core/form_table_layout.html' %}
