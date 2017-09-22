@@ -1,34 +1,43 @@
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
-from tinventory.core.forms import SignUpForm
+from tinventory.core.forms import SignUpForm, ProfileSignupSubform
 from stronghold.decorators import public
-from django.core.mail import send_mail
 from people.helpers import create_action
-
-def notify_paul(user):
-    new_user_string = "%s (%s)" % (user.get_full_name(), user.username)
-    send_mail(
-        '[Tinventory] New Signup - %s.' % (new_user_string),
-        'A new user - %s has signed up.' % (new_user_string),
-        'tinventory900@gmail.com',
-        ['paul.kugelmass@ontario.ca'],
-        fail_silently=True,
-        )
+from people.models import Profile
+from datetime import datetime
+from django.db import Error
 
 @public
 def signup(request):
     if request.method == 'POST':
+        
         form = SignUpForm(request.POST)
-        if form.is_valid():
+        subform = ProfileSignupSubform(request.POST,request.FILES)
+        
+        if form.is_valid() and subform.is_valid():
+            
+            # Save the new user
             form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            notify_paul(user)
+            
+            # Create and populate the profile
+            new_profile = Profile.objects.create(user=user)
+            new_profile.ministry = subform.cleaned_data['ministry']
+            new_profile.role = subform.cleaned_data['role']
+            new_profile.profile_picture = subform.cleaned_data['profile_picture']
+            new_profile.save()
+                
+            # Note success and log the user in.
             create_action(user,'joined the site')
+            login(request, user)
             return redirect('index')
+            
     else:
+        
         form = SignUpForm()
-    return render(request, 'registration/signup.html', {'form': form})
+        subform = ProfileSignupSubform()
+        
+    return render(request, 'registration/signup.html', {'form': form, 'subform':subform,})
