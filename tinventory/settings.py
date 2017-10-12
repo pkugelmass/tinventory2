@@ -46,8 +46,7 @@ INSTALLED_APPS = [
     'mptt',
     'django_mptt_admin',
     'debug_toolbar',
-    'ckeditor', #required a collectstatic command.
-    'ckeditor_uploader',
+
 ]
 
 MIDDLEWARE = [

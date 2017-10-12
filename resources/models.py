@@ -10,7 +10,6 @@ import datetime
 import os
 from people.models import Action
 from django.contrib.contenttypes.models import ContentType
-from ckeditor_uploader.fields import RichTextUploadingField
 from django.conf import settings
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db.models import Sum
@@ -48,7 +47,7 @@ class Resource(models.Model):
      
      file = models.FileField("File",upload_to=get_upload_path, blank=True, null=True)
      link = models.URLField("Link", help_text="The URL (address), starting with \'http.\'", blank=True, null=True)
-     post = RichTextUploadingField("Post", help_text="Type your post here.",  blank=True, null=True)
+     post = models.TextField("Post", help_text="Type your post here.",  blank=True, null=True)
      
      category = models.CharField('Resource Category',max_length=10,choices=CATEGORIES)
      transformation = models.ForeignKey('transformations.Transformation', blank=True, null=True, related_name='resources')

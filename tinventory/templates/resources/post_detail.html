@@ -27,7 +27,7 @@
                         <span class="pull-right">Posted {{object.created.created}} by {{object.created.user}}</span>
                     </div>
                   <div class="panel-body">
-                      {% autoescape off %} {{object.post}} {% endautoescape %}
+                      {{object.post|linebreaks}}
                     </div>
               </div>
 
