@@ -13,23 +13,18 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '#^!2+ccl$a!oxs98gdp5%_2o97z&-*2@2mv+z7=5%24d&v+ev6'
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['pktcsb.pythonanywhere.com']
 
 # Application definition
 
 INSTALLED_APPS = [
+    
+    # Built-in / Default
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -37,16 +32,20 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    
+    # Repository Apps
     'transformations',
     'resources',
+    'topics',
+    'people',
+    
+    # 3rd Party Packages
     'widget_tweaks',
     'autoslug',
-    'debug_toolbar',
     'stronghold',
     'mptt',
     'django_mptt_admin',
-    'topics',
-    'people',
+    'debug_toolbar',
     'ckeditor', #required a collectstatic command.
     'ckeditor_uploader',
 ]
@@ -85,7 +84,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'tinventory.wsgi.application'
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
-
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
@@ -151,20 +149,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 LOGIN_REDIRECT_URL = 'index'
 LOGIN_URL = '/login/'
 
-# Import Local Settings, if they exist:
 
-try:
-    from .local_settings import * 
-except ImportError as e:
-    pass
 
-# For sending email
-
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_HOST_USER = "tinventory900@gmail.com"
-EMAIL_HOST_PASSWORD = 'what3v3r'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
 
 AUTH_USER_MODEL = 'auth.User'
 ABSOLUTE_URL_OVERRIDES = {
@@ -188,3 +174,10 @@ CKEDITOR_CONFIGS = {
     }
 }
 
+
+# Import Local Settings, if they exist:
+
+try:
+    from .local_settings import * 
+except ImportError as e:
+    pass
