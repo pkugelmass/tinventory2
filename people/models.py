@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from datetime import datetime
+from django.utils import timezone
 import os
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
@@ -19,7 +19,7 @@ class Profile(models.Model):
     role = models.CharField(max_length=200, blank=True, null=True)
     profile_picture = models.ImageField(upload_to=get_upload_path, blank=True, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
-    last_login = models.DateTimeField(null=True, blank=True, default=datetime.now)
+    last_login = models.DateTimeField(null=True, blank=True, default=timezone.now)
     
     def get_absolute_url(self):
         return "/users/%s" % (self.user.username)

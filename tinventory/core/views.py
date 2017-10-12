@@ -5,7 +5,7 @@ from tinventory.core.forms import SignUpForm, ProfileSignupSubform
 from stronghold.decorators import public
 from people.helpers import create_action
 from people.models import Profile
-from datetime import datetime
+from django.utils import timezone
 from django.db import Error
 
 @public
@@ -28,6 +28,7 @@ def signup(request):
             new_profile.ministry = subform.cleaned_data['ministry']
             new_profile.role = subform.cleaned_data['role']
             new_profile.profile_picture = subform.cleaned_data['profile_picture']
+            new_profile.last_login = timezone.now()
             new_profile.save()
                 
             # Note success and log the user in.
