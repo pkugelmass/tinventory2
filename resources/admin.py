@@ -3,7 +3,7 @@ from .models import Resource, Review
 
 class ResourceAdmin(admin.ModelAdmin):
     list_display=['title','type','category','created_by']
-    list_filter=['category', ('topics',admin.RelatedOnlyFieldListFilter),'type']
+    list_filter=['category','date_modified', ('topics',admin.RelatedOnlyFieldListFilter),]
     view_on_site=True
 admin.site.register(Resource, ResourceAdmin)
 
