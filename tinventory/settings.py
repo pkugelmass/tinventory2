@@ -148,31 +148,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 LOGIN_REDIRECT_URL = 'index'
 LOGIN_URL = '/login/'
 
-
-
-
 AUTH_USER_MODEL = 'auth.User'
 ABSOLUTE_URL_OVERRIDES = {
     'auth.user': lambda u: "/users/%s/" % u.username,
 }
-
-# ---------- CKEDITOR SETTINGS
-
-CKEDITOR_UPLOAD_PATH = "posts/"
-CKEDITOR_IMAGE_BACKEND = 'pillow'
-CKEDITOR_CONFIGS = {
-    'default': {
-        'toolbar': 'Custom',
-        'toolbar_Custom': [
-            ['Format'],
-            ['Bold', 'Italic', 'Underline', 'TextColor', 'CopyFormatting', 'RemoveFormat'],
-            ['Undo', 'Redo'],
-            ['NumberedList', 'BulletedList', 'Blockquote', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight'],
-            ['Link', 'Unlink', 'Image', 'Table', 'HorizontalRule', 'Smiley']
-        ]
-    }
-}
-
 
 # Import Local Settings, if they exist:
 
