@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth.models import User
-from .models import Transformation
+from .models import Transformation, Ministry
 
 class TestIndex(TestCase):
     
@@ -18,11 +18,51 @@ class TestIndex(TestCase):
         self.assertNotEqual(response.status_code, 200)
         
     def test_index_view_showing_transformation(self):
-        Transformation.objects.get_or_create(title='Test Transformation')
-        response = self.client.get(reverse('index'))
-        self.assertContains(response, 'Test Transformation')
-        
-    def test_index_view_links_to_transformation(self):
         obj = Transformation.objects.get_or_create(title='Test Transformation')[0]
         response = self.client.get(reverse('index'))
+        self.assertContains(response, 'Test Transformation')
         self.assertContains(response, obj.get_absolute_url())
+        
+    def test_index_view_ministry_filter(self):
+        
+        obj = Transformation.objects.get_or_create(title='Test Transformation')[0]
+        min = Ministry.objects.get_or_create(abbrev="MSW", name="Ministry of Silly Walks")[0]
+        obj.ministry=[1]
+        obj.save()
+            
+        response = self.client.get(
+            reverse('index'),
+            data={
+                'ministry':1,
+                'category':'',
+                'tags':'',
+                'status':'',
+            }
+        )
+            
+        self.assertContains(response, obj.title)
+        self.assertContains(response, obj.get_absolute_url())
+        self.assertContains(response, min.abbrev)
+        
+    def test_index_view_ministry_filter_exclude(self):
+        
+        obj = Transformation.objects.get_or_create(title='Test Transformation')[0]
+        min = Ministry.objects.create(abbrev="MSW", name="Ministry of Silly Walks")
+        min2 = Ministry.objects.create(abbrev="MFG", name="Ministry of Funny Gaits")
+        obj.ministry=[2]
+        obj.save()
+        this_min = Ministry.objects.get(transformations=obj)
+            
+        response = self.client.get(
+            reverse('index'),
+            data={
+                'ministry':1,
+                'category':'',
+                'tags':'',
+                'status':'',
+            }
+        )
+            
+        self.assertNotContains(response, obj.title), 'Object\'s title should not appear.'
+        self.assertNotContains(response, obj.get_absolute_url()), 'Object\'s link should not appear.'
+        #self.assertNotContains(response, this_min.abbrev), 'Ministry abbreviation should not appear.'
