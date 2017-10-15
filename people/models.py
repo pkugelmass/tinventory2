@@ -19,7 +19,7 @@ class Profile(models.Model):
     role = models.CharField(max_length=200, blank=True, null=True)
     profile_picture = models.ImageField(upload_to=get_upload_path, blank=True, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
-    last_login = models.DateTimeField(null=True, blank=True, default=timezone.now)
+    last_login = models.DateTimeField(null=True, blank=True)
     
     def get_absolute_url(self):
         return "/users/%s" % (self.user.username)

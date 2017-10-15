@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Profile, Action
 from django.contrib.auth.models import User
-from datetime import datetime
+from django.utils import timezone
 from .forms import UserForm, ProfileForm
 from django.urls import reverse
 from django.contrib import messages
@@ -22,8 +22,8 @@ def UserProfile(request, username):
         
     except:
         new_profile = Profile.objects.create(user=this_user)
-        new_profile.last_login = datetime.now()
-        new_profile.date_joined = datetime.now()
+        new_profile.last_login = timezone.now()
+        new_profile.date_joined = timezone.now()
         new_profile.save()
     
     return render(request, 'people/profile.html', {'user':this_user})
