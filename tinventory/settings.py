@@ -46,6 +46,21 @@ INSTALLED_APPS = [
     'mptt',
     'django_mptt_admin',
     'debug_toolbar',
+    
+    # Wagtail Packages
+    'wagtail.wagtailforms',
+    'wagtail.wagtailredirects',
+    'wagtail.wagtailembeds',
+    'wagtail.wagtailsites',
+    'wagtail.wagtailusers',
+    'wagtail.wagtailsnippets',
+    'wagtail.wagtaildocs',
+    'wagtail.wagtailimages',
+    'wagtail.wagtailsearch',
+    'wagtail.wagtailadmin',
+    'wagtail.wagtailcore',
+    'modelcluster',
+    'taggit',
 
 ]
 
@@ -60,6 +75,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'stronghold.middleware.LoginRequiredMiddleware',
     'people.middleware.SetLastVisitMiddleware',
+    'wagtail.wagtailcore.middleware.SiteMiddleware',
+    'wagtail.wagtailredirects.middleware.RedirectMiddleware',
 ]
 
 ROOT_URLCONF = 'tinventory.urls'
@@ -152,6 +169,8 @@ AUTH_USER_MODEL = 'auth.User'
 ABSOLUTE_URL_OVERRIDES = {
     'auth.user': lambda u: "/users/%s/" % u.username,
 }
+
+WAGTAIL_SITE_NAME = 'Transformation Repository'
 
 # Import Local Settings, if they exist:
 
