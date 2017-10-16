@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'resources',
     'topics',
     'people',
+    'sitepages',
     
     # 3rd Party Packages
     'widget_tweaks',
