@@ -33,7 +33,7 @@ class TestIndex(TestCase):
         response = self.client.get(
             reverse('index'),
             data={
-                'ministry':1,
+                'ministry':'MSW',
                 'category':'',
                 'tags':'',
                 'status':'',
@@ -49,14 +49,13 @@ class TestIndex(TestCase):
         obj = Transformation.objects.get_or_create(title='Test Transformation')[0]
         min = Ministry.objects.create(abbrev="MSW", name="Ministry of Silly Walks")
         min2 = Ministry.objects.create(abbrev="MFG", name="Ministry of Funny Gaits")
-        obj.ministry=[2]
+        obj.ministry=[min2]
         obj.save()
-        this_min = Ministry.objects.get(transformations=obj)
             
         response = self.client.get(
             reverse('index'),
             data={
-                'ministry':1,
+                'ministry':'MSW',
                 'category':'',
                 'tags':'',
                 'status':'',
@@ -65,4 +64,3 @@ class TestIndex(TestCase):
             
         self.assertNotContains(response, obj.title), 'Object\'s title should not appear.'
         self.assertNotContains(response, obj.get_absolute_url()), 'Object\'s link should not appear.'
-        #self.assertNotContains(response, this_min.abbrev), 'Ministry abbreviation should not appear.'

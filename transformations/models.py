@@ -75,7 +75,7 @@ class Transformation(models.Model):
           return Action.objects.filter(target_id=self.pk, target_type=ContentType.objects.get_for_model(Transformation), verb="updated").first()
 
 class Ministry(models.Model):
-     abbrev = models.CharField(max_length=6)
+     abbrev = models.CharField(max_length=6, unique=True)
      name = models.CharField(max_length=100)
      
      class Meta:

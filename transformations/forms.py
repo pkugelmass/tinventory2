@@ -18,7 +18,8 @@ class TransformationFilterForm(forms.Form):
           Ministry.objects.all().order_by('abbrev'),
           label="Ministry",
           empty_label='', 
-          required=False
+          required=False,
+          to_field_name='abbrev',
           )
           
      category = ChoiceFieldEmpty(
@@ -32,6 +33,7 @@ class TransformationFilterForm(forms.Form):
           label="Area of Focus",
           empty_label='',
           required=False,
+          to_field_name='name'
           )
           
      status = ChoiceFieldEmpty(
