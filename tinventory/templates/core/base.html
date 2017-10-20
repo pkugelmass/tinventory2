@@ -67,7 +67,7 @@
             <li {% if "resources" in request.path %}class="active"{% endif %}><a href="{% url 'resources' %}">Resources</a></li>
             
             <!-- Site dropdown menu -->
-            <li class="dropdown">
+            <li class="dropdown {% if "site" in request.path %}active{% endif %}">
               
               <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 Site<span class="caret"></span>
