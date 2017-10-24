@@ -1,6 +1,7 @@
 body {
   padding-top: 70px;
   font-family: 'Libre Franklin', sans-serif;
+  margin-bottom: 60px;
 }
 
 .navbar-inverse {
@@ -8,17 +9,14 @@ body {
 }
 
 .navbar-inverse .navbar-brand {
-    color: lightgray;
+    color: white;
     font-size: 18pt;
     font-weight:800;
 }
 
-.navbar-inverse .container {
-  
-}
 
 .navbar-inverse .navbar-brand a:hover {
-    color: white;
+    color: lightgray;
     font-size: 18pt;
 }
 
@@ -69,10 +67,7 @@ text-shadow:    none;
   margin-right: 5px;
 }
 
-
-
 .panel-primary > .panel-heading-custom {
   backgorund-image:None;
   background:#006E81;
 }
-
