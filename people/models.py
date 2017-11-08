@@ -12,7 +12,7 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 class Profile(models.Model):
 
     def get_upload_path(instance, filename):
-        return os.path.join('users', datetime.now().strftime("%y-%m-%d"), filename)
+        return os.path.join('users', timezone.now().strftime("%y-%m-%d"), filename)
     
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     ministry = models.ForeignKey('transformations.Ministry', blank=True, null=True, related_name='profiles')

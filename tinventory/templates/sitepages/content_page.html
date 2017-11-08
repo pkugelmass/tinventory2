@@ -1,0 +1,53 @@
+{% extends 'core/base.html' %}
+{% load wagtailcore_tags %}
+
+{% block title %}{{page.title}}{% endblock %}
+
+{% block header %}{{page.title}}{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        
+        <div class="col-md-12">
+            
+            {% for block in page.body %}
+            
+                {% if block.block_type == 'heading' %}
+                
+                    <h3>{{block.value}}</h3>
+                    
+                {% else %}
+                
+                    {{block.value|richtext}}
+                    
+                {% endif %}
+                    
+            {% empty %}
+            
+                {% if page.body %}
+                
+                    {{ page.body|richtext }}
+                
+                {% else %}
+                
+                No content to show.
+                
+                {% endif %}
+                
+            {% endfor %}
+            
+            <hr>
+            
+            <small></small>Published by {{page.owner.get_full_name}} on {{page.last_published_at|date}}.</small>
+                
+                
+            
+        </div>    
+        
+    </div>
+
+    
+
+{% endblock %}
+
