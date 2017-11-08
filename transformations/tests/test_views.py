@@ -128,4 +128,23 @@ class TestIndex(TestCase):
             self.assertContains(response, obj.get_absolute_url()), 'Should include a link to each item.'
         
     # I haven't written tests for TAG or STATUS because I think those things may still change.
-    # Could also write tests that test multiple filters at once but I assume 
+    # Could also write tests that test multiple filters at once but that seems too complex for now.
+    
+class Test_Transformation_Detail_View(TestCase):
+    
+    def setUp(self):
+        self.client.force_login(User.objects.get_or_create(username='testuser')[0])
+    
+    def test_transformation_detail_view(self):
+        
+        obj = Transformation.objects.get_or_create(title='Test Transformation')[0]
+        response = self.client.get(reverse('transformation-detail', kwargs={'slug':obj.slug}))
+        self.assertEqual(response.status_code, 200), 'Page should display when logged in.'
+        self.assertContains(response, +obj.title[:10]), 'Page should show the object\'s title.'
+        
+    def test_transformation_detail_view_not_logged_in_bounces(self):
+        
+        obj = Transformation.objects.get_or_create(title='Test Transformation')[0]
+        self.client.logout()
+        response = self.client.get(reverse('transformation-detail', kwargs={'slug':obj.slug}))
+        self.assertNotEqual(response.status_code, 200), 'Should bounce away from page if not logged in.'
