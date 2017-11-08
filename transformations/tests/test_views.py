@@ -140,7 +140,7 @@ class Test_Transformation_Detail_View(TestCase):
         obj = Transformation.objects.get_or_create(title='Test Transformation')[0]
         response = self.client.get(reverse('transformation-detail', kwargs={'slug':obj.slug}))
         self.assertEqual(response.status_code, 200), 'Page should display when logged in.'
-        self.assertContains(response, +obj.title[:10]), 'Page should show the object\'s title.'
+        self.assertContains(response, obj.title[:10]), 'Page should show the object\'s title.'
         
     def test_transformation_detail_view_not_logged_in_bounces(self):
         
@@ -148,3 +148,27 @@ class Test_Transformation_Detail_View(TestCase):
         self.client.logout()
         response = self.client.get(reverse('transformation-detail', kwargs={'slug':obj.slug}))
         self.assertNotEqual(response.status_code, 200), 'Should bounce away from page if not logged in.'
+        
+class Test_Transformation_Add_View(TestCase):
+    
+    def setUp(self):
+        self.client.force_login(User.objects.get_or_create(username='testuser')[0])
+        
+    def test_transformation_add_view(self):
+        
+        response = self.client.get(reverse('transformation-add'))
+        self.assertEqual(response.status_code, 200), 'Page should display when logged in.'
+        self.assertContains(response, '<h2>Add Transformation'), 'Page should show the title.'
+        
+    def test_transformation_add_view_not_logged_in_bounces(self):
+        
+        self.client.logout()
+        response = self.client.get(reverse('transformation-add'))
+        self.assertNotEqual(response.status_code, 200), 'Should bounce away from page if not logged in.'
+        
+    def test_transformation_add_view_accepts_valid_post_data(self):
+        pass
+    
+    def test_transformation_add_view_rejects_invalid_post_data(self):
+        pass
+        # WHAT IS INVALID DATA?
