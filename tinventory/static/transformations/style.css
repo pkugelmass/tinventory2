@@ -9,31 +9,20 @@ body {
 }
 
 .navbar-inverse .navbar-brand {
-    color: white;
+    color: lightgray;
     font-size: 18pt;
     font-weight:800;
 }
 
 
 .navbar-inverse .navbar-brand a:hover {
-    color: lightgray;
+    color: white;
     font-size: 18pt;
 }
 
 .fit-please {
   padding: 0 15px 0 0;
   display:inline-block;
-}
-
-/* Adjust Menu colors - Normal */
-.navbar .nav > li > a, .navbar .nav > li > a:first-letter {
-color:          lightgray;
-text-shadow:    none;
-}
-/* Adjust Menu colors - Hover */
-.navbar .nav > li > a:hover, .navbar .nav > li > a:hover:first-letter { 
-color:          white;                      
-text-shadow:    none;
 }
 
 #page-title {

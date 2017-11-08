@@ -13,9 +13,11 @@
             
             {% for update in page.updates %}
             
-                <span class="label label-primary">{{update.specific.up_date|date}}</span>
-                <span class="label label-success">v{{update.specific.version}}</span>
-                <h3>{{ update.title }}</h3>
+                <h3>
+                    {{ update.title }}
+                    <span class="label label-primary">{{update.specific.up_date|date}}</span>
+                    <span class="label label-success">v{{update.specific.version}}</span>
+                </h3>
                 {{ update.specific.body|richtext }}
 
             {% empty %}
