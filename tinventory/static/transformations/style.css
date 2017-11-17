@@ -25,6 +25,17 @@ body {
   display:inline-block;
 }
 
+/* Adjust Menu colors - Normal */
+.navbar .nav > li > a, .navbar .nav > li > a:first-letter {
+color:          lightgray;
+text-shadow:    none;
+}
+/* Adjust Menu colors - Hover */
+.navbar .nav > li > a:hover, .navbar .nav > li > a:hover:first-letter { 
+color:          white;                      
+text-shadow:    none;
+}
+
 #page-title {
   margin:0px 0px 20px 0px; 
   padding-bottom:5px;
