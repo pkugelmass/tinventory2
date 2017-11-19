@@ -38,13 +38,18 @@
   
   </head>
 
+
+
   <body>
+    
+  
 
   <!-- Nav bar -->
-  {% include 'core/top_nav.html' %}
+  <div class="overall-container">
+  {% include 'core/side_nav.html' %}
 
     <!-- Main content -->
-    <div class="container">
+    <div class="main-panel">
       <div class="page-header" id="page-title">
           <h2>{% block header %}Transformation Inventory{% endblock %}</small></h2>
      </div>
@@ -54,8 +59,9 @@
         {% block content %}
         {% endblock %}
 
+
     </div>
-    
+    </div>  
 
 
     <!-- Bootstrap core JavaScript
