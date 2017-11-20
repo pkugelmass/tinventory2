@@ -41,30 +41,38 @@
 
 
   <body>
-    
-  
-
-  <!-- Nav bar -->
-  <div class="left">
-  {% include 'core/side_nav.html' %}
-  </div>
-  
-  
-
-    <!-- Main content -->
-    <div class="right">
-      <div class="page-header" id="page-title">
-          <h2>{% block header %}Transformation Inventory{% endblock %}</small></h2>
-     </div>
+    <div class="wrapper">
+      
+      <div class="header">
+        {{site_title}}
+      </div>
+      
+      <div class="sidebar">
+        {% include 'core/side_nav.html' %}
+      </div>
+      
+      <div class="main-content">
+            <!-- Main content -->
+          <div class="page-header" id="page-title">
+              <h2>{% block header %}Transformation Inventory{% endblock %}</small></h2>
+         </div>
      
-     {% include 'core/messages.html' %}
+         {% include 'core/messages.html' %}
 
         {% block content %}
         {% endblock %}
+      
+      </div>
+      
+      <div class="footer">
+        This is a footer, yo.
+      </div>
 
-
-    </div>
-
+  
+  </div>
+  
+  
+</body>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -74,7 +82,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!--<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>-->
-  </body>
+  
 </html>
 
 {% endwith %}
