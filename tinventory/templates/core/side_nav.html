@@ -13,8 +13,8 @@
                   </a>
                 </li>
 
-                <li>
-                  <a href="#"><i class="fa fa-gift fa-lg"></i> Transformations </a>
+                <li {% if "transformations" in request.path %}class="active"{% endif %}>
+                  <a href="{% url 'index' %}"><i class="fa fa-gift fa-lg"></i> Transformations </a>
                 </li>
                 
 
