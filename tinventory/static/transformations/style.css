@@ -25,7 +25,6 @@ html,body {
   align-items:center;
   justify-content: flex-start;
   font-size:16pt;
-  margin-bottom:20px;
   font-weight:900;
   background-color:#444444;
 }
@@ -33,6 +32,42 @@ html,body {
 .title-flex img {
   padding: 0px 12px;
   height:45px;
+}
+
+.side-menu-flex {
+  display:flex;
+  flex-direction:column;
+  flex: 1 0 auto;
+  padding:0px
+  margin:0px;
+}
+.side-menu-flex ul,
+.side-menu-flex li {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+  line-height: 65px;
+  font-size:16pt;
+}
+  
+.side-menu-flex li a {
+  text-decoration:None;
+  color:white;
+}
+
+.side-menu-flex li a:hover {
+  background-color:#94e4cc;
+}
+
+.side-menu-flex p {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:lightgray;
+  font-weight:900;
+  min-height:65px;
+  padding: 0px 10px;
+  margin: 0px;
 }
 
 .main-flex {
@@ -86,6 +121,10 @@ html,body {
     background: -o-linear-gradient(#006e81 70%, #002b22); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#006e81 70%, #002b22); /* For Firefox 3.6 to 15 */
     background: linear-gradient(#006e81 70%, #002b22); /* Standard syntax */
+}
+
+.or-white {
+  background: white;
 }
 
 .buttonset-flex {
