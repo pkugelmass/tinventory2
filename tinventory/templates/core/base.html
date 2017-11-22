@@ -46,12 +46,10 @@
       </div>-->
       
 
-      
-      <div class="container-flex">
         
         <div class="side-flex gray-gradient">
           <div class="title-flex">
-            T-Repo
+            <img src="{% static 'transformations/images/elephant_circle.png' %}"> T-Repository
           </div>
           {% include 'core/side_nav.html' %}
         </div>
@@ -59,16 +57,23 @@
         <div class="main-flex">
           
           <div class="header-flex">
-            Transformations > Old > 
+            Something
           </div>
           
-
+          
+          <div class="pagetitle-flex">
+            
+            <p>{% block header %} {% endblock %}</p>
+            
+            <div class="buttonset-flex">
+              
+              {% block item-buttons %} {% endblock %}
+              
+            </div>
+            
+          </div>
          
          <div class="page-flex">
-               
-            <div class="page-header" id="page-title">
-                  <h2>{% block header %}Transformation Inventory{% endblock %}</small></h2>
-             </div>
      
            {% include 'core/messages.html' %}
            
@@ -78,16 +83,8 @@
           
           
         </div>
-        
-
-
-
       
       </div>
-      
-      
-
-  </div>
   
   
 </body>

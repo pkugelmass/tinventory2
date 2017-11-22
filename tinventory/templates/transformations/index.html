@@ -1,14 +1,10 @@
 {% extends "core/base.html" %}
 {% load widget_tweaks %}
 
-{% block header %}Transformations
+{% block header %}Transformations{% endblock %}
 
-     <div class="pull-right">
-          <a class="btn btn-success" href="{% url 'transformation-add' %}" data-toggle="tooltip" title="New Transformation">
-               <span class="glyphicon glyphicon-plus-sign"></span>  Add New Transformation
-          </a>
-     </div>
-
+{% block item-buttons %}
+    <a href="{% url 'transformation-add' %}" class="button-flex">Add Transformation</a>
 {% endblock %}
 
 {% block content %}
