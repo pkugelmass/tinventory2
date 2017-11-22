@@ -6,6 +6,7 @@
   grid-template-columns: minmax(200px,225px) 1fr minmax(200px,225px);
   grid-template-rows: auto 1fr auto;
   height:100vh;
+  width:100vh;
   grid-template-areas: 
     "title head search"
     "side main main"
@@ -15,7 +16,7 @@
 .sidebar {
   grid-area: side;
   background-color: lightgray;
-  align-self:stretch;
+  /*align-self:stretch;*/
   border-right:1px gray solid;
   vertical-align:center;
   
@@ -23,8 +24,6 @@
 
 .header {
   grid-area: head;
-  display: table-cell;
-  vertical-align: middle;
   background-color: #006E81;
   padding: 10px;
   /*display: block;*/
@@ -43,7 +42,6 @@
 .footer {
   grid-area: foot;
   background:#006E81;
-  align-self:stretch;
   border-top: 1px solid grey;
 }
 
@@ -61,7 +59,6 @@
   font-size: 18px;
   color:white;
   text-align:center;
-  border-bottom: 1px solid grey;
   padding: 3px;
 }
 
@@ -147,7 +144,7 @@ text-shadow:    none;
 }
 
 .panel-primary > .panel-heading-custom {
-  backgorund-image:None;
+  background-image:None;
   background:#006E81;
 }
 
@@ -155,7 +152,7 @@ text-shadow:    none;
 
 .nav-side-menu {
   /* overflow: auto; */
-  font-size: 12px;
+  /*font-size: 12px;*/
   font-family: 'Libre Franklin', sans-serif;
   font-weight: 200;
   background-color: lightgray;
@@ -173,7 +170,7 @@ text-shadow:    none;
   line-height: 50px;
   display: block;
   text-align: center;
-  font-size: 14px;
+  /*font-size: 14px;*/
 }
 .nav-side-menu .toggle-btn {
   display: none;
@@ -266,6 +263,8 @@ text-shadow:    none;
   /*-o-transition: all .5s ease;
   -ms-transition: all .5s ease;
   transition: all .5s ease;*/
+  
+/*
 }
 @media (max-width: 767px) {
   .nav-side-menu {
@@ -293,9 +292,11 @@ text-shadow:    none;
     line-height: 50px !important;
   }
 }
+
 @media (min-width: 767px) {
   .nav-side-menu .menu-list .menu-content {
     display: block;
   }
 }
+*/
 

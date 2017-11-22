@@ -9,42 +9,42 @@
             <ul id="menu-content" class="menu-content"> <!--removed collapse out-->
                 <li>
                   <a href="#">
-                  <i class="fa fa-dashboard fa-lg"></i> Home
+                  <i class="fa fa-home"></i> Home
                   </a>
+                </li>
+                
+                <li>
+                  <a href="#"><i class="fa fa-share-alt"></i> All Resources</a>
                 </li>
 
                 <li {% if "transformations" in request.path %}class="active"{% endif %}>
-                  <a href="{% url 'index' %}"><i class="fa fa-gift fa-lg"></i> Transformations </a>
+                  <a href="{% url 'index' %}"><i class="fa fa-spinner"></i> OPS Transformations </a>
                 </li>
-                
-
 
                 <li>
-                  <a href="#"><i class="fa fa-globe fa-lg"></i> Topics</a>
+                  <a href="#"><i class="fa fa-lightbulb-o"></i> Transformation Topics</a>
                 </li>  
 
 
+
+                
                 <li>
-                  <a href="#"><i class="fa fa-car fa-lg"></i> Resources</a>
+                  <a href="#"><i class="fa fa-user "></i> Me (username)</a>
                 </li>
-                <!--<ul class="sub-menu collapse" id="new">
-                  <li>New New 1</li>
-                  <li>New New 2</li>
-                  <li>New New 3</li>
-                </ul>-->
+
 
 
                  <li data-toggle="collapse" data-target="#site" class="collapsed in">
-                      <a href="#"><i class="fa fa-user fa-lg"></i> Site<span class="arrow"></span></a>
+                      <a href="#"><i class="fa fa-info-circle"></i> About the Repo<span class="arrow"></span></a>
                   </li>
                   <ul class="sub-menu collapse" id="site">
-                      <li>About the Repo</li>
+                      <li>FAQ - Start Here</li>
                       <li>Site Updates</li>
                       <li>Contact Us</li>
                   </ul>
                   
                     <li data-toggle="collapse" data-target="#experiments" class="collapsed">
-                      <a href="#"><i class="fa fa-user fa-lg"></i> Experiments<span class="arrow"></span></a>
+                      <a href="#"><i class="fa fa-flask"></i> Experiments<span class="arrow"></span></a>
                   </li>
                   <ul class="sub-menu collapse" id="experiments">
                       <li>Leaderboard</li>
