@@ -1,4 +1,87 @@
+/* This is the crazy flex idea. */
+
+html,body {
+  margin: 0px;
+  padding: 0px;
+  font-family: 'Libre Franklin', sans-serif;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+}
+
+.header-flex {
+  flex: 0 0 65px;
+  display:flex;
+  border-bottom:1px dashed gray;
+  padding:0px 30px;
+  font-weight:900;
+  align-items:center;
+}
+
+.header-flex a {
+  text-decoration:None;
+}
+
+.container-flex {
+  flex: 1 1 auto;
+  display:flex;
+}
+
+.side-flex {
+  flex: 0 0 250px;
+  display:flex;
+  flex-direction:column;
+  justify-content:stretch;
+}
+
+
+
+.title-flex {
+  flex: 0 1 65px;
+  color: white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:16pt;
+  margin-bottom:20px;
+  font-weight:900;
+  background-color:#444444;
+}
+
+.title-flex img {
+  padding: 0px 12px;
+  height:45px;
+}
+
+.main-flex {
+  flex: 1 1 auto;
+  display:flex;
+  flex-direction: column;
+}
+
+.page-flex {
+  flex: 1 1 auto;
+  display:flex;
+  flex-direction:column;
+  padding:10px 30px;
+}
+
+.footer-flex {
+  background:#004b54;
+  flex: 0 0 30px;
+}
+
+.gray-gradient {
+    background: lightgray; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#006e81, #002b22); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#006e81, #002b22); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#006e81, #002b22); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#006e81, #002b22); /* Standard syntax */
+}
+
+
 /* This is the crazy grid idea. */
+
 
 .wrapper {
   background: white;
@@ -73,12 +156,8 @@
 }
 
 
+END GRID EXPERIMENT */
 
-body {
-  margin: 0px;
-  padding: 0px;
-  font-family: 'Libre Franklin', sans-serif;
-}
 
 .navbar-inverse {
   background-color: #006E81;
@@ -155,7 +234,6 @@ text-shadow:    none;
   /*font-size: 12px;*/
   font-family: 'Libre Franklin', sans-serif;
   font-weight: 200;
-  background-color: lightgray;
   /* background-color: #2e353d; 
   top: 0px;
   max-width: 300px;
@@ -248,7 +326,7 @@ text-shadow:    none;
 }
 .nav-side-menu li a {
   text-decoration: none;
-  color: black
+  color: white;
 }
 .nav-side-menu li a i {
   padding-left: 10px;
