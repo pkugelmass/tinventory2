@@ -13,6 +13,7 @@
     <i class="fa fa-spinner"></i>OPS Transformations
     
     <ul class="side-sub-menu">
+      
       <li><a href="#">Current Transformations</a></li>
       <li><a href="#">Past Transformations</a></li>
     </ul>
@@ -21,6 +22,14 @@
   
   <li>
     <a href="#"><i class="fa fa-lightbulb-o"></i>Transformation Topics</a>
+    
+    <ul class="side-sub-menu">
+      
+      {% for topic in topics %}
+        <li><a href="{{topic.get_absolute_url}}">{{topic.title}}</a></li>
+      {% endfor %}
+      
+    </ul>
   </li>
   
   <li>
@@ -38,3 +47,4 @@
 </ul>
 
 </div>
+

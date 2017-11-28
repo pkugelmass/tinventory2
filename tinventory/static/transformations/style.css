@@ -18,6 +18,7 @@ html,body {
   flex-direction:column;
   justify-content:center;
   min-height:100%;
+  background:#f5f5f5;
 }
 
 /* SITE TITLE */
@@ -46,7 +47,6 @@ html,body {
   padding:0px;
   margin:0px;
   background:#f5f5f5;
-  border-right: 1px solid #006E81;
   align-content:center;
 }
 
@@ -60,7 +60,7 @@ html,body {
 .side-menu-flex li,
 .side-menu-flex li a {
   margin: 0px;
-  font-size:13pt;
+  font-size:11pt;
   text-decoration:None;
   color:#444444;
   padding-top:15px;
@@ -75,7 +75,7 @@ html,body {
 
 .side-menu-flex .side-sub-menu {
   padding-top: 5px;
-  padding-bottom: 5px;
+  padding-bottom: 0px;
 }
 
 .side-menu-flex .side-sub-menu li,
@@ -95,6 +95,11 @@ html,body {
   font-weight:700;
 }
 
+.footer-info-flex {
+  flex-basis:auto;
+  margin:auto;
+  padding-bottom:10px;
+}
 
 /* MAIN STUFF */
 
@@ -102,17 +107,15 @@ html,body {
   flex: 1 1 100%;
   display:flex;
   flex-direction: column;
-  background-color:#f5f5f5;
+  background-color:white;
 }
 
 .header-flex {
   flex: 0 0 65px;
   display:flex;
-  border-bottom:1px solid #006E81;
   padding:0px 30px;
   font-weight:900;
   align-items:center;
-  background-color:white;
   justify-content: space-between;
 }
 
@@ -126,6 +129,7 @@ html,body {
   flex: 0 1 65px;
   justify-content:space-between;
   align-items:center;
+  margin-top:10px;
 }
 
 .pagetitle-flex p {
@@ -151,9 +155,6 @@ html,body {
     background: linear-gradient(#006e81, #002b22); /* Standard syntax */
 }
 
-.or-white {
-  background: white;
-}
 
 .or-lightgray {
   background: ilghtgray;
@@ -194,85 +195,6 @@ html,body {
 
         
 }
-
-
-/* This is the crazy grid idea. */
-
-
-.wrapper {
-  background: white;
-  display: grid;
-  grid-template-columns: minmax(200px,225px) 1fr minmax(200px,225px);
-  grid-template-rows: auto 1fr auto;
-  height:100vh;
-  width:100vh;
-  grid-template-areas: 
-    "title head search"
-    "side main main"
-    "foot foot tag"
-}
-
-.sidebar {
-  grid-area: side;
-  background-color: lightgray;
-  /*align-self:stretch;*/
-  border-right:1px gray solid;
-  vertical-align:center;
-  
-}
-
-.header {
-  grid-area: head;
-  background-color: #006E81;
-  padding: 10px;
-  /*display: block;*/
-  font-size: 14px;
-  color:white;
-  text-align:center;
-  border-bottom: 1px solid grey;
-
-}
-
-.main-content {
-  grid-area: main;
-  padding: 0px 30px;
-}
-
-.footer {
-  grid-area: foot;
-  background:#006E81;
-  border-top: 1px solid grey;
-}
-
-.search-corner {
-  grid-area: search;
-  background:#006E81;
-  text-align: center;
-  padding: 10px;
-  border-bottom: 1px solid grey;
-}
-
-.title-corner {
-  grid-area: title;
-  background:#004b54;
-  font-size: 18px;
-  color:white;
-  text-align:center;
-  padding: 3px;
-}
-
-.tag-corner {
-  grid-area: tag;
-  background:#004b54;
-  font-size: 12px;
-  color:white;
-  text-align:center;
-  border-top: 1px solid grey;
-  padding: 3px;
-}
-
-
-END GRID EXPERIMENT */
 
 
 .navbar-inverse {
