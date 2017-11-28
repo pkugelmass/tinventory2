@@ -4,10 +4,52 @@ html,body {
   margin: 0px;
   padding: 0px;
   font-family: 'Libre Franklin', sans-serif;
-  min-height:100%;
-  min-width:100%;;
+  min-height:100vh;
+  min-width:100%;
   display:flex;
+  flex-direction:column;
 }
+
+
+/* HEADER */
+
+.header-flex {
+  flex: 0 0 65px;
+  display:flex;
+  padding:0px 30px 0px 20px;
+  font-weight:700;
+  align-items:center;
+  justify-content: space-between;
+  color:white;
+}
+
+.header-flex a {
+  text-decoration:None;
+}
+
+.title-flex {
+  flex: 1 1 65px;
+  color: white;
+  font-size:16pt;
+  font-weight:700;
+  display:flex;
+  align-items:center;
+}
+
+.title-flex img {
+  padding: 0px 12px;
+  height:45px;
+}
+
+/* MAIN STUFF */
+
+.main-flex {
+  display:flex;
+  flex: 1 0 100%;
+  background-color:white;
+}
+
+
 
 
 /* SIDEBAR */
@@ -17,25 +59,8 @@ html,body {
   display:flex;
   flex-direction:column;
   justify-content:center;
-  min-height:100%;
   background:#f5f5f5;
-}
-
-/* SITE TITLE */
-
-.title-flex {
-  flex: 0 1 65px;
-  color: white;
-  font-size:16pt;
-  font-weight:700;
-  display:flex;
-  align-items:center;
-  width:100%;
-}
-
-.title-flex img {
-  padding: 0px 12px;
-  height:45px;
+  align-self:stretch;
 }
 
 /* SIDE NAV */
@@ -101,26 +126,9 @@ html,body {
   padding-bottom:10px;
 }
 
-/* MAIN STUFF */
-
-.main-flex {
-  flex: 1 1 100%;
-  display:flex;
+.pageholder-flex {
+  flex:1;
   flex-direction: column;
-  background-color:white;
-}
-
-.header-flex {
-  flex: 0 0 65px;
-  display:flex;
-  padding:0px 30px;
-  font-weight:700;
-  align-items:center;
-  justify-content: space-between;
-}
-
-.header-flex a {
-  text-decoration:None;
 }
 
 .pagetitle-flex {
@@ -187,13 +195,6 @@ html,body {
 	background-color:#006E81;
 	color: white;
 	text-decoration:None;
-}
-
-.myButton:active {
-
-}
-
-        
 }
 
 
