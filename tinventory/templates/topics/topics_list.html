@@ -17,10 +17,6 @@
             <li>
                 
                 <a href="{% url 'topic-detail' node.slug %}">{{node.title}}</a>
-                
-                {% if node.description %}
-                    : {{node.description}}
-                {% endif %}
             
                 {% if not node.is_leaf_node %}
                 
