@@ -1,27 +1,32 @@
+{% load wagtailcore_tags %}
+
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
 <div class="side-menu-flex">
-
+  
+  <form>
+    <input type="text" class="searchbar" placeholder="Search...">
+  </form>
 <ul>
 
   <li>
-    <a href="#"><i class="fa fa-share-alt"></i>All Resources</a>
+    <a href="{% url 'resources'%}"><i class="fa fa-share-alt"></i>All Resources</a>
   </li>
   
   <li>
     
-    <i class="fa fa-spinner"></i>OPS Transformations
+    <a href="{%url 'index' %}"><i class="fa fa-spinner"></i>OPS Transformations</a>
     
     <ul class="side-sub-menu">
       
-      <li><a href="#">Current Transformations</a></li>
-      <li><a href="#">Past Transformations</a></li>
+      <li><a href="{% url 'index' %}#">Current Transformations</a></li>
+      <li><a href="{% url 'index' %}">Past Transformations</a></li>
     </ul>
   
   </li>
   
   <li>
-    <a href="#"><i class="fa fa-lightbulb-o"></i>Transformation Topics</a>
+    <a href="{% url 'topics'%}"><i class="fa fa-lightbulb-o"></i>Transformation Topics</a>
     
     <ul class="side-sub-menu">
       
@@ -37,12 +42,25 @@
     <i class="fa fa-info-circle"></i>About the Site
     
     <ul class="side-sub-menu">
-      <li><a href="#">FAQ - Start Here</a></li>
+      <li><a href="{% slugurl 'about' %}">FAQ - Start Here</a></li>
       <li><a href="#">Change Log</a></li>
       <li><a href="#">Provide Feedback</a></li>
     </ul>
   
   </li>
+  
+  {% if request.user.is_staff %}
+  <li>
+    
+    <i class="fa fa-flask"></i>Experiments
+    
+    <ul class="side-sub-menu">
+      <li><a href="{% url 'activity-feed' %}">Activity Feed</a></li>
+      <li><a href="{% url 'leaderboard' %}">Leaderboard</a></li>
+    </ul>
+  
+  </li>
+  {% endif %}
 
 </ul>
 
