@@ -1,13 +1,12 @@
 {% extends 'core/base.html' %}
 
 {% block title %}Login{% endblock %}
-{% block header %}Login
+{% block header %}Login{% endblock %}
 
-     <div class="pull-right">
-          <a class="btn btn-success" href="{% url 'signup' %}" data-toggle="tooltip" title="Register New User">
-               <span class="glyphicon glyphicon-plus-sign"></span>  Sign Up
-          </a>
-     </div>{% endblock %}
+{% block item-buttons %}
+    <a href="{% url 'signup' %}" class="button-flex">Register New User</a>
+{% endblock %}
+
 
 {% block content %}
      {% include 'core/form_table_layout.html' %}

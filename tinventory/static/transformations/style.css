@@ -233,11 +233,6 @@ html,body {
   background:#006E81;
 }
 
-.searchdiv {
-  margin:20px 0px;
-  display:flex;
-}
-
 .buttonset-flex {
   display: flex;
   align-items:center;
@@ -245,13 +240,14 @@ html,body {
 
 .button-flex {
 	cursor:pointer;
-	border:1px solid #006E81;
+	border:1px solid #664785;
 	color:white;
 	font-size:14px;
 	font-weight:bold;
 	padding:10px 25px;
-	background-color:#006E81;
+	background-color:#664785;
   text-decoration:None;
+  margin:0px 2px;
 }
 
 .button-flex:hover {
