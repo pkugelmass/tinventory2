@@ -211,8 +211,45 @@ html,body {
   justify-content: space-between;
 }
 
-#page-cards-flex .cards-3 {
-  flex:1;
+
+.root-list {
+  list-style:none;
+  padding-left:20px;
+  display:flex;
+  flex-flow:row wrap;
+}
+
+.child-list {
+  list-style:none;
+  padding-left:20px;
+}
+
+.root-list li {
+  margin:0px;
+  padding:0px;
+  flex: 1 1 0;
+}
+
+.root-list-heading {
+  font-size:14pt;
+  border-bottom:1px solid #006E81;
+  margin-bottom:5px;
+}
+
+.child-list li {
+  margin:0px;
+  border:none;
+  padding:0px;
+}
+
+.root-list li a {
+  font-weight:700;
+  padding: 10px 0px;
+  text-decoration:None;
+}
+
+.child-list li a {
+  font-weight:500;
 }
 
 .gray-gradient {
