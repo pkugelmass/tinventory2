@@ -39,6 +39,8 @@
               </a>
             </div>
             
+            {% if request.user.is_authenticated %}
+            
             <div class="header-center-flex">
               <a href="#" data-toggle="tooltip" title="Hooray!">
                 <i class="fa fa-plus-square fa-lg"></i>
@@ -48,9 +50,13 @@
 
             <div class="header-right-flex">Welcome, {{request.user.first_name|default:'You'}}!</div>
             
+            {% endif %}
+            
           </div>
     
       <div class="main-flex">
+        
+        {% if request.user.is_authenticated %}
       
         <div class="side-flex">
           
@@ -58,7 +64,11 @@
            
         </div>
         
+        {% endif %}
+        
         <div class="pageholder-flex">
+          
+          {% if not request.user.is_authenticated %}<div class="narrow-page-flex">{% endif %}
           
           <div class="pagetitle-flex">
             
@@ -82,6 +92,8 @@
           
           
         </div>
+        
+        {% if not request.user.is_authenticated %}</div>{% endif %}
       
       </div>
       </div>

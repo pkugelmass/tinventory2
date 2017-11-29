@@ -152,17 +152,26 @@ html,body {
 }
 
 .pageholder-flex {
+  background:white;
   flex:1;
   flex-direction: column;
 }
 
+.narrow-page-flex {
+  max-width:70%;
+  margin: 40px auto;
+  padding:20px;
+  background:white;
+  border:1px lightgray solid;
+}
+
 .pagetitle-flex {
-  padding: 0px 30px;
+  padding: 10px 30px;
   display:flex;
   flex: 0 1 65px;
   justify-content:space-between;
   align-items:center;
-  margin-top:10px;
+  background:white;
 }
 
 .pagetitle-flex p {
