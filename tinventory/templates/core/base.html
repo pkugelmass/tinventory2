@@ -31,28 +31,7 @@
 
   <body>
     
-          <div id="header-flex" class="gray-gradient">
-            
-            <div class="title-flex equal">
-              <a href="{% url 'index' %}">
-                <img src="{% static 'transformations/images/elephant_circle_2.png' %}"> Transformation Repository
-              </a>
-            </div>
-            
-            {% if request.user.is_authenticated %}
-            
-            <div class="header-center-flex">
-              <a href="#" data-toggle="tooltip" title="Hooray!">
-                <i class="fa fa-plus-square fa-lg"></i>
-              </a>
-              
-            </div>
-
-            <div class="header-right-flex">Welcome, {{request.user.first_name|default:'You'}}!</div>
-            
-            {% endif %}
-            
-          </div>
+      {% include 'core/header.html' %}
     
       <div class="main-flex">
         
