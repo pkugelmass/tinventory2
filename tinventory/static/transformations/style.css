@@ -217,17 +217,20 @@ html,body {
   padding-left:20px;
   display:flex;
   flex-flow:row wrap;
+  border-collapse:collapse;
+  border-left: dashed 1px #006E81;
 }
 
 .child-list {
   list-style:none;
-  padding-left:20px;
+  padding-left:40px;
 }
 
 .root-list li {
   margin:0px;
-  padding:0px;
+  padding:0px 10px;
   flex: 1 1 0;
+  border-right: dashed 1px #006E81;
 }
 
 .root-list-heading {
@@ -240,6 +243,10 @@ html,body {
   margin:0px;
   border:none;
   padding:0px;
+}
+
+.child-list:first-child {
+  border-left: none;
 }
 
 .root-list li a {
