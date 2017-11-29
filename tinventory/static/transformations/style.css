@@ -43,8 +43,10 @@ html,body {
 }
 
 #header-flex ul li a:hover {
-  color:gray;
+  color:#006E81;
+  font-weight:700;
 }
+
 
 .title-flex {
   color: white;
@@ -52,7 +54,7 @@ html,body {
   font-weight:700;
   display:flex;
   align-items:center;
-  flex:1;
+  flex:3;
 }
 
 .title-flex img {
@@ -68,7 +70,7 @@ html,body {
 }
 
 .header-right-flex {
-  flex:1;
+  flex:3;
   display:flex;
   justify-content:flex-end;
 }
@@ -212,6 +214,7 @@ html,body {
     background: linear-gradient(#006e81, #002b22); /* Standard syntax */
 }
 
+/* BUTTONS */
 
 .buttonset-flex {
   display: flex;
@@ -219,19 +222,20 @@ html,body {
 }
 
 .button-flex {
-	border:1px solid lightgray;
 	cursor:pointer;
-	color:#002b22;
+	border:1px solid #006E81;
+	color:white;
 	font-size:14px;
 	font-weight:bold;
 	padding:10px 25px;
-	background-color:white;
+	background-color:#006E81;
   text-decoration:None;
 }
 
 .button-flex:hover {
-	background-color:#006E81;
-	color: white;
+  border:1px solid #006E81;
+	background-color:white;
+	color: #006E81;
 	text-decoration:None;
 }
 
