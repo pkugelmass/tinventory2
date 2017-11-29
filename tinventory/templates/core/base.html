@@ -22,6 +22,7 @@
     <!-- Style stuff: font, bootstrap, our custom styles -->
     <link href="https://fonts.googleapis.com/css?family=Libre+Franklin" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'transformations/style.css' %}">
     
     {% block extrahead %} {% endblock %}
@@ -30,15 +31,22 @@
 
   <body>
     
-          <div class="header-flex gray-gradient">
+          <div id="header-flex" class="gray-gradient">
             
-            <div class="title-flex">
-              <img src="{% static 'transformations/images/elephant_circle_2.png' %}"> Transformation Repository
+            <div class="title-flex equal">
+              <a href="{% url 'index' %}">
+                <img src="{% static 'transformations/images/elephant_circle_2.png' %}"> Transformation Repository
+              </a>
             </div>
             
-            
+            <div class="header-center-flex">
+              <a href="#" data-toggle="tooltip" title="Hooray!">
+                <i class="fa fa-plus-square fa-lg"></i>
+              </a>
+              
+            </div>
 
-            Welcome, Username!
+            <div class="header-right-flex">Welcome, {{request.user.first_name|default:'You'}}!</div>
             
           </div>
     

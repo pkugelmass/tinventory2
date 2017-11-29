@@ -6,34 +6,45 @@ html,body {
   font-family: 'Libre Franklin', sans-serif;
   min-height:100vh;
   min-width:100%;
-  display:flex;
-  flex-direction:column;
 }
 
+.equal {
+  flex:1;
+}
 
 /* HEADER */
 
-.header-flex {
-  flex: 0 0 65px;
+#header-flex {
   display:flex;
-  padding:0px 30px 0px 20px;
+  padding: 0px 30px 0px 20px;
   font-weight:700;
   align-items:center;
   justify-content: space-between;
   color:white;
+  margin-top:auto;
+  margin-bottom:auto;
+  position:fixed;
+  width:100%;
+  z-index:10;
+  height: 60px;
 }
 
-.header-flex a {
+#header-flex a {
   text-decoration:None;
+  color:white;
+}
+
+#header-flex a:hover {
+  color:lightgray;
 }
 
 .title-flex {
-  flex: 1 1 65px;
   color: white;
   font-size:16pt;
   font-weight:700;
   display:flex;
   align-items:center;
+  flex:1;
 }
 
 .title-flex img {
@@ -41,12 +52,26 @@ html,body {
   height:45px;
 }
 
+.header-center-flex {
+  flex:1;
+  display:flex;
+  justify-content:center;
+}
+
+.header-right-flex {
+  flex:1;
+  display:flex;
+  justify-content:flex-end;
+}
+
 /* MAIN STUFF */
 
 .main-flex {
   display:flex;
-  flex: 1 0 100%;
+  flex:1;
   background-color:white;
+  padding-top:60px;
+  min-height:100vh;
 }
 
 
