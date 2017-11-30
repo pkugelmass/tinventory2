@@ -10,28 +10,32 @@
 
 {% block content %}
 
-<ul class="root-list">
+    <div id="page-cards-flex">
 
-    {% recursetree topic_list %}
-
-            <li>
+    {% for node in topic_list %}
+    
+        {% if node.is_root_node %}
+        
+            <div class="topic-list">
                 
-                <a href="{% url 'topic-detail' node.slug %}">{{node.title}}</a>
-            
-                {% if not node.is_leaf_node %}
+                <h3>{{node.title}}</h3>
                 
-                <ul class="child-list">
-                
-                    {{ children }}
+                <ul>
+                    
+                    {% for subtopic in node.get_descendants %}
+                    
+                        <li>{{subtopic.title}}</li>
+                        
+                    {% endfor %}
                     
                 </ul>
-                    
-                {% endif %}
                 
-            </li>
-            
-    {% endrecursetree %}
+            </div>
+        
+        {% endif %}
+
+    {% endfor %}
     
-</ul>
+    </div>
     
 {% endblock %}
