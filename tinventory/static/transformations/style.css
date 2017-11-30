@@ -208,11 +208,14 @@ html,body {
 
 #page-cards-flex {
   display:flex;
-  justify-content: space-between;
+  align-items:stretch;
+  justify-content:flex-start;
+  width:100%;
 }
 
-#page-cards-flex .cards-3 {
-  flex:1;
+.cards-3 {
+  flex: 0 1 auto; 
+  align-self:stretch;
 }
 
 .gray-gradient {
