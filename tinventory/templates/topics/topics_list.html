@@ -20,18 +20,36 @@
                 
                 <h3>{{node.title}}</h3>
                 
-                <ul>
+                {% for topic in node.get_children %}
                     
-                    {% for subtopic in node.get_descendants %}
-                    
-                        <li>{{subtopic.title}}</li>
+                    <div class="topic-card">
                         
-                    {% endfor %}
-                    
-                </ul>
+                        <a href="{% url 'topic-detail' slug=topic.slug %}"><h4>{{topic.title}}</h4></a>
+                        
+                        {% if topic.description %}
+                            <small>{{topic.description}}</small>
+                        {% endif %}
+                        
+                        {% if not subtopic.is_leaf_node %}
+                        
+                            <ul>
+                        
+                            {% for subtopic in topic.get_descendants %}
+                            
+                                <a href="{% url 'topic-detail' slug=topic.slug %}"><li>{{subtopic.title}}</li></a>
+                                
+                            {% endfor %}
+                            
+                            </ul>
+                            
+                        {% endif %}
+                        
+                    </div>
+                
+                {% endfor %}
                 
             </div>
-        
+
         {% endif %}
 
     {% endfor %}
