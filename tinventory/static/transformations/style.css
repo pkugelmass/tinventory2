@@ -208,14 +208,88 @@ html,body {
 
 #page-cards-flex {
   display:flex;
+  justify-content: space-between;
   align-items:stretch;
-  justify-content:flex-start;
-  width:100%;
 }
 
-.cards-3 {
-  flex: 0 1 auto; 
-  align-self:stretch;
+#page-cards-flex .topic-list {
+  flex: 1 1 0;
+  margin:0px 10px;
+  background:#f5f5f5;
+  padding: 0px 10px;
+  display:flex;
+  flex-direction:column;
+  border:1px lightgray solid;
+  box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#page-cards-flex .topic-list .topic-card {
+  background:white;
+  padding:10px;
+  margin:5px;
+  /*box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
+  border:1px solid lightgray;
+}
+
+#page-cards-flex .topic-list .topic-card:hover {
+  border:1px solid #006E81;
+}
+
+#page-cards-flex .topic-list .topic-card a {
+  text-decoration:none;
+}
+
+#page-cards-flex .topic-list .topic-card h4 {
+  margin-bottom:0px;
+}
+
+
+.root-list {
+  list-style:none;
+  padding-left:20px;
+  display:flex;
+  flex-flow:row wrap;
+  border-collapse:collapse;
+  border-left: dashed 1px #006E81;
+}
+
+.child-list {
+  list-style:none;
+  padding-left:0px;
+}
+
+.root-list li {
+  margin:0px;
+  padding:0px 10px;
+  flex: 1 1 0;
+  border:1px solid black;
+}
+
+.root-list-heading {
+  font-size:14pt;
+  border-bottom:1px solid #006E81;
+  margin-bottom:5px;
+}
+
+.child-list li {
+  margin:0px;
+  border:none;
+  padding:40px;
+}
+
+.child-list:first-child {
+  border-left: none;
+}
+
+.root-list li a {
+  font-weight:700;
+  padding: 10px 0px;
+  text-decoration:None;
+}
+
+.child-list li a {
+  font-weight:500;
+>>>>>>> topicsredesign2
 }
 
 .gray-gradient {

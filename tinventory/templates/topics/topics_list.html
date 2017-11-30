@@ -11,30 +11,47 @@
 {% block content %}
 
     <div id="page-cards-flex">
-    
-    {% for n in topic_list %}
-    
-        {% if n.is_root_node %}
-        
-            <div class="list-group list-group-root cards-3">
-        
-            <h3>{{n.title}}</h3>
-            
-            {% recursetree n.get_descendants %}
-                
-                <a href="{% url 'topic-detail' slug=node.slug %}" class="list-group-item list-lvl-{{node.level}}">
-                <strong>{{ node.title }}</strong>
-                
-                </a>
-                
-                {{children}}
-            
-            {% endrecursetree %}
 
+    {% for node in topic_list %}
+    
+        {% if node.is_root_node %}
+
+            <div class="topic-list">
+                
+                <h3>{{node.title}}</h3>
+                
+                {% for topic in node.get_children %}
+                    
+                    <div class="topic-card">
+                        
+                        <a href="{% url 'topic-detail' slug=topic.slug %}"><h4>{{topic.title}}</h4></a>
+                        
+                        {% if topic.description %}
+                            <small>{{topic.description}}</small>
+                        {% endif %}
+                        
+                        {% if not subtopic.is_leaf_node %}
+                        
+                            <ul>
+                        
+                            {% for subtopic in topic.get_descendants %}
+                            
+                                <a href="{% url 'topic-detail' slug=topic.slug %}"><li>{{subtopic.title}}</li></a>
+                                
+                            {% endfor %}
+                            
+                            </ul>
+                            
+                        {% endif %}
+                        
+                    </div>
+                
+                {% endfor %}
+                
             </div>
-            
+
         {% endif %}
-        
+
     {% endfor %}
     
     </div>
