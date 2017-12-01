@@ -8,14 +8,23 @@
     <input type="text" class="searchbar" placeholder="Search...">
   </form>
 <ul>
+  
+  <li>
+    <a href="{% url 'index' as link %}" {% if request.get_full_path == link %} class="active" {% endif %} >
+    <i class="fa fa-home"></i>Home</a>
+  </li>
 
   <li>
-    <a href="{% url 'resources'%}"><i class="fa fa-share-alt"></i>All Resources</a>
+    <a href="{% url 'resources' as link %}" {% if request.get_full_path == link %} class="active" {% endif %} >
+    <i class="fa fa-share-alt"></i>All Resources</a>
   </li>
   
   <li>
     
-    <a href="{%url 'index' %}"><i class="fa fa-spinner"></i>OPS Transformations</a>
+    <a href="{%url 'index' as link %}" {% if request.get_full_path == link %} class="active" {% endif %} >
+    <i class="fa fa-spinner"></i>OPS Transformations</a>
+    
+    <!--
     
     <ul class="side-sub-menu">
       
@@ -23,10 +32,15 @@
       <li><a href="{% url 'index' %}">Past Transformations</a></li>
     </ul>
   
+    -->
+  
   </li>
   
   <li>
-    <a href="{% url 'topics'%}"><i class="fa fa-lightbulb-o"></i>Transformation Topics</a>
+    <a href="{% url 'topics' as link %}" {% if request.get_full_path == link %} class="active" {% endif %} >
+    <i class="fa fa-lightbulb-o"></i>Transformation Topics</a>
+    
+    <!--
     
     <ul class="side-sub-menu">
       
@@ -35,18 +49,29 @@
       {% endfor %}
       
     </ul>
+    
+    -->
+    
   </li>
   
   <li>
     
-    <i class="fa fa-info-circle"></i>About the Site
+    <a href="#"><i class="fa fa-info-circle"></i>About the Site</a>
+    
+    <!--
     
     <ul class="side-sub-menu">
       <li><a href="{% slugurl 'about' %}">FAQ - Start Here</a></li>
       <li><a href="#">Change Log</a></li>
       <li><a href="#">Provide Feedback</a></li>
     </ul>
+    
+    -->
   
+  </li>
+  
+  <li>
+    <a href="#"><i class="fa fa-comments-o"></i>Talk to us!</a>
   </li>
   
   {% if request.user.is_staff %}
@@ -55,8 +80,8 @@
     <i class="fa fa-flask"></i>Experiments
     
     <ul class="side-sub-menu">
-      <li><a href="{% url 'activity-feed' %}">Activity Feed</a></li>
-      <li><a href="{% url 'leaderboard' %}">Leaderboard</a></li>
+      <li><a href="{% url 'activity-feed' as link %}" {% if request.get_full_path == link %} class="active" {% endif %} >Activity Feed</a></li>
+      <li><a href="{% url 'leaderboard' as link %}" {% if request.get_full_path == link %} class="active" {% endif %} >Leaderboard</a></li>
     </ul>
   
   </li>

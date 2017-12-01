@@ -131,6 +131,10 @@ html,body {
   font-weight:700;
 }
 
+.side-menu-flex .active {
+  color:#006E81;
+}
+
 .side-menu-flex li i {
   padding-right:8px;
   list-style:none;
@@ -221,6 +225,10 @@ html,body {
   flex-direction:column;
   border:1px lightgray solid;
   box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#page-cards-flex .topic-list .topic-card .subtopic-list {
+  margin-top:5px;
 }
 
 #page-cards-flex .topic-list .topic-card {

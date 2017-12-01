@@ -2,11 +2,11 @@
 {% load widget_tweaks %}
 {% load mptt_tags %}
 
-{% block title %}Topics {% endblock %}
+{% block title %}Transformation Topics {% endblock %}
 
-{% block header %}Topics{% endblock %}
+{% block header %}Transformation Topics{% endblock %}
 
-{% block item-buttons %} {% include 'resources/resource_add_menu_include.html' %} {% endblock %}
+{% block item-buttons %}{% endblock %}
 
 {% block content %}
 
@@ -32,11 +32,11 @@
                         
                         {% if not subtopic.is_leaf_node %}
                         
-                            <ul>
+                            <ul class="subtopic-list">
                         
                             {% for subtopic in topic.get_descendants %}
                             
-                                <a href="{% url 'topic-detail' slug=topic.slug %}"><li>{{subtopic.title}}</li></a>
+                                <li><a href="{% url 'topic-detail' slug=topic.slug %}">{{subtopic.title}}</a></li>
                                 
                             {% endfor %}
                             
