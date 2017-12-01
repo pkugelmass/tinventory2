@@ -62,17 +62,14 @@ html,body {
   height:45px;
 }
 
-.header-center-flex {
-  flex:1;
-  display:flex;
-  justify-content:center;
-  position:relative;
-}
-
 .header-right-flex {
   flex:3;
   display:flex;
   justify-content:flex-end;
+}
+
+.header-right-flex-item {
+  padding:0px 8px;
 }
 
 #header-flex i {

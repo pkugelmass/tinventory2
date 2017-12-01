@@ -4,37 +4,41 @@
   
   <div class="title-flex">
     <a href="{% url 'index' %}">
-      <img src="{% static 'transformations/images/elephant_circle_2.png' %}"> Transformation Repository
+      <img src="{% static 'transformations/images/elephant_circle_3.png' %}"> Transformation Repository
     </a>
   </div>
   
   {% if request.user.is_authenticated %}
-  
-  <div class="header-center-flex dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown">
-      <i class="fa fa-plus-circle fa-lg"></i>
+
+  <div class="header-right-flex">
+    
+    <div class="header-right-flex-item dropdown">
+      
+      <a class="dropdown-toggle" data-toggle="dropdown">
+      <i class="fa fa-plus-circle fa-lg"></i> Add <span class="caret"></span>
       
       <ul id="topmenus" class="dropdown-menu">
-        <li><a href="{% url 'transformation-add' %}">New Transformation</a></li>
-        <li><a href="{% url 'add-resource' 'file' %}">New File</a></li>
-        <li><a href="{% url 'add-resource' 'link' %}">New Link</a></li>
-        <li><a href="{% url 'add-resource' 'post' %}">New Post</a></li>
-        <li><a href="#">Provide Feedback</a></li>
-    </a>
+        <li><a href="{% url 'transformation-add' %}"><i class="fa fa-spinner"></i> Add Transformation</a></li>
+        <li><a href="{% url 'add-resource' 'file' %}"><i class="fa fa-file"></i> Add File</a></li>
+        <li><a href="{% url 'add-resource' 'link' %}"><i class="fa fa-link"></i> Add Link</a></li>
+        <li><a href="{% url 'add-resource' 'post' %}"><i class="fa fa-pencil"></i> Add Post</a></li>
+        <li><a href="#"><i class="fa fa-comments-o"></i> Talk to Us</a></li>
     
-  </div>
-
-  <div class="header-right-flex dropdown">
+    </div>
     
-    <a class="dropdown-toggle" data-toggle="dropdown">
-      <i class="fa fa-user fa-lg"></i> 
-      Welcome, {{request.user.first_name|default:request.user.username}}!  <span class="caret"></span>
-    </a>
+    <div class="header-right-flex-item dropdown">
     
-    <ul id="topmenus" class="dropdown-menu dropdown-menu-right">
-      <li><a href="{% url 'user-profile' request.user.username %}">Your Profile</a></li>
-      <li><a href="{% url 'logout' %}">Log Out</a></li>
-    </ul>
+      <a class="dropdown-toggle" data-toggle="dropdown">
+        <i class="fa fa-user fa-lg"></i> 
+        Welcome, {{request.user.first_name|default:request.user.username}}!  <span class="caret"></span>
+      </a>
+      
+      <ul id="topmenus" class="dropdown-menu dropdown-menu-right">
+        <li><a href="{% url 'user-profile' request.user.username %}">Your Profile</a></li>
+        <li><a href="{% url 'logout' %}">Log Out</a></li>
+      </ul>
+    
+    </div>
     
   </div>
   
