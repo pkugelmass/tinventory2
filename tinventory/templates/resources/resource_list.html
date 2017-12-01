@@ -2,13 +2,9 @@
 {% load widget_tweaks %}
 {% load hyperlink_list %}
 
-{% block header %}Resources
+{% block header %}All Resources{% endblock %}
 
-{% include 'resources/resource_add_menu_include.html' %}
-
-
-
-{% endblock %}
+{% block item-buttons %} {% include 'resources/resource_add_menu_include.html' %} {% endblock %}
 
 {% block content %}
 

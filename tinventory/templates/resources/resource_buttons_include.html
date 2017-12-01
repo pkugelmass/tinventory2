@@ -1,7 +1,4 @@
-     <div class="pull-right"> <!-- Edit & delete buttons -->
-          
-
-          <a class="btn btn-default" href=
+     <a class="button-flex-white" href=
                "{% if object.type == 'link' %}{% url 'edit-link' object.slug %}{% endif %}
                {% if object.type == 'file' %}{% url 'edit-file' object.slug %}{% endif %}
                {% if object.type == 'post' %}{% url 'edit-post' object.slug %}{% endif %}"
@@ -11,12 +8,12 @@
           </a>
           
           {% if not user_review %}
-               <a class="btn btn-default" href="{% url 'add-review' object.slug %}">
+               <a class="button-flex-white" href="{% url 'add-review' object.slug %}">
                     <span class="glyphicon glyphicon-star"></span> Review
                </a>
           {% endif %}
           
-          <a class="btn btn-default" href=
+          <a class="button-flex-white" href=
                "{% if object.type == 'link' %}{% url 'delete-link' object.slug %}{% endif %}
                {% if object.type == 'file' %}{% url 'delete-file' object.slug %}{% endif %}
                {% if object.type == 'post' %}{% url 'delete-post' object.slug %}{% endif %}"
@@ -24,7 +21,3 @@
                
                <span class="glyphicon glyphicon-trash"></span> Delete
           </a>
-          
-
-
-     </div>

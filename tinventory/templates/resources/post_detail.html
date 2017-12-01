@@ -8,12 +8,9 @@
 
 {% block header %}
      {{object.title}}<small> ({{ object.type|title }})</small>
-     
-{% include 'resources/resource_buttons_include.html' %}
-     
-     
-
 {% endblock %}
+
+{% block item-buttons %} {% include 'resources/resource_buttons_include.html' %} {% endblock %}
 
 {% block content %}
 

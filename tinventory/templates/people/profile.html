@@ -7,21 +7,21 @@
 
 {% block header %}
 
-    {{user.get_full_name}}<small> (User)</small>
+    {{user.get_full_name|default:user.username}}<small> (User)</small>
      
-    {% if user == request.user %}
+{% endblock %}
+
+{% if user == request.user %}
     
-    <div class="pull-right"> 
+    {% block item-buttons %}
     
-        <a class="btn btn-default" href="{% url 'edit-profile' username=user.username %}" data-toggle="tooltip" title="Edit Profile">
+        <a class="button-flex" href="{% url 'edit-profile' username=user.username %}" data-toggle="tooltip" title="Edit Profile">
         <span class="glyphicon glyphicon-pencil"></span> Edit Your Profile
         </a>
         
-    </div>
+    {% endblock %}
     
-    {% endif %}
-     
-{% endblock %}
+{% endif %}
 
 {% block content %}
 
