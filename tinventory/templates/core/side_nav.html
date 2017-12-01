@@ -15,13 +15,13 @@
   </li>
 
   <li>
-    <a href="{% url 'resources' as link %}" {% if request.get_full_path == link %} class="active" {% endif %} >
+    <a href="{% url 'resources' %}">
     <i class="fa fa-share-alt"></i>All Resources</a>
   </li>
   
   <li>
     
-    <a href="{%url 'index' as link %}" {% if request.get_full_path == link %} class="active" {% endif %} >
+    <a href="{% url 'index' %}">
     <i class="fa fa-spinner"></i>OPS Transformations</a>
     
     <!--
@@ -37,7 +37,7 @@
   </li>
   
   <li>
-    <a href="{% url 'topics' as link %}" {% if request.get_full_path == link %} class="active" {% endif %} >
+    <a href="{% url 'topics' %}">
     <i class="fa fa-lightbulb-o"></i>Transformation Topics</a>
     
     <!--
@@ -80,8 +80,8 @@
     <i class="fa fa-flask"></i>Experiments
     
     <ul class="side-sub-menu">
-      <li><a href="{% url 'activity-feed' as link %}" {% if request.get_full_path == link %} class="active" {% endif %} >Activity Feed</a></li>
-      <li><a href="{% url 'leaderboard' as link %}" {% if request.get_full_path == link %} class="active" {% endif %} >Leaderboard</a></li>
+      <li><a href="{% url 'activity-feed'%}">Activity Feed</a></li>
+      <li><a href="{% url 'leaderboard'}%">Leaderboard</a></li>
     </ul>
   
   </li>
