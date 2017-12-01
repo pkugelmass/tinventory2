@@ -174,6 +174,8 @@ ABSOLUTE_URL_OVERRIDES = {
 
 WAGTAIL_SITE_NAME = 'Transformation Repository'
 
+STRONGHOLD_PUBLIC_NAMED_URLS = ('login', 'password_reset', 'password_reset_done', 'password_reset_confirm', 'password_reset_complete')
+
 # Import Local Settings, if they exist:
 
 try:

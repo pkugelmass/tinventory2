@@ -7,6 +7,7 @@ from people.helpers import create_action
 from people.models import Profile
 from django.utils import timezone
 from django.db import Error
+from django.contrib.auth.views import password_change
 
 @public
 def signup(request):
