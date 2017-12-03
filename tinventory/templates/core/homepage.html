@@ -1,12 +1,37 @@
-{% extends 'core/base2.html' %}
+{% extends 'core/base_home.html' %}
+{% load static %}
 
 {% block title %}Transformation Repository{% endblock %}
-{% block header %}{% endblock %}
 
 {% block content %}
-    <div class="jumbotron">
+
+    <div class="home-top-flex home-gradient">
         
-        This is a thing.
+                
+            <img class="big-img" src="{% static 'transformations/images/elephant_circle_3.png' %}" alt="Repo Logo is an Elephant in a Room">
+                
+                <h1>The OPS Organizational Transformation Knowldedge Repository</h1>
+            
+                <p>This is a thing you might be interested in.</p>
+        
+        
+        
+    </div>
+    
+    <div class="home-bottom-flex">
+        
+        <div class="home-bottom-card">
+            Card 1
+        </div>
+        
+        <div class="home-bottom-card">
+            Card 2
+        </div>
+        
+        <div class="home-bottom-card">
+            Card 3
+        </div>        
+        
         
     </div>
 

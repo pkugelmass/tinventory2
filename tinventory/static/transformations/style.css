@@ -169,13 +169,25 @@ html,body {
 /* MAIN PAGE STUFF */
 
 .pageholder-flex {
+  background:white;
+  flex:1;
+  display:flex;
+  flex-direction: column;
+  padding-left: 5px;
+  padding-top: 10px;
+}
+
+.pageholder-flex-grey {
   background:#f5f5f5;
   flex:1;
+  align-self:stretch;
+  display:flex;
   flex-direction: column;
-  padding:0px;
+  padding: 0px;
 }
 
 .narrow-page-flex {
+  flex:1;
   max-width:70%;
   margin: 40px auto;
   padding:20px;
@@ -210,6 +222,45 @@ html,body {
   flex-direction:column;
   padding:10px 30px;
 }
+
+/* HOME PAGE STUFF */
+
+.home-top-flex {
+  flex:4.25 4.25 0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  background:#0099cc;
+  border-bottom:1px solid white;
+  padding:0px 5%;
+}
+
+.home-gradient {
+  background:radial-gradient(#f5f5f5 40%,lightgrey);
+}
+
+.home-top-flex .big-img {
+  height:60%;
+}
+  
+.home-bottom-flex {
+  display:flex;
+  flex:3;
+  align-items:stretch;
+}
+
+.home-bottom-card {
+  flex:1;
+  background:#f5f5f5;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:3px solid white;
+  
+}
+
+/* TOPICS PAGE STUFF */
 
 #page-cards-flex {
   display:flex;
@@ -298,7 +349,6 @@ html,body {
 
 .child-list li a {
   font-weight:500;
->>>>>>> topicsredesign2
 }
 
 .gray-gradient {
@@ -379,14 +429,4 @@ html,body {
 	background-color:white;
 	color: #006E81;
 	text-decoration:None;
-}
-
-.my-jumbotron {
-  width: 100%;
-  flex: 1 0 60%;
-  background:blue;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
 }

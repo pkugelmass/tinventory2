@@ -2,44 +2,18 @@
 
 {% block subtemplate %}
         
-        {% if request.user.is_authenticated %}
+    <div class="side-flex">
       
-        <div class="side-flex">
-          
-            {% include 'core/side_nav.html' %}
-           
-        </div>
-        
-        {% endif %}
-        
-        <div class="pageholder-flex">
-          
-          {% if not request.user.is_authenticated %}<div class="narrow-page-flex">{% endif %}
-          
-          <div class="pagetitle-flex">
-            
-            {% block header %} {% endblock %}
-            
-            <div class="buttonset-flex">
-              
-              {% block item-buttons %}{% endblock %}
-              
-            </div>
-            
-          </div>
-         
-           <div class="page-flex">
+        {% include 'core/side_nav.html' %}
        
-             {% include 'core/messages.html' %}
-             
-             {% block content %}{% endblock %}
-             
-          </div>
-          
-        </div>
+    </div>
+    
+    <div class="pageholder-flex-grey">
         
-        {% if not request.user.is_authenticated %}</div>{% endif %}
-      
-      </div>
-      
+        {% block content %}{% endblock %}
+
+    </div>
+    
+  </div>
+  
 {% endblock %}

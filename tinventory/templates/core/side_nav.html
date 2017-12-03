@@ -15,13 +15,13 @@
   </li>
 
   <li>
-    <a href="{% url 'resources' %}">
+    <a href="{% url 'resources' %}" {% if '/resources/' in request.get_full_path %} class="active" {% endif %} >
     <i class="fa fa-share-alt"></i>All Resources</a>
   </li>
   
   <li>
     
-    <a href="{% url 'index' %}">
+    <a href="{% url 'index' %}" {% if '/transformations/' in request.get_full_path %} class="active" {% endif %}>
     <i class="fa fa-spinner"></i>OPS Transformations</a>
     
     <!--
@@ -37,7 +37,7 @@
   </li>
   
   <li>
-    <a href="{% url 'topics' %}">
+    <a href="{% url 'topics' %}" {% if '/topics/' in request.get_full_path %} class="active" {% endif %}>
     <i class="fa fa-lightbulb-o"></i>Transformation Topics</a>
     
     <!--
