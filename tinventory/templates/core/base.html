@@ -35,50 +35,8 @@
     
       <div class="main-flex">
         
-        {% if request.user.is_authenticated %}
-      
-        <div class="side-flex">
-          
-            {% include 'core/side_nav.html' %}
-           
-        </div>
-        
-        {% endif %}
-        
-        <div class="pageholder-flex">
-          
-          {% if not request.user.is_authenticated %}<div class="narrow-page-flex">{% endif %}
-          
-          {% if not hide_title %}
-          
-          <div class="pagetitle-flex">
-            
-            {% block header %} {% endblock %}
-            
-            <div class="buttonset-flex">
-              
-              {% block item-buttons %}{% endblock %}
-              
-            </div>
-            
-          </div>
-          
-          {% endif %}
-         
-         <div class="page-flex">
-     
-           {% include 'core/messages.html' %}
-           
-           {% block content %}{% endblock %}
-           
-        </div>
-          
-          
-        </div>
-        
-        {% if not request.user.is_authenticated %}</div>{% endif %}
-      
-      </div>
+      {% block subtemplate %} {% endblock %}
+
       </div>
   
   

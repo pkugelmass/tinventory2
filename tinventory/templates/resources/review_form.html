@@ -1,4 +1,4 @@
-{% extends "core/base.html" %}
+{% extends "core/base_page.html" %}
 
 {% block title %} {%if object%}Edit Review{%else%}Add Review{%endif%} of {{review.resource}} {% endblock %}
 {% block header %}{%if object%}Edit Review{%else%}Add Review{%endif%} <span class="small">({{review.resource}})</small> {% endblock %}
