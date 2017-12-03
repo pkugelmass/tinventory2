@@ -12,6 +12,8 @@ from wagtail.wagtailcore import urls as wagtail_urls
 
 urlpatterns = [
     
+    url(r'^home/', core_views.HomePage.as_view(), name='home'),
+    
     url(r'^admin/', admin.site.urls),
     
     url(r'^$', lambda r: HttpResponseRedirect('transformations/')),

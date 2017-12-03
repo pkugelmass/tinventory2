@@ -7,7 +7,7 @@ from people.helpers import create_action
 from people.models import Profile
 from django.utils import timezone
 from django.db import Error
-from django.contrib.auth.views import password_change
+from django.views.generic import TemplateView
 
 @public
 def signup(request):
@@ -43,3 +43,7 @@ def signup(request):
         subform = ProfileSignupSubform()
         
     return render(request, 'registration/signup.html', {'form': form, 'subform':subform,})
+
+class HomePage(TemplateView):
+    template_name = 'core/homepage.html'
+    

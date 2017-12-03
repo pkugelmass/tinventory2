@@ -49,23 +49,27 @@
           
           {% if not request.user.is_authenticated %}<div class="narrow-page-flex">{% endif %}
           
+          {% if not hide_title %}
+          
           <div class="pagetitle-flex">
             
-            <p>{% block header %} {% endblock %}</p>
+            {% block header %} {% endblock %}
             
             <div class="buttonset-flex">
               
-              {% block item-buttons %} {% endblock %}
+              {% block item-buttons %}{% endblock %}
               
             </div>
             
           </div>
+          
+          {% endif %}
          
          <div class="page-flex">
      
            {% include 'core/messages.html' %}
            
-           {% block content %} {% endblock %}
+           {% block content %}{% endblock %}
            
         </div>
           
