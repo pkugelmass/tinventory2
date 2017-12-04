@@ -91,6 +91,8 @@ class FeedbackForm(FormView):
         
         email.send()
         
+        # It would be good to include a success message here.
+        
         return redirect('home')
         
 class SearchResults(TemplateView):
