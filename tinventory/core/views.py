@@ -1,7 +1,7 @@
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
-from tinventory.core.forms import SignUpForm, ProfileSignupSubform
+from tinventory.core.forms import SignUpForm, ProfileSignupSubform, FeedbackForm
 from stronghold.decorators import public
 from people.helpers import create_action
 from people.models import Profile, Action
@@ -10,7 +10,9 @@ from resources.models import Resource
 from topics.models import Topic
 from django.utils import timezone
 from django.db import Error
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, FormView
+from django.core.mail import EmailMessage
+from django.template.loader import get_template
 
 @public
 def signup(request):
@@ -63,3 +65,33 @@ class HomePage(TemplateView):
         context.update(my_context)
         return context
     
+class FeedbackForm(FormView):
+    
+    form_class = FeedbackForm
+    template_name = 'core/feedback_form.html'
+
+    def form_valid(self,form):
+        
+        template = get_template('core/feedback_template.html')
+        context = {
+            'feedback_category': self.request.POST.get('feedback_category', ''),
+            'content': self.request.POST.get('content', ''),
+            'user': self.request.user,
+            'path': self.request.META.get('HTTP_REFERRER'),
+        }
+        
+        content = template.render(context)
+
+        email = EmailMessage(
+            "[Feedback] "+ self.request.POST.get('subject'),
+            content,
+            "T-Repo" +'',
+            ['paul.kugelmass@ontario.ca'],
+        )
+        
+        email.send()
+        
+        return redirect('home')
+        
+class SearchResults(TemplateView):
+    template_name='core/search.html'

@@ -39,3 +39,20 @@ class ProfileSignupSubform(forms.ModelForm):
             self.fields[x].help_text = None
         self.fields['profile_picture'].required = False
         self.fields['profile_picture'].help_text="(Optional)"
+        
+
+
+class FeedbackForm(forms.Form):
+    
+    FEEDBACK_CATEGORIES = (
+        ('bug','Reporting a Bug'),
+        ('idea','Suggeting a Feature or Improvement'),
+        ('complaint','Report a Pain Point'),
+        ('question','Just wondering...'),
+        ('compliments','We also take compliments.'),
+        ('other','Other'),
+    )
+    
+    feedback_category = forms.ChoiceField(choices=FEEDBACK_CATEGORIES)
+    subject = forms.CharField(required=True)
+    content = forms.CharField(required=True, widget=forms.Textarea)

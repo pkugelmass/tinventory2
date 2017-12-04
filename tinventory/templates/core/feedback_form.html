@@ -1,0 +1,9 @@
+{% extends 'core/base_page.html' %}
+
+{% block title %}Feedback{% endblock %}
+{% block header %}Feedback{% endblock %}
+
+{% block content %}
+     {% include 'core/form_table_layout.html' %}
+     <input type="hidden" name="next" value="{{ request.path }}">
+{% endblock %}
