@@ -4,7 +4,10 @@ from django.shortcuts import render, redirect
 from tinventory.core.forms import SignUpForm, ProfileSignupSubform
 from stronghold.decorators import public
 from people.helpers import create_action
-from people.models import Profile
+from people.models import Profile, Action
+from transformations.models import Transformation
+from resources.models import Resource
+from topics.models import Topic
 from django.utils import timezone
 from django.db import Error
 from django.views.generic import TemplateView
@@ -45,5 +48,18 @@ def signup(request):
     return render(request, 'registration/signup.html', {'form': form, 'subform':subform,})
 
 class HomePage(TemplateView):
+    
     template_name = 'core/homepage.html'
+    
+    def get_context_data(self, **kwargs):
+        my_context = {
+            'transformation_count':Transformation.objects.count(),
+            'resources_count':Resource.objects.count(),
+            'topics_count':Topic.objects.exclude(level=0).count(),
+            'users_count':Profile.objects.count(),
+            'recent_actions':Action.objects.all()[:5],
+        }
+        context = super(TemplateView,self).get_context_data(**kwargs)
+        context.update(my_context)
+        return context
     

@@ -41,10 +41,10 @@
             </div>
             
             <ul>
-                <li><span class="badge">#</span> Resources</li>
-                <li><span class="badge">#</span> Transformations</li>
-                <li><span class="badge">#</span> Topics</li>
-                <li><span class="badge">#</span> Users</li>
+                <a href="{%url 'resources' %}"><li><span class="badge">{{resources_count}}</span> Resources</li></a>
+                <li><span class="badge">{{transformation_count}}</span> Transformations</li>
+                <li><span class="badge">{{topics_count}}</span> Topics</li>
+                <li><span class="badge">{{users_count}}</span> Users</li>
             </ul>
         </div>
         
@@ -53,8 +53,11 @@
                 <i class="fa fa-newspaper-o fa-lg"></i> Latest Activity
             </div>
             <ul>
-                <li>So and so did something</li>
-                <li>So and so did something else</li>
+                {% for action in recent_actions %}
+                    <li><span class="badge">{{action.created|date:"n/j"}}</span> 
+                    {{action.target.type|capfirst}} 
+                    "<a href="{{action.target.get_absolute_url}}"> {{action.target}} </a>" {{action.verb}}</li>
+                {% endfor %}
             </ul>
         </div>
         
