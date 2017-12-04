@@ -6,6 +6,7 @@ from stronghold.decorators import public
 from people.helpers import create_action
 from people.models import Profile, Action
 from transformations.models import Transformation
+from sitepages.models import MiniFeedPage
 from resources.models import Resource
 from topics.models import Topic
 from django.utils import timezone
@@ -60,6 +61,7 @@ class HomePage(TemplateView):
             'topics_count':Topic.objects.exclude(level=0).count(),
             'users_count':Profile.objects.count(),
             'recent_actions':Action.objects.all()[:5],
+            'site_updates_page':MiniFeedPage.objects.get(slug='site-updates')
         }
         context = super(TemplateView,self).get_context_data(**kwargs)
         context.update(my_context)
