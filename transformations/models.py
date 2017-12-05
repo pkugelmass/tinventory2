@@ -36,9 +36,8 @@ class Transformation(models.Model):
      )
      
      STATUSES = (
-          ('prospective', 'Prospective'),
-          ('ongoing', 'Ongoing'),
-          ('complete', 'Past/Complete'),
+          ('current', 'Current'),
+          ('Past', 'Past'),
      )
      
      category = models.CharField(verbose_name='Category', max_length=20, choices=CATEGORIES, blank=True)

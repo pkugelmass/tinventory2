@@ -28,13 +28,13 @@ class TransformationFilterForm(forms.Form):
           required=False
           )
           
-     tags = forms.ModelChoiceField(
-          Transformation_Tag.objects.all().order_by('name'),
-          label="Area of Focus",
-          empty_label='',
-          required=False,
-          to_field_name='name'
-          )
+     # tags = forms.ModelChoiceField(
+     #      Transformation_Tag.objects.all().order_by('name'),
+     #      label="Area of Focus",
+     #      empty_label='',
+     #      required=False,
+     #      to_field_name='name'
+     #      )
           
      status = ChoiceFieldEmpty(
           choices = Transformation.STATUSES, 
@@ -46,7 +46,7 @@ class TransformationForm(forms.ModelForm):
      
      class Meta:
           model = Transformation
-          fields = ['title','ministry','specific_orgs','description','problem','category', 'tags',\
+          fields = ['title','ministry','specific_orgs','description','problem','category', \
                'status','primary_contact',]
           widgets = {
                'description':forms.Textarea(attrs={'rows':4,'cols':40}),
@@ -62,4 +62,4 @@ class TransformationForm(forms.ModelForm):
      def __init__(self, *args, **kwargs):
           super(TransformationForm, self).__init__(*args, **kwargs)
           self.fields['ministry'].widget.attrs['size']='7'
-          self.fields['tags'].widget.attrs['size']='7'
+          #self.fields['tags'].widget.attrs['size']='7'
