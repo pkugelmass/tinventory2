@@ -175,7 +175,7 @@ html,body {
   flex-direction: column;
   padding-left: 5px;
   padding-top: 10px;
-  align-items:center;
+  align-items:stretch;
 }
 
 .pageholder-flex-grey {
@@ -200,7 +200,7 @@ html,body {
 .pagetitle-flex {
   padding: 5px 30px 15px 30px;
   display:flex;
-  flex: 0 1 65px;
+  flex: 1 1 65px;
   justify-content:space-between;
   align-items:center;
   background:white;
@@ -235,30 +235,33 @@ html,body {
   align-items:center;
   background:#0099cc;
   border-bottom:1px solid white;
+  height:55%; /* Included for IE */
+}
+
+.highlight-this {
+  border:3px solid pink;
 }
 
 .home-top-container {
   flex: 1 1 auto;
   display:flex;
   justify-content:center;
-  align-items:stretch;
-  margin:50px;
+  margin:40px;
+  height:50%; /* Added for IE */
+  max-width:80%;
 }
 
 .home-top-text {
   display:flex;
   flex-direction:column;
-  flex:3 1 auto;
-  margin-left:30px;
-  padding: 2.2em 0;
+  flex:3 1 800px; /* width added for IE */
+  padding: 0px 25px;
   color: #444444;
-  height:auto;
-  justify-content:space-around;
-  max-width:60%;
+  justify-content:center;
 }
 
 .home-top-flex .home-top-container .home-img-container {
-  flex:0 1 20%;
+  flex:0 0 20%;
   display:flex;
   align-items:center;
 }
@@ -269,7 +272,7 @@ html,body {
 }
 
 .home-top-flex .home-top-container .home-top-text .home-title p {
-  padding-bottom:0px;
+  padding-bottom:0px
   
 }
 
@@ -279,10 +282,11 @@ html,body {
 
 
 .home-top-flex .home-top-container .big-img {
-  width:auto;
-  height:auto;
+  /*width:auto;
+  height:auto;*/
   max-width:100%;
   max-height:100%;
+  flex:none;
   align-self:center;
   
   
@@ -302,7 +306,8 @@ html,body {
 }
 
 .home-top-flex .home-top-text .learn-more-button {
-  align-self:space-around;
+  
+  padding-top:20px;
 }
   
 .home-bottom-flex {
@@ -310,6 +315,7 @@ html,body {
   flex:3;
   align-items:stretch;
   border:2px solid white;
+  height:45%; /* Included for IE */
 }
 
 .home-bottom-card {
