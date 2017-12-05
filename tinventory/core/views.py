@@ -14,6 +14,9 @@ from django.db import Error
 from django.views.generic import TemplateView, FormView
 from django.core.mail import EmailMessage
 from django.template.loader import get_template
+from termsandconditions.decorators import terms_required
+from termsandconditions.views import AcceptTermsView
+from django.utils.decorators import method_decorator
 
 @public
 def signup(request):
@@ -63,9 +66,18 @@ class HomePage(TemplateView):
             'recent_actions':Action.objects.all()[:5],
             'site_updates_page':MiniFeedPage.objects.get(slug='site-updates')
         }
+        
         context = super(TemplateView,self).get_context_data(**kwargs)
         context.update(my_context)
+        
         return context
+        
+    @method_decorator(terms_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super(HomePage, self).dispatch(request, *args, **kwargs)
+        
+class MyAcceptTerms(AcceptTermsView):
+    template_name = 'registration/accept_terms.html'
     
 class FeedbackForm(FormView):
     

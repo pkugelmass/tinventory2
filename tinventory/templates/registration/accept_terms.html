@@ -1,0 +1,34 @@
+{% extends 'core/base_card.html' %}
+
+{% block title %}Terms of Use{% endblock %}
+{% block header %}Terms of Use{% endblock %}
+
+{% block content %}
+
+    {{ form.errors }}
+    
+    {% for terms in form.initial.terms %}
+
+        <h3>{{terms.name|safe}} v{{terms.version_number|safe}}</h3>
+        
+        <div>
+            <p>Here are just a few things we need everyone to know...</p>
+            {{terms.text|safe}}
+        </div>
+        
+    {% endfor %}
+    
+    
+    <form action="" method="post" id="tc-terms-form" data-ajax="false">
+            {% csrf_token %}
+            {{ form.terms }}
+            {{ form.returnTo }}
+    <div class="buttonset-flex">
+          <button class="button-flex" type="submit">I Accept</button>
+     </div>
+    </form>
+    
+{% endblock %}
+    
+    
+    

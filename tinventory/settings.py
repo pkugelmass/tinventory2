@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'mptt',
     'django_mptt_admin',
     'debug_toolbar',
+    'termsandconditions',
     
     # Wagtail Packages
     'wagtail.wagtailforms',
@@ -78,6 +79,7 @@ MIDDLEWARE = [
     'people.middleware.SetLastVisitMiddleware',
     'wagtail.wagtailcore.middleware.SiteMiddleware',
     'wagtail.wagtailredirects.middleware.RedirectMiddleware',
+    #'termsandconditions.middleware.TermsAndConditionsRedirectMiddleware',
 ]
 
 ROOT_URLCONF = 'tinventory.urls'
@@ -164,7 +166,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-LOGIN_REDIRECT_URL = 'index'
+LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = '/login/'
 
 AUTH_USER_MODEL = 'auth.User'
@@ -175,6 +177,11 @@ ABSOLUTE_URL_OVERRIDES = {
 WAGTAIL_SITE_NAME = 'Transformation Repository'
 
 STRONGHOLD_PUBLIC_NAMED_URLS = ('login', 'password_reset', 'password_reset_done', 'password_reset_confirm', 'password_reset_complete')
+
+# TERMS AND CONDITIONS
+TERMS_BASE_TEMPLATE = 'core/base_card.html'
+ACCEPT_TERMS_PATH = '/terms/accept/'
+TERMS_CACHE_SECONDS = 30
 
 # Import Local Settings, if they exist:
 
