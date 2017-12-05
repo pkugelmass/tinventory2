@@ -1,0 +1,17 @@
+{% extends 'core/base_page.html' %}
+
+{% block title %}Current Terms of Use{% endblock %}
+{% block header %}Current Terms of Use{% endblock %}
+
+{% block content %}
+
+    <h3>{{terms.name|safe}} <small>v{{terms.version_number|safe}}</small></h3>
+    
+    <div>
+        {{terms.text|safe}}
+    </div>
+    
+{% endblock %}
+    
+    
+    

@@ -43,6 +43,7 @@ urlpatterns = [
     url(r'^reset/done/$', auth_views.password_reset_complete, name='password_reset_complete'),
     
     url(r'^terms/accept/', core_views.MyAcceptTerms.as_view(), name='accept-terms'),
+    url(r'^terms/', core_views.MyViewTerms.as_view(), name='terms'),
     
     url(r'^cms/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),

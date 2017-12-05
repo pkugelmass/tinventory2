@@ -11,11 +11,12 @@ from resources.models import Resource
 from topics.models import Topic
 from django.utils import timezone
 from django.db import Error
-from django.views.generic import TemplateView, FormView
+from django.views.generic import TemplateView, FormView, DetailView
 from django.core.mail import EmailMessage
 from django.template.loader import get_template
 from termsandconditions.decorators import terms_required
 from termsandconditions.views import AcceptTermsView
+from termsandconditions.models import TermsAndConditions
 from django.utils.decorators import method_decorator
 
 @public
@@ -78,6 +79,16 @@ class HomePage(TemplateView):
         
 class MyAcceptTerms(AcceptTermsView):
     template_name = 'registration/accept_terms.html'
+    
+class MyViewTerms(DetailView):
+    template_name = 'registration/view_terms.html'
+    context_object_name = 'terms'
+    
+    def get_object(self,**kwargs):
+        obj = TermsAndConditions.objects.latest('date_active').get_active()
+        return obj
+        
+    
     
 class FeedbackForm(FormView):
     
