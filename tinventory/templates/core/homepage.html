@@ -68,7 +68,9 @@
             </div>            
             <ul>
                 {% for update in site_updates_page.updates %}
-                    <li><span class="badge">{{update.specific.up_date|date:"n/j"}}</span> {{update.title}}</li>
+                    <li>
+                        <span class="badge">{{update.specific.up_date|date:"n/j"}}</span> 
+                        <a href="{% pageurl update %}">{{update.title}}</a></li>
                 {% endfor %}
             </ul>
         </div>        

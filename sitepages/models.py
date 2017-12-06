@@ -49,5 +49,5 @@ class MiniUpdate(Page):
 
     parent_page_types = ['MiniFeedPage']
 
-    template = 'sitepages/content_page.html'
+    template = 'sitepages/mini_update.html'
 

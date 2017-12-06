@@ -1,0 +1,28 @@
+{% extends "core/base_page.html" %}
+{% load wagtailcore_tags %}
+
+{% block title %}{{page.title}}{% endblock %}
+
+{% block header %}{{page.title}}{% endblock %}
+
+{% block item-buttons %}<a href="{% pageurl page.get_parent %}" class="button-flex-white">Back to feed.</a>{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        
+        <div class="col-md-12">
+            
+            {{page.body|safe}}
+            
+            <small></small>Published by {{page.owner.get_full_name}} on {{page.last_published_at|date}}.</small>
+                
+            
+        </div>    
+        
+    </div>
+
+    
+
+{% endblock %}
+
