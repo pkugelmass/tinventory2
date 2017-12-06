@@ -43,8 +43,8 @@
             
             <ul>
                 <a href="{%url 'resources' %}"><li><span class="badge">{{resources_count}}</span> Resources</li></a>
-                <li><span class="badge">{{transformation_count}}</span> Transformations</li>
-                <li><span class="badge">{{topics_count}}</span> Topics</li>
+                <a href="{%url 'index' %}"><li><span class="badge">{{transformation_count}}</span> Transformations</li></a>
+                <a href="{%url 'topics' %}"><li><span class="badge">{{topics_count}}</span> Topics</li></a>
                 <li><span class="badge">{{users_count}}</span> Users</li>
             </ul>
         </div>
@@ -55,9 +55,10 @@
             </div>
             <ul>
                 {% for action in recent_actions %}
+                    <a href="{{action.target.get_absolute_url}}">
                     <li><span class="badge">{{action.created|date:"n/j"}}</span> 
-                    {{action.target.type|capfirst}} 
-                    "<a href="{{action.target.get_absolute_url}}"> {{action.target}} </a>" {{action.verb}}.</li>
+                    <span>{{action.target.type|capfirst}} 
+                    " {{action.target}}" {{action.verb}}.</span></li></a>
                 {% endfor %}
             </ul>
         </div>
@@ -68,9 +69,9 @@
             </div>            
             <ul>
                 {% for update in site_updates_page.updates %}
-                    <li>
+                    <a href="{% pageurl update %}"><li>
                         <span class="badge">{{update.specific.up_date|date:"n/j"}}</span> 
-                        <a href="{% pageurl update %}">{{update.title}}</a></li>
+                        {{update.title}}</li></a>
                 {% endfor %}
             </ul>
         </div>        

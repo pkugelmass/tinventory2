@@ -45,7 +45,7 @@ def signup(request):
             # Note success and log the user in.
             create_action(user,'joined the site')
             login(request, user)
-            return redirect('index')
+            return redirect('home')
             
     else:
         
