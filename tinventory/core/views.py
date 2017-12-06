@@ -18,6 +18,7 @@ from termsandconditions.decorators import terms_required
 from termsandconditions.views import AcceptTermsView
 from termsandconditions.models import TermsAndConditions
 from django.utils.decorators import method_decorator
+from django.contrib import messages
 
 @public
 def signup(request):
@@ -102,7 +103,7 @@ class FeedbackForm(FormView):
             'feedback_category': self.request.POST.get('feedback_category', ''),
             'content': self.request.POST.get('content', ''),
             'user': self.request.user,
-            'path': self.request.META.get('HTTP_REFERRER'),
+            'path': self.request.META.get('HTTP_REFERER'),
         }
         
         content = template.render(context)
@@ -115,8 +116,7 @@ class FeedbackForm(FormView):
         )
         
         email.send()
-        
-        # It would be good to include a success message here.
+        messages.success(self.request,'You are LITERALLY the best. Thanks for sharing your feedback!')
         
         return redirect('home')
         

@@ -8,11 +8,14 @@
 
     <div class="home-top-flex home-gradient">
         
+        {% include 'core/messages.html' %}
+        
         <div class="home-top-container">
+            
                 
             <div class="home-img-container">
             
-                <img class="big-img" src="{% static 'transformations/images/elephant_circle_3.png' %}" alt="Repo Logo is an Elephant in a Room">
+                <img class="big-img" src="{% static 'transformations/images/t_hub_circle.png' %}" alt="Repo Logo is an Elephant in a Room">
                 
             </div>
             
@@ -26,7 +29,7 @@
                         
                     </div>
                         
-                    <p class="learn-more-button"><a href="{% slugurl 'about' %}" class="button-flex">Learn More About the Project</a></p>
+                    <p class="learn-more-button"><a href="{% slugurl 'about' %}" class="button-flex">Start Here</a></p>
             
                 </div>
         
