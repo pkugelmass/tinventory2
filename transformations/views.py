@@ -34,7 +34,7 @@ def IndexView(request):
           if request.GET['ministry'] != '': q_list = q_list + [Q(ministry__abbrev=request.GET['ministry'])]
           if request.GET['category'] != '': q_list = q_list + [Q(category=request.GET['category'])]
           if request.GET['status'] != '': q_list = q_list + [Q(status=request.GET['status'])]
-          if request.GET['tags'] != '': q_list = q_list + [Q(tags__name=request.GET['tags'])]
+          #if request.GET['tags'] != '': q_list = q_list + [Q(tags__name=request.GET['tags'])]
           
           if len(q_list) > 0: # Only if there is something to filter...
                

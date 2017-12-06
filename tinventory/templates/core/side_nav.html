@@ -4,8 +4,8 @@
 
 <div class="side-menu-flex">
   
-  <form>
-    <input type="text" class="searchbar" placeholder="Search...">
+  <form action="{% url 'search' %}">
+    <input type="text" class="searchbar" placeholder="Search..." >
   </form>
 <ul>
   
@@ -75,7 +75,7 @@
   </li>
   
   {% if request.user.is_staff %}
-  <li>
+  <!--<li>
     
     <i class="fa fa-flask"></i>Experiments
     
@@ -84,7 +84,7 @@
       <li><a href="{% url 'leaderboard' %}">Leaderboard</a></li>
     </ul>
   
-  </li>
+  </li>-->
   {% endif %}
 
 </ul>

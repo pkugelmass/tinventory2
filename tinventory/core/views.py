@@ -64,7 +64,7 @@ class HomePage(TemplateView):
             'resources_count':Resource.objects.count(),
             'topics_count':Topic.objects.exclude(level=0).count(),
             'users_count':Profile.objects.count(),
-            'recent_actions':Action.objects.all()[:5],
+            'recent_actions':Action.objects.exclude(target_type=None)[:5],
             'site_updates_page':MiniFeedPage.objects.get(slug='site-updates')
         }
         

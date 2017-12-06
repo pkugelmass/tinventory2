@@ -14,6 +14,7 @@ class ContentPage(Page):
         ('heading', blocks.CharBlock()),
         ('paragraph', blocks.RichTextBlock()),
         ('image', image_blocks.ImageChooserBlock()),
+        ('html', blocks.RawHTMLBlock()),
     ])
     date = models.DateTimeField(auto_now=True)
 
