@@ -45,11 +45,12 @@ class ProfileSignupSubform(forms.ModelForm):
 class FeedbackForm(forms.Form):
     
     FEEDBACK_CATEGORIES = (
-        ('bug','Reporting a Bug'),
-        ('idea','Suggeting a Feature or Improvement'),
-        ('complaint','Report a Pain Point'),
-        ('question','Just wondering...'),
-        ('compliments','We also take compliments.'),
+        ('Bug','Bug Report: Something\'s not working.'),
+        ('PainPoint','Pain Point: It\'s working, but not the way I would like.'),
+        ('UserStory','User Story: As a ___ I would like to ___ so I can ___.'),
+        ('OtherIdea','Other Feature Idea or Suggestion'),
+        ('Compliment','Compliments: Something you particularly like.'),
+        ('Question','Questions: Just wondering...'),
         ('other','Other'),
     )
     
