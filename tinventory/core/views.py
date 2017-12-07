@@ -102,17 +102,17 @@ class FeedbackForm(FormView):
         context = {
             'feedback_category': self.request.POST.get('feedback_category', ''),
             'content': self.request.POST.get('content', ''),
-            'user': self.request.user,
+            'user': self.request.user.email,
             'path': self.request.META.get('HTTP_REFERER'),
         }
         
         content = template.render(context)
 
         email = EmailMessage(
-            "[Feedback] "+ self.request.POST.get('subject'),
+            '%s #%s' % (self.request.POST.get('subject'), context['feedback_category']),
             content,
             "T-Repo" +'',
-            ['paul.kugelmass@ontario.ca'],
+            ['paulkugelmass+tepvl3fctswujtfshyjt@boards.trello.com'],
         )
         
         email.send()
