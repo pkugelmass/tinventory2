@@ -122,8 +122,14 @@ DATABASES = {
 #NB: Had to run "pip install mysqlclient"
 
 
+# Authorization
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'tinventory.core.authentication.EmailAuthBackend',
+    )
+
 # Password validation
-# https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -174,8 +180,10 @@ ABSOLUTE_URL_OVERRIDES = {
     'auth.user': lambda u: "/users/%s/" % u.username,
 }
 
+#WAGTAIL
 WAGTAIL_SITE_NAME = 'Transformation Repository'
 
+#STRONGHOLD
 STRONGHOLD_PUBLIC_NAMED_URLS = ('login', 'password_reset', 'password_reset_done', 'password_reset_confirm', 'password_reset_complete')
 
 # TERMS AND CONDITIONS
