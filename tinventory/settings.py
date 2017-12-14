@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django_mptt_admin',
     'debug_toolbar',
     'termsandconditions',
+    'applicationinsights',
     
     # Wagtail Packages
     'wagtail.wagtailforms',
@@ -80,6 +81,7 @@ MIDDLEWARE = [
     'wagtail.wagtailcore.middleware.SiteMiddleware',
     'wagtail.wagtailredirects.middleware.RedirectMiddleware',
     #'termsandconditions.middleware.TermsAndConditionsRedirectMiddleware',
+    'applicationinsights.django.ApplicationInsightsMiddleware',
 ]
 
 ROOT_URLCONF = 'tinventory.urls'
@@ -190,6 +192,8 @@ STRONGHOLD_PUBLIC_NAMED_URLS = ('login', 'password_reset', 'password_reset_done'
 TERMS_BASE_TEMPLATE = 'core/base_card.html'
 ACCEPT_TERMS_PATH = '/terms/accept/'
 TERMS_CACHE_SECONDS = 30
+
+
 
 # Import Local Settings, if they exist:
 
