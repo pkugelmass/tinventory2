@@ -33,3 +33,4 @@ urllib3==1.22
 wagtail==1.13
 webencodings==0.5.1
 Willow==1.0
+waitress==1.0.1  
