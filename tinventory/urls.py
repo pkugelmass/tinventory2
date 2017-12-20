@@ -1,7 +1,7 @@
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.http import HttpResponseRedirect
-from . import settings
+from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from tinventory.core import views as core_views

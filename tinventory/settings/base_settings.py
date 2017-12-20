@@ -5,6 +5,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # Application definition
 
@@ -32,11 +33,9 @@ INSTALLED_APPS = [
     'stronghold',
     'mptt',
     'django_mptt_admin',
-    'debug_toolbar',
     'termsandconditions',
-    'applicationinsights',
+    #'applicationinsights',
     #'storages',
-    
     
     # Wagtail Packages
     'wagtail.wagtailforms',
@@ -69,7 +68,7 @@ MIDDLEWARE = [
     'wagtail.wagtailcore.middleware.SiteMiddleware',
     'wagtail.wagtailredirects.middleware.RedirectMiddleware',
     #'termsandconditions.middleware.TermsAndConditionsRedirectMiddleware',
-    'applicationinsights.django.ApplicationInsightsMiddleware',
+    #'applicationinsights.django.ApplicationInsightsMiddleware',
 ]
 
 ROOT_URLCONF = 'tinventory.urls'
@@ -94,20 +93,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'tinventory.wsgi.application'
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
-
-# Database
-# https://docs.djangoproject.com/en/1.10/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'pktcsb$tcsb',
-        'USER': 'pktcsb',
-        'PASSWORD': 'what3v3r',
-        'HOST': 'pktcsb.mysql.pythonanywhere-services.com',
-    
-    },
-}
 
 #NB: Had to run "pip install mysqlclient"
 
@@ -141,15 +126,10 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'Canada/Eastern'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
@@ -170,6 +150,14 @@ ABSOLUTE_URL_OVERRIDES = {
     'auth.user': lambda u: "/users/%s/" % u.username,
 }
 
+# EMAIL
+
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = "tinventory900@gmail.com"
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_PASSWORD")
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
 #WAGTAIL
 WAGTAIL_SITE_NAME = 'Transformation Repository'
 
@@ -182,12 +170,3 @@ STRONGHOLD_PUBLIC_URLS = (r'^/__debug__/.+$',)
 TERMS_BASE_TEMPLATE = 'core/base_card.html'
 ACCEPT_TERMS_PATH = '/terms/accept/'
 TERMS_CACHE_SECONDS = 30
-
-
-
-# Import Local Settings, if they exist:
-
-try:
-    from .local_settings import * 
-except ImportError as e:
-    pass
